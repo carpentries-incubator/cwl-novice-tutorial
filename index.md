@@ -65,4 +65,44 @@ FIXME: home page introduction
     - pipeline will end up being run often and on large scale
     - why CWL? to ensure resulting workflow could be run anywhere, most flexible once workflow is described
 
+
+### Learning Objectives
+
+After following one of these tutorials, learners will be able to:
+
+
+- Know that workflow development can be iterative, can involve sketching, prototypes; that it doesn't have to happen all at once
+- How CWL can help you [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools use used
+See example [here](https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py)
+- Be able to explain the difference between a CWL tool description and a CWL workflow (description)
+- Be able to make understandable and valid names for inputs and outputs (not "input3")
+- Describe all the requirements for running a tool: environment variables, and more
+- Realize that a workflow is a dependency graph
+- Know that all output files must be explicitly captured and how to do so
+- Recognize when the same step is being run but the input files vary (or may a parameter varies, or both) and that this is the "scatter" pattern. Know how to implement this using "scatter"
+- Be able to split a bash script into a CWL workflow
+- Be able to include their own script as a step in a CWL workflow
+- Be able to document purpose, intent, and other factors within their workflow
+- Be able to graph/visualize their workflow, both by hand, and with an automated visualizer
+- Be able to interpret CWL error messages to recognize and fix simple bugs in their workflow code
+- Be able to customize a workflow at any of the many levels
+    - Change the input object
+    - Change the default values at the workflow level
+    - Change hard coded values at the workflow level
+    - Change default value at the Workflow step level
+    - Change hard coded values at the Workflow step level
+    - Change default values in the CLT description
+    - Change hard coded values in the CLT description
+    - Change the container
+    - Change the tool source itself
+
+---
+
+Objectives that require further discussion, if (and how) they should be included.
+- Know what a sub workflow is, how to make one, and when to use them.
+- Work around a bad software container (requires to be run as root user inside the container, expects certain directory paths)
+- Know how to use CWL v1.2 [dynamic workflow conditionals](https://www.commonwl.org/v1.2.0-dev2/Workflow.html#WorkflowStepInput)
+- Run their workflow on a {Sun Grid Engine, LSF, Slurm,..} HPC system
+- Convert a GNU Makefile to a CWL workflow
+
 {% include links.md %}
