@@ -81,19 +81,20 @@ single cell RNA-seq analyses.
 
 After following this tutorial,
 Jorge will be able to describe the scripts and tools
-in his research group's collection as workflows,
+in his research group's collection as CWL workflows,
 which will be much easier to maintain in the medium to long term.
 He knows how grateful his colleagues will be
 for the reduction in downtime while problems are solved,
 and for enabling them to run these tools in other compute environments.
-He will also be able to describe his image processing software
-and the workflow it will be part of,
-enabling him to deploy it as a container
+He will also be able to describe his own image processing software
+in CWL, and the workflow it will be part of too.
+Once he containerizes his software,
+his whole workflow can easily be executed
 in the imaging facility's cloud environment.
 
 ## Shawn
 
-Shawn racked up a lot of hours in the wet lab during while
+Shawn racked up a lot of hours in the wet lab while
 studying for his Masters in molecular biology.
 Understanding that biological research is becoming increasingly data-driven,
 he decided to gain more experience with computational research
@@ -117,7 +118,7 @@ He's read a lot about the complications and considerations involved in
 migrating between environments and is a little intimidated by the task.
 
 After following this tutorial,
-Shawn will be able to find descriptions for most of the tools in his pipeline,
+Shawn will know where to find CWL descriptions for most of the tools in his pipeline,
 and combine these together in a workflow.
 Having a workflow for his data analysis protocol will
 allow him and his supervisor to deploy and scale up their data analysis
