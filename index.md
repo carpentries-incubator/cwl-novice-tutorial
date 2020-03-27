@@ -96,7 +96,6 @@ After following one of these tutorials, learners will be able to:
     - difference between a tool and the cwl-document that acts as a wrapper for that tool
     - tool wrapper document: describes input/output semantics of command line tool
     - workflow document: describes the input/output of a workflow and specifies the flow of data between tools
-- Know what a sub workflow is, how to make one, and when to use them. (KB, HM)
 - Be able to make understandable and valid names for inputs and outputs (not "input3")
     - always give use case-oriented names or names that describe the content
     - avoid naming them by the tool that produced it or the format
@@ -141,12 +140,8 @@ After following one of these tutorials, learners will be able to:
     - use cwlviewer online
     - generate Graphviz diagram using cwltool
     - exercise with the printout of a simple workflow; draw arrows on code; hand draw a graph on another sheet of paper
-- Work around a bad software container (requires to be run as root user inside the container, expects certain directory paths) (FP, KB)
 - Be able to interpret CWL error messages to recognize and fix simple bugs in their workflow code
     - (this is difficult! will need to collect examples first)
-- Know how to use CWL v1.2 [dynamic workflow conditionals](https://www.commonwl.org/v1.2.0-dev2/Workflow.html#WorkflowStepInput) (MRC, HM, TT)
-    - Not yet released, expected in Q2 2020
-
 - Be able to document purpose, intent, and other factors within their workflow
     - "doc"
     - "label"
@@ -160,10 +155,6 @@ After following one of these tutorials, learners will be able to:
     - CWL
 - How CWL can help you [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools use used
 See also https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py
-- Run their workflow on a {Sun Grid Engine, LSF, Slurm,..} HPC system (FP, MRC, TT, MI)
-    - explain the benefit and restrictions of HPC systems (high throughput, network restrictions, etc)
-    - provide example options (e.g. Toil)
-- Convert a GNU Makefile to a CWL workflow (FP, MRC, TT, HM, KB, MI)
 - Be able to customize a workflow at any of the many levels
     - Change the input object
     - Change the default values at the workflow level
@@ -181,7 +172,10 @@ Objectives that require further discussion, if (and how) they should be included
 - Know what a sub workflow is, how to make one, and when to use them.
 - Work around a bad software container (requires to be run as root user inside the container, expects certain directory paths)
 - Know how to use CWL v1.2 [dynamic workflow conditionals](https://www.commonwl.org/v1.2.0-dev2/Workflow.html#WorkflowStepInput)
+    - Not yet released, expected in Q2 2020
 - Run their workflow on a {Sun Grid Engine, LSF, Slurm,..} HPC system
+    - explain the benefit and restrictions of HPC systems (high throughput, network restrictions, etc)
+    - provide example options (e.g. Toil)
 - Convert a GNU Makefile to a CWL workflow
 
 {% include links.md %}
