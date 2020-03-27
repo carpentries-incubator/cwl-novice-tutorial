@@ -6,6 +6,14 @@ redirect_from:
 excerpt: This tutorial uses learner profiles to inform what we teach
 ---
 
+Learner profiles inform what we teach,
+by describing (fictional) representatives of our target audience.
+Each profile answers three questions:
+
+- who are they?
+- what problem are they facing?
+- how will the lesson help them overcome this challenge?
+
 ## Martha
 
 Early this year,
@@ -101,7 +109,7 @@ data from a variation on ChIP-seq used by one of his supervisor's collaborators.
 A keen follower of developing technologies herself,
 his supervisor told him about the benefits of describing the analysis as a workflow,
 explaining that the analysis would eventually need to be deployed at large scale
-(though she doesm't yet know exactly where it would be deployed).
+(though she doesn't yet know exactly where it would be deployed).
 So far, Shawn has been developing and testing the pipeline on his laptop
 but knows that soon he'll need to run it on real data,
 which will mean connecting to an external server and deploying it there.
