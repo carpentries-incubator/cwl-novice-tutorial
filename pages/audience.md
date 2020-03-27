@@ -35,31 +35,15 @@ including a complete, reproducible description of the data analysis pipeline.
 After following this tutorial,
 Martha will be able to start converting her collection of shell scripts
 into a workflow.
-This will allow her to run the workflow to her university's HPC cluster,
+This will allow her to run the workflow on her university's HPC cluster,
 which has a capacity far greater than the local server
 she's been working with up to now.
-She also can include the workflow description when she publishes her research findings,
+She can also include the workflow description when she publishes her research findings,
 allowing others to take and use her method in their own research.
 The workflow runner can also provide provenance information
 for all her results,
 allowing her to trace the origin of her findings
 and report this information to her collaborators and funders.
-
-    - life sciences background
-    - already learned essential computational research skills - attended a Software Carpentry workshop last year?
-    - developing a new experimental protocol
-    - writing a pipeline/protocol to analyse the data generated
-        - this combines multiple command line/bioinformatics tools in a few shell scripts that run on their research group's local server
-- what problem are they having?
-    - when they publish this research, they expect to be asked to include a reproducible description of the data analysis
-    - the funding body requires them to publish details of their analyses in full
-    - need to adapt existing script(s) to work in local HPC environment, as incoming experimental data requires upscaling of analysis
-- how will the tutorial help them?
-    - after applying what they've learned in the tutorial, their analysis pipeline will be
-        - more portable between compute environments
-        - easy to share alongside publication of research findings (separate methods paper?)
-    - after applying what they've learned in the tutorial, they will be able to provide information of provenance of research findings on request e.g. from reviewer/funder/collaborator
-        - more robust to changes in tool/dependancy versions and adjustments to the protocol itself
 
 ## RSE who inherited protocol and now needs to deploy/scale up
 
