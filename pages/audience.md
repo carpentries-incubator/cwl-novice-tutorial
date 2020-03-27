@@ -87,8 +87,8 @@ in the imaging facility's cloud environment.
 
 Shawn racked up a lot of hours in the wet lab during while
 studying for his Masters in molecular biology.
-He knew that biological research is becoming increasingly data-driven,
-so decided to gain more experience with computational research
+Understanding that biological research is becoming increasingly data-driven,
+he decided to gain more experience with computational research
 with one of the lab placements required for the course.
 He's enjoyed playing around with computers and writing his own programs
 ever since his thirteenth birthday,
@@ -96,12 +96,12 @@ when his aunt gave him a Raspberry Pi as a gift,
 and he likes the idea of combining this hobby with his interest in biology.
 
 For his Masters thesis project,
-Shawn has been implementing a pipeline for processing and analysis of
-data from a variation on ChIP-seq used by his supervisor's collaborators.
-When he started the project,
+Shawn has been implementing a pipeline to process and analyse
+data from a variation on ChIP-seq used by one of his supervisor's collaborators.
+A keen follower of developing technologies herself,
 his supervisor told him about the benefits of describing the analysis as a workflow,
 explaining that the analysis would eventually need to be deployed at large scale
-(though she didn't yet know exactly where it would be deployed).
+(though she doesm't yet know exactly where it would be deployed).
 So far, Shawn has been developing and testing the pipeline on his laptop
 but knows that soon he'll need to run it on real data,
 which will mean connecting to an external server and deploying it there.
@@ -113,7 +113,7 @@ Shawn will be able to find descriptions for most of the tools in his pipeline,
 and combine these together in a workflow.
 Having a workflow for his data analysis protocol will
 allow him and his supervisor to deploy and scale up their data analysis
-on whichever platform their consortium chooses to adopt.
+on whichever platform their research consortium chooses to adopt.
 He will also have a clear understanding of the key concepts involved in
 workflow design and tool description,
 so he can [read more](https://www.commonwl.org/user_guide/)
