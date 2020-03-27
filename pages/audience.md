@@ -100,7 +100,7 @@ Understanding that biological research is becoming increasingly data-driven,
 he decided to gain more experience with computational research
 with one of the lab placements required for the course.
 He's enjoyed playing around with computers and writing his own programs
-ever since his thirteenth birthday,
+ever since his fifteenth birthday,
 when his aunt gave him a Raspberry Pi as a gift,
 and he likes the idea of combining this hobby with his interest in biology.
 
