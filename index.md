@@ -45,54 +45,64 @@ These are also a useful resource during the lesson design process.
 
 #### Goals
 
+Below is a list of draft learning objectives,
+(very) roughly broken down into chunks that feel like they belong together.
+These chunks _could_ form the basis for splitting tutorial material into episodes.
+Most blocks include one objective in __bold__:
+this is intended to flag it up as a higher-level objective,
+encapsulating multiple smaller,
+more fine-grained,
+objectives that follow.
+The higher-level objectives may be suitable as learning objectives
+for the tutorial as a whole
+(i.e. they would be shown on the landing page,
+used to guide development and structuring of material, etc)
+while the "sub-objectives" would apply to specific sections (episodes)
+of the tutorial,
+and be used to guide the creation of exercises and content of those episodes.
+
+The chunks get a bit less well-defined towards the end.
+See [this page]({{ site.base_url }}/objective-notes/) for the original notes these objectives are based on,
+created during the March 2020 lesson development sprint.
+
 After following one of these tutorials, learners will be able to:
 
-- Know that all output files must be explicitly captured and how to do so
-    - How to capture the output files
-    - need to specify the files which you want to capture from the tools
-    - bulk caputre the output for debug purpose.
-        - which file is actually needed.
-    - output files in the specific directory or working directory
-    - output files in the same directory which has input files
-    - stdout & stdin
-- Recognize when the same step is being run but the input files vary (or may a parameter varies, or both) and that this is the "scatter" pattern. Know how to implement this using "scatter"
-    - What is a CWL scatter
-    - difference between scattering and parallel execution
-    - running the same program on each file
-    - running the same program the same way except for one parameter
-    - Advanced: multidimensional scatter
-- Be able to split a bash script into a CWL workflow
-    - difference between a "control flow" (bash script) and a "data flow" (CWL - and others)
-    - identify the inputs and outputs of the script
-    - identify the tasks, i.e. the tools being run
-    - identify the links, i.e. the data flowing in and out of these tools
-    - (not sure about this one) identify and remove some infrastructure-specific details which need to be removed (e.g. if tools are launched with SLURM commands in a bash script, or loaded with Docker or Conda)
-- Be able to explain the difference between a CWL tool description and a CWL workflow (description)
-    - difference between a tool and the cwl-document that acts as a wrapper for that tool
-    - tool wrapper document: describes input/output semantics of command line tool
-    - workflow document: describes the input/output of a workflow and specifies the flow of data between tools
+- __define the files that will be included as output of a workflow__ (lesson-level objective)
+- explain that only files explicitly mentioned in a description will be included in the output of a step/workflow
+- implement bulk capturing of all files produced by a step/workflow for debugging purposes
+- use STDIN and STDOUT as input and output
+- capture output written to a specific directory, the working directory, or the same directory where input is located
+
+- __implement scattering of steps in a workflow__ (lesson-level objective)
+- explain what is meant by the _scatter_ pattern in workflow design, and how it differs from the similar concept of parallel execution
+- identify when the scatter pattern appears in a workflow description
+- (FIXME: does the above cover the intended meaning of the following two points from the lesson development sprint?)
+  - running the same program on each file
+  - running the same program the same way except for one parameter
+
+- __convert a shell script into a CWL workflow__ (lesson-level objective)
+- explain the difference between _control flow_ and _data flow_
+- identify the inputs and outputs, tasks, and links in a script
+- (recognize and remove details and configuration in a script that are specific to particular infrastructure)
+
+- __explain how a workflow document describes the input and output of a workflow and the flow of data between tools__ (lesson-level objective)
+- explain the difference between a CWL tool description and a CWL workflow
+- describe the relationship between a tool and its corresponding CWL document
+- exercise good practices when naming inputs and outputs
 - Be able to make understandable and valid names for inputs and outputs (not "input3")
-    - always give use case-oriented names or names that describe the content
-    - avoid naming them by the tool that produced it or the format
-    - so instead of:
-        - fastq1
-        - bam
-        - bed
-    - go for:
-        - read1
-        - aligned_reads
-        - regions_of_interest
-- Describe all the requirements for running a tool: environment variables, and more
-    - https://www.commonwl.org/v1.1/CommandLineTool.html#Runtime_environment
-    - Assume the program (baseCommand) is in the system PATH
-    - Aren't allowed to change the PATH
-    - other environment variable necessary for execution must be set explicitly
-    - need a file next to (in the same directory as) another file? use secondaryFiles or InitialWorkDirRequirement
-    - Don't hard code the number of threads, use `$(runtime.cores)`
-    - Need network access? Not so great, but use NetworkAccess if you must
-    - Referencing a file path? Use `type: File` not a string
-- Realize that a workflow is a dependency graph
-- Be able to include their own script as a step in a CWL workflow
+
+- __describe all the requirements for running a tool__ (lesson-level objective)
+- identify all the requirements of a tool and define them in the tool description
+- use `runtime` parameters to access information about the runtime environment
+- define environment variables necessary for execution
+- use `secondaryFiles` or `InitialWorkDirRequirement` to access files in the same directory as another referenced file
+- use `$(runtime.cores)` to define the number of cores to be used
+- use `type: File`, instead of a string, to reference a filepath
+
+- __explain that a workflow is a dependency graph__
+
+- __be able to include their own script as a step in a workflow__
+  - several options for this were identified during the lesson development sprint. we should choose one or two to focus on in the tutorial:
     - make script executable and add to path
         - advantage: quick
         - downside:
@@ -111,26 +121,27 @@ After following one of these tutorials, learners will be able to:
             - explodes the complexity of a CWL tool wrapper
             - having to deal with escapes and so on
     - distribute as seperate package via pip / cran / ...
-- Be able to graph/visualize their workflow, both by hand, and with an automated visualizer
-    - use cwlviewer online
-    - generate Graphviz diagram using cwltool
-    - exercise with the printout of a simple workflow; draw arrows on code; hand draw a graph on another sheet of paper
-- Be able to interpret CWL error messages to recognize and fix simple bugs in their workflow code
-    - (this is difficult! will need to collect examples first)
-- Be able to document purpose, intent, and other factors within their workflow
-    - "doc"
-    - "label"
-    - Workflow level, step level, sub workflow level, tool level, inputs and outputs everywhere.
-    - Not required nor recommended to fill these out everywhere! As needed
-    - Show example using the CWL viewer
-- Know that workflow development can be iterative, can involve sketching, prototypes; that it doesn't have to happen all at once
-    - Whiteboard sketch
-    - bash script
-    - makefile
-    - CWL
-- How CWL can help you [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools use used
-See also https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py
-- Be able to customize a workflow at any of the many levels
+
+- __sketch their workflow, both by hand, and with an automated visualizer__ (lesson-level objective)
+  - use cwlviewer online
+  - generate Graphviz diagram using cwltool
+  - exercise with the printout of a simple workflow; draw arrows on code; hand draw a graph on another sheet of paper
+
+- __recognize and fix simple bugs in their workflow code__ (lesson-level objective)
+    - interpret commonly encountered error messages
+
+- __document their workflows to increase reusability__
+- explain the importance of documenting a workflow
+- use description fields to document purpose, intent, and other factors at multiple levels within their workflow
+- recognise when it is appropriate to include this documentation
+
+- recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once
+
+- explain the importance of correctly citing research software
+- [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools used in their workflows
+  - See also https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py
+
+- customize a workflow at any of the many levels
     - Change the input object
     - Change the default values at the workflow level
     - Change hard coded values at the workflow level
