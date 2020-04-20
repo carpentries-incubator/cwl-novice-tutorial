@@ -10,6 +10,7 @@
 [cran-checkpoint]: https://cran.r-project.org/package=checkpoint
 [cran-knitr]: https://cran.r-project.org/package=knitr
 [cran-stringr]: https://cran.r-project.org/package=stringr
+[cwl-user-guide]: https://www.commonwl.org/user_guide/
 [dc-lessons]: http://www.datacarpentry.org/lessons/
 [email]: mailto:team@carpentries.org
 [github-importer]: https://import.github.com/
@@ -42,7 +43,9 @@
 [ruby-installer]: https://rubyinstaller.org/
 [rubygems]: https://rubygems.org/pages/download/
 [styles]: https://github.com/carpentries/styles/
+[swc]: https://software-carpentry.org/
 [swc-lessons]: https://software-carpentry.org/lessons/
+[swc-shell]: http://swcarpentry.github.io/shell-novice/
 [swc-releases]: https://github.com/swcarpentry/swc-releases
 [training]: https://carpentries.github.io/instructor-training/
 [workshop-repo]: {{ site.workshop_repo }}

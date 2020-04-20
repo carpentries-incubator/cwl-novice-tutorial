@@ -3,7 +3,6 @@ layout: lesson
 root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
-FIXME: home page introduction
 
 <!-- this is an html comment -->
 
@@ -11,7 +10,26 @@ FIXME: home page introduction
 
 > ## Prerequisites
 >
-> FIXME
+> This tutorial guides you through the the fundamentals of
+> designing and building an analysis workflow.
+> It assumes no previous knowledge or experience of workflows
+> or Common Workflow Language (CWL),
+> but does assume some experience with the Unix command line.
+>
+> Before following this tutorial,
+> you should be comfortable working in a Unix command line environment
+> and familiar with fundamental commands (`cd`, `mv`, `mkdir`, etc),
+> piping and redirection,
+> and simple Bash scripting,
+> such as might be gained from following the [Software Carpentry][swc]
+> lesson, [The Unix Shell][swc-shell].
+> You might also have some experience with running
+> tasks on a remote machine (by `ssh` connection)
+> and in a cluster (high performance computing) environment.
+>
+> If you have previously written a workflow description,
+> in CWL or another langauge,
+> you may want to look instead at the [User Guide][cwl-user-guide].
 {: .prereq}
 
 #### Learner profile outlines
@@ -21,7 +39,7 @@ FIXME: home page introduction
 - who are they?
     - life sciences background
     - already learned essential computational research skills - attended a Software Carpentry workshop last year?
-    - developing a new experimental protocol 
+    - developing a new experimental protocol
     - writing a pipeline/protocol to analyse the data generated
         - this combines multiple command line/bioinformatics tools in a few shell scripts that run on their research group's local server
 - what problem are they having?
@@ -29,7 +47,7 @@ FIXME: home page introduction
     - the funding body requires them to publish details of their analyses in full
     - need to adapt existing script(s) to work in local HPC environment, as incoming experimental data requires upscaling of analysis
 - how will the tutorial help them?
-    - after applying what they've learned in the tutorial, their analysis pipeline will be 
+    - after applying what they've learned in the tutorial, their analysis pipeline will be
         - more portable between compute environments
         - easy to share alongside publication of research findings (separate methods paper?)
     - after applying what they've learned in the tutorial, they will be able to provide information of provenance of research findings on request e.g. from reviewer/funder/collaborator
@@ -48,7 +66,7 @@ FIXME: home page introduction
         - it feels like every time they manage to fix these problems, another update is released and everything breaks all over again
     - the group leader wants to change the short read alignment tool used in a key step in the existing workflow
 - how will the tutorial help them?
-    - after applying what they've learned in the tutorial, their analysis pipeline will be 
+    - after applying what they've learned in the tutorial, their analysis pipeline will be
         - more portable between compute environments
         - more robust to changes in tool/dependancy versions
         - more maintainable
