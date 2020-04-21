@@ -1,6 +1,6 @@
 # Contributing
 
-[The Carpentries][c-site] ([Software Carpentry][swc-site], [Data Carpentry][dc-site], and [Library Carpentry][lc-site]) are open source projects,
+The [Common Workflow Language project](cwl-site) is an open source project,
 and we welcome contributions of all kinds:
 new lessons,
 fixes to existing material,
@@ -14,8 +14,8 @@ you agree that we may redistribute your work under [our license](LICENSE.md).
 In exchange,
 we will address your issues and/or assess your change proposal as promptly as we can,
 and help you become a member of our community.
-Everyone involved in [The Carpentries][c-site]
-agrees to abide by our [code of conduct](CODE_OF_CONDUCT.md).
+Everyone involved in the [Common Workflow Language project](cwl-site)
+agrees to abide by our [code of conduct](CONDUCT.md).
 
 ## How to Contribute
 
@@ -27,7 +27,7 @@ This is a good way to introduce yourself
 and to meet some of our community members.
 
 1.  If you do not have a [GitHub][github] account,
-    you can [send us comments by email][email].
+    you can [send us comments by email][discuss-list].
     However,
     we will be able to respond more quickly if you use one of the other methods described below.
 
@@ -46,8 +46,8 @@ and to meet some of our community members.
 ## Where to Contribute
 
 1.  If you wish to change this lesson,
-    please work in <https://github.com/swcarpentry/FIXME>,
-    which can be viewed at <https://swcarpentry.github.io/FIXME>.
+    please work in <https://github.com/common-workflow-language/user_guide>,
+    which can be viewed at <https://www.commmonwl.org/user_guide/>.
 
 2.  If you wish to change the example lesson,
     please work in <https://github.com/carpentries/lesson-example>,
@@ -71,10 +71,9 @@ from writing new exercises and improving existing ones
 to updating or filling in the documentation
 and submitting [bug reports][issues]
 about things that don't work, aren't clear, or are missing.
-If you are looking for ideas, please see the 'Issues' tab for
-a list of issues associated with this repository,
-or you may also look at the issues for [Data Carpentry][dc-issues], 
-[Software Carpentry][swc-issues], and [Library Carpentry][lc-issues] projects.
+If you are looking for ideas,
+please see [the list of issues for this repository][issues],
+or the issues for [Common Workflow Language](cwl-issues) project itself.
 
 Comments on issues and reviews of pull requests are just as welcome:
 we are smarter together than we are on our own.
@@ -83,6 +82,7 @@ it's easy for people who have been using these lessons for a while
 to forget how impenetrable some of this material can be,
 so fresh eyes are always welcome.
 
+<!--
 ## What *Not* to Contribute
 
 Our lessons already contain more material than we can cover in a typical workshop,
@@ -98,7 +98,7 @@ We are also not looking for exercises or other material that only run on one pla
 Our workshops typically contain a mixture of Windows, macOS, and Linux users;
 in order to be usable,
 our lessons must run equally well on all three.
-
+-->
 ## Using GitHub
 
 If you choose to contribute via GitHub, you may want to look at
@@ -128,24 +128,21 @@ repository for reference while revising.
 
 ## Other Resources
 
-General discussion of [Software Carpentry][swc-site] and [Data Carpentry][dc-site]
+General discussion of [Common Workflow Language](cwl-site) project
 happens on the [discussion mailing list][discuss-list],
 which everyone is welcome to join.
-You can also [reach us by email][email].
 
-[email]: mailto:admin@software-carpentry.org
 [dc-issues]: https://github.com/issues?q=user%3Adatacarpentry
 [dc-lessons]: http://datacarpentry.org/lessons/
 [dc-site]: http://datacarpentry.org/
-[discuss-list]: http://lists.software-carpentry.org/listinfo/discuss
+[discuss-list]: https://groups.google.com/forum/#!forum/common-workflow-language
 [github]: https://github.com
 [github-flow]: https://guides.github.com/introduction/flow/
 [github-join]: https://github.com/join
 [how-contribute]: https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github
-[issues]: https://guides.github.com/features/issues/
+[issues]: https://github.com/common-workflow-language/user_guide/issues
+[repo]: https://github.com/common-workflow-language/user_guide
 [swc-issues]: https://github.com/issues?q=user%3Aswcarpentry
 [swc-lessons]: https://software-carpentry.org/lessons/
 [swc-site]: https://software-carpentry.org/
-[c-site]: https://carpentries.org/
-[lc-site]: https://librarycarpentry.org/
-[lc-issues]: https://github.com/issues?q=user%3Alibrarycarpentry
+[cwl-site]: https://www.commonwl.org/
