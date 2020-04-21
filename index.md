@@ -37,8 +37,9 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 This tutorial is aimed at researchers
 and research software engineers
 who would like to begin automating their analyses in workflows.
-If you're unsure whether this tutorial is a good fit for you,
-you may find our [learner profiles][audience] helpful.
+If you're unsure whether this tutorial is a good fit for you
+check the prerequisites listed above.
+You may also find our [learner profiles][audience] helpful.
 These are also a useful resource during the lesson design process.
 
 ### Learning Objectives
