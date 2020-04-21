@@ -7,7 +7,7 @@
 # dc: Data Carpentry
 # lc: Library Carpentry
 # cp: Carpentries (to use for instructor traning for instance)
-carpentry: "swc"
+carpentry: "cwl"
 
 # Overall title for pages.
 title: "Introduction to Workflows with Common Workflow Language"
@@ -29,7 +29,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "FIXME"
+email: "https://www.commonwl.org/#Support"
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
