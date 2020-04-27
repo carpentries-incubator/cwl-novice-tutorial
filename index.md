@@ -8,6 +8,21 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 
 {% comment %} This is a comment in Liquid {% endcomment %}
 
+### For Contributors
+
+Use the _Episodes_ menu above to browse through the pages for
+indivual blocks of learning objectives.
+These pages can be used for designing challenges/exercises
+for the tutorial,
+as described in detail on [this Issue](https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/7).
+**Note:** the order of these episode pages is arbitrary and
+these pages may be removed/rearranged/merged
+later in the lesson development process.
+
+You may find it helpful during lesson/exercise design to
+refer to [these draft concept maps](https://docs.google.com/presentation/d/1aVdK8LHkgtESBunCQ-p7XmEl8NB9XbgDsH67X0_2HWg/edit#slide=id.g72208cbc10_0_264)
+for the tutorial material
+
 > ## Prerequisites
 >
 > This tutorial guides you through the the fundamentals of
