@@ -185,7 +185,7 @@ a suitable "fill in the blanks" exercise might be:
 ## How to contribute
 
 - head to [the GitHub repository](https://github.com/common-workflow-lab/cwl-novice-tutorial/)
-- post in [the relevant issue]https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/7 to let others know which objective you're working on
+- post in [the relevant issue](https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/7) to let others know which objective you're working on
 - submit one pull request per exercise
 
 ---
