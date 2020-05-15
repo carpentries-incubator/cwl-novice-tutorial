@@ -48,6 +48,13 @@ a suitable "fill in the blanks" exercise might be:
 ---
 ## Designing exercises - potentially suitable exercise formats
 
+- Multiple choice questions
+- Code & run
+- Fill in the blanks
+- Minimal fix
+- Theme & variations
+- Labeling a diagram
+
 (Examples taken from Greg Wilson's [Teaching Tech Together](http://teachtogether.tech/#s:exercises))
 
 ---
