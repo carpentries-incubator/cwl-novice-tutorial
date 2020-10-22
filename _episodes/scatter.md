@@ -7,8 +7,10 @@ questions:
 objectives:
 - "Learn how to scatter steps of a CWL workflow."
 keypoints:
-- "Use ScatterFeatureRequirement to scatter over array inputs"
+- "Use"
 ---
+This workflow uses a real life example of open-source CWL CommandLineTools from Dockstore.
+
 CWL Workflows can scatter array inputs to run in parallel within the same step and gather all the outputs together to be used in subsequent steps. It's similar to GNU parallel in that it will execute all jobs in parallel using a single script and multiple input arguments.
 
 Use the ScatterFeatureRequirement in the requirements section of a workflow to begin enabling scattering in a single step.
