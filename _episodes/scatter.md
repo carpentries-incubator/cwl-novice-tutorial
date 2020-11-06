@@ -72,83 +72,51 @@ In the steps section, use scatter and the input variable to scatter on, in this 
 
 When scattering on multiple inputs, you need to explicitly say how the scatter should occur. There are 3 scatter methods in CWL: dot_product, flat_crossproduct and nested_crossproduct. dot_product is the default method, which takes each element of the array and runs on each nth item of the array. flat_crossproduct and nested_crossproduct will take both inputs and run on every combination of both arrays. The difference between flat and nested is in the output type. Flat will create a single array output whereas Nested will create a nested array output.
 
-> Exercise: 
+> ## Exercise 2:
 >
 > What if you had two arrays, one a file array of bams and an array of chromosomes? How would you run all chromosomes on each bam?
-Answer:
+>
+> > ## Solution:
+> > 
+> > steps:
+> >   GATK_HaplotypeCaller:
+> >     run: GATK_HaplotypeCaller.cwl
+> >     scatter: [intervals, input_bam]
+> >     scatterMethod: flat_crossproduct
+> {. solution}
+{. challenge}
 
-~~~
-steps:
-  GATK_HaplotypeCaller:
-    run: GATK_HaplotypeCaller.cwl
-    scatter: [intervals, input_bam]
-    scatterMethod: nested_crossproduct
-~~~
-
-or 
-
-~~~
-steps:
-  GATK_HaplotypeCaller:
-    run: GATK_HaplotypeCaller.cwl
-    scatter: [intervals, input_bam]
-    scatterMethod: flat_crossproduct
-~~~
-
-How does this change the inputs and outputs for the workflow?
-
-Answer:
-
-~~~
-cwlVersion: v1.0
-class: Workflow
-requirements:
-   ScatterFeatureRequirement: {}
-inputs:
-   bam: File
-   chromosomes: string[]
-outputs:
-  HaplotypeCaller_VCFs:
-    type:
-      type: array
-      items:
-        type: array
-        items: File
-    outputSource: GATK_HaplotypeCaller/vcf
-steps:
-  GATK_HaplotypeCaller:
-    run: GATK_HaplotypeCaller.cwl
-    scatter: [intervals, input_bam]
-    scatterMethod: nested_crossproduct
-    in:
-      input_bam: bam
-      intervals: chromosomes
-    out: [vcf]
-~~~
-
-or
-
-~~~
-cwlVersion: v1.0
-class: Workflow
-requirements:
-   ScatterFeatureRequirement: {}
-inputs:
-   bam: File
-   chromosomes: string[]
-outputs:
-  HaplotypeCaller_VCFs:
-    type: File[]
-    outputSource: GATK_HaplotypeCaller/vcf
-steps:
-  GATK_HaplotypeCaller:
-    run: GATK_HaplotypeCaller.cwl
-    scatter: [intervals, input_bam]
-    scatterMethod: flat_crossproduct
-    in:
-      input_bam: bam
-      intervals: chromosomes
-    out: [vcf]
-~~~
+> ## Exercise 3:
+> 
+> How does this change the inputs and outputs for the workflow?
+>
+> > ## Solution:
+> > 
+> > cwlVersion: v1.0
+> > class: Workflow
+> > requirements:
+> >   ScatterFeatureRequirement: {}
+> > inputs:
+> >    bam: File
+> >    chromosomes: string[]
+> > outputs:
+> >   HaplotypeCaller_VCFs:
+> >     type:
+> >       type: array
+> >       items:
+> >         type: array
+> >         items: File
+> >     outputSource: GATK_HaplotypeCaller/vcf
+> > steps:
+> >   GATK_HaplotypeCaller:
+> >     run: GATK_HaplotypeCaller.cwl
+> >     scatter: [intervals, input_bam]
+> >     scatterMethod: flat_crossproduct
+> >     in:
+> >       input_bam: bam
+> >       intervals: chromosomes
+> >     out: [vcf]
+> {. solution}
+{. challenge}
 
 {: .source}
