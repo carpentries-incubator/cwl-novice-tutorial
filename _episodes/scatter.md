@@ -20,8 +20,6 @@ requirements:
    ScatterFeatureRequirement: {}
 ~~~
 
-In the steps section, use scatter and the input variable to scatter on, in this example its the intervals, which uses the chromosomes string array specified in the inputs section of the Workflow.
-
 > ## Exercise 1
 >
 > In this workflow, we have a job that uses GATK Haplotype Caller. Currently, the job is configured to run on a single chromosome. How would you parallelize GATK_HaplotypeCaller to run all chromosomes simultaneously?
@@ -67,10 +65,13 @@ In the steps section, use scatter and the input variable to scatter on, in this 
 > >       intervals: chromosomes
 > >     out: [vcf]
 > > GATK will take the array of chromosome strings, and then using it's intervals input option, create multiple VCFs, one for each chromosome. All these jobs will be run in parallel, and run on as maybe compute nodes available.
+> > # TODO: Add diagram of how the job will run
 > {: .solution}
 {: .challenge}
 
 When scattering on multiple inputs, you need to explicitly say how the scatter should occur. There are 3 scatter methods in CWL: dot_product, flat_crossproduct and nested_crossproduct. dot_product is the default method, which takes each element of the array and runs on each nth item of the array. flat_crossproduct and nested_crossproduct will take both inputs and run on every combination of both arrays. The difference between flat and nested is in the output type. Flat will create a single array output whereas Nested will create a nested array output.
+
+# TODO Add pictures of cross product / matrix manipulation
 
 > ## Exercise 2:
 >
