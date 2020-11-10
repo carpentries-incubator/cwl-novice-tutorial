@@ -1,11 +1,15 @@
-Please delete this line and the text below before submitting your contribution.
+<details>
+<summary><strong>Instructions</strong></summary>
 
----
+Thanks for contributing! :heart:
 
-Thanks for contributing!
+Keep in mind that **lesson maintainers are volunteers** and it may take them some time to
+respond to your contribution. Although not all contributions can be incorporated into the lesson
+materials, we appreciate your time and effort to improve the curriculum. If you have any questions
+about the lesson maintenance process or would like to volunteer your time as a contribution
+reviewer, please contactt The CWL Team via https://www.commonwl.org/#Support.
 
-If this pull request relates to a specific issue, please refer to the issue number or link directly to the issue in the PR description.
+You may delete these instructions from your comment.
 
-Please keep in mind that lesson maintainers are volunteers and it may be some time before they can respond to your contribution. If you have any questions about the lesson maintenance process or would like to volunteer your time as a contribution reviewer, please contact The CWL Team via https://www.commonwl.org/#Support.
-
----
+\- The Carpentries
+</details>
