@@ -18,19 +18,17 @@ By the end of this episode,
 learners should be able to
 __describe all the requirements for running a tool__
 
+Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a CommandLineTool
 
 > ## Exercise 1:
 >
-> For each of these variables, is it required in a CommandLineTool?
+> Create the baseCommand for running the joint_haplotype caller using the fast_genome_variants README.
 >
-> A. inputs
-> B. outputs
-> C. arguments
-> D. baseCommand
-> E. requirements
-> F. hints
 > > ## Solution
-> > Just like a normal shell script, you need inputs, outputs, and a command to run. So A, B, C are definitely needed. D is sometimes needed, this is where you put the binary invocation of the tool. E and F are necessary for adding environment help, such as machine and docker requirements.
+> > The base command should use the path to the binary and the type of variants you're calling.
+> > 
+> >  baseCommand: [fgv, joint_haplotype]
+> > 
 > {: .solution}
 {: .challenge}
 
@@ -38,69 +36,74 @@ __describe all the requirements for running a tool__
 > 
 > When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific RAM, Cores and Disk space parameters.
 >
-> What ResourceRequirements can you specify in a CommandLineTool to satisfy the machine requirements?
+> Create the ResourceRequirements field for running 2 BAMs for the fgv joint_haplotype command.
 >
 > > ## Solution:
 > >
-> > coresMin and coresMax
-> > ramMin and ramMax
-> > tmpdirMin and tmpdirMax
-> > outdirMin andoutdirMax
+> > requirements:
+> >   ResourceRequirement:
+> >     ramMin: 4000
+> >     coresMin: 2
+> > 
+> > FGV requires 2 GiB of memory for each bam input, and the unit for ramMin is in MiB, so we need approximately 4000 MiB to meet the requirement. FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
+> >
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 3:
 >
-> Input arguments for a command in a shell script are typically strings that can be classified as file paths, booleans, integers, etc. When you have multiple inputs of a same type, you classify that as an array.
->
-> What input types would you use for these inputs?
->
-> A. BAM
-> B. VCF
-> C. Sample name
-> D. 23 Chromosomes
-> E. Flag for turning on paired-end mode in bwa mem
-> F. Cohort of sample paired-end FASTQs
+> Create the input field for running fgv_joint_haplotype and also add an optional flag for calling a GVCF output. Also add a string input for intervals chr2:1-10000 and an output name.
 >
 > > ## Solution:
-> > A. BAM (File)
-> > B. VCF (File)
-> > C. Sample name (String)
-> > D. 23 Chromosomes (String Array)
-> > E. Flag for turning on paired-end mode in bwa mem (boolean)
-> > F. Cohort of sample paired-end FASTQs (Array of File Arrays)
 > >
-> > The trickiest one is the paired FASTQs, we need to be able to distinguish each sample pair, so using a nested array works best. # TODO Add picture example
+> > inputs:
+> >   bam:
+> >     type: File[]
+> >     inputBinding:
+> >       position: 1
+> >       prefix: -bam
+> >     secondaryFiles:
+> >       - .bai
+> >   gvcf:
+> >     type: boolean
+> >     inputBinding:
+> >       position: 2
+> >       prefix: -gvcf
+> >   interval:
+> >     type: string
+> >     inputBinding:
+> >       position: 3
+> >   output_name:
+> >     type: string
+> >     inputBinding:
+> >       position: 4
+> >       prefix: -o
+> > 
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 4:
 > 
-> In a typical linux environment, when you go into a directory, given that you have the correct permissions, you can read every file. When using CWL, each file given to a CommandLineTool must be explicitly stated, or it will not be found by the command. When grouping files together, such as a bam and its index, you should use the secondaryFiles variable to pass the index along with the bam variable.
->
-> Fix this code for capturing the correct file in this CommandLineTool. Samtools index will take a BAM and create an index (.bai) file. The output should be the bam and index together.
->
->
-> baseCommand: [samtools, index]
-> inputs:
->   bam: File
-> outputs:
->   bam_output_and_index:
->     type:
->     outputBinding:
->       glob:
+> Create the output variable for the CommandLineTool and name it output_vcf.
 >
 > > ## Solution:
-> > baseCommand: [samtools, index]
-> > inputs:
-> >   bam: File
+> >
 > > outputs:
-> >   bam_output_and_index:
+> >   output_vcf:
 > >     type: File
 > >     outputBinding:
-> >       glob: $(inputs.input.basename)
-> >     secondaryFiles:
-> >       - .bai
+> >       glob: $(inputs.output_name)
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 5:
+>
+>
+>
+> > ## Solution:
+> >
+> > 
 > {: .solution}
 {: .challenge}
 
