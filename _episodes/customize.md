@@ -13,16 +13,87 @@ By the end of this episode,
 learners should be able to
 __customize a workflow at any of the many levels__:
 
+You've been given a workflow by your colleague that runs GATK HaplotypeCaller and must change various points to fix your needs.
+
 - Change the input object
 > ## Exercise 1:
 > 
-> Given this workflow, add an input reference to the workflow to be passed to the GATK_HaplotypeCaller step.
+> In the input yaml file, your colleague adds an input for a bam input. You decide that you want to add a reference file input and a chromosome string input. Add those to this yaml file.
+> 
+> bam:
+>   class: File
+>   location: ftp:/­/­ftp.­1000genomes.­ebi.­ac.­uk/­vol1/­ftp/­phase3/­data/­HG00133/­alignment/­HG00133.­unmapped.­ILLUMINA.­bwa.­GBR.­low_coverage.­20120522.­bam
+>
+> > ## Solution:
+> >
+> > bam:
+> >   class: File
+> >   location: ftp:/­/­ftp.­1000genomes.­ebi.­ac.­uk/­vol1/­ftp/­phase3/­data/­HG00133/­alignment/­HG00133.­unmapped.­ILLUMINA.­bwa.­GBR.­low_coverage.­20120522.­bam
+> > reference:
+> >   class: File
+> >   location: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+> > chromosome: chr1
+> >
+> {: .solution}
+{: .challenge}
+
+- Change the default values at the workflow level
+> ## Exercise 2:
+>
+> Default values in a workflow can be used at both the input object level and the step level. Add the new reference and chromosome inputs to the workflow
+> 
+> cwlVersion: v1.0
+> class: Workflow
+> inputs:
+>    bam: File
+>
+> > ## Solution:
+> > cwlVersion: v1.0
+> > class: Workflow
+> > inputs:
+> >    bam: File
+> >    chromosome: string
+> >    reference: File
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3:
+>
+> In this workflow, add a default value for the reference in the inputs section.
 >
 > cwlVersion: v1.0
 > class: Workflow
 > inputs:
 >    bam: File
 >    chromosome: string
+>    reference: File
+>
+> > ## Solution:
+> > cwlVersion: v1.0
+> > class: Workflow
+> > inputs:
+> >    bam: File
+> >    chromosome: string
+> >    reference:
+> >      class: File
+> >      default:
+> >        type: File
+> >        location: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+> {: .solution}
+{: .challenge}
+
+
+- Change hard coded values at the workflow level
+> ## Exercise 4:
+>
+> In this workflow, add the new inputs to the GATK_HaplotypeCaller step. Assume that the inputs to GATK_HaplotypeCaller.cwl are the same variables as what you stated before.
+>
+> cwlVersion: v1.0
+> class: Workflow
+> inputs:
+>    bam: File
+>    chromosome: string
+>    reference: File
 > outputs:
 >   HaplotypeCaller_VCF:
 >     type: File
@@ -32,11 +103,9 @@ __customize a workflow at any of the many levels__:
 >     run: GATK_HaplotypeCaller.cwl
 >     in:
 >       input_bam: bam
->       intervals: chromosome
 >     out: [vcf]
-> 
+>
 > > ## Solution:
-> >
 > > cwlVersion: v1.0
 > > class: Workflow
 > > inputs:
@@ -52,26 +121,25 @@ __customize a workflow at any of the many levels__:
 > >     run: GATK_HaplotypeCaller.cwl
 > >     in:
 > >       input_bam: bam
-> >       intervals: chromosome
-> >       reference_fasta: reference
+> >       chromosome: chromosome
+> >       reference: reference
 > >     out: [vcf]
 > {: .solution}
 {: .challenge}
 
-- Change the default values at the workflow level
-> ## Exercise 2:
+
+- Change default value at the Workflow step level
+
+> ## Exercise 5:
 >
-> Default values in a workflow can be used at both the input object level and the step level. It is similar to how it is used in a CommandLineTool.
-> 
-> Given this workflow, add a default string value of "sample" for the sample_name variable and a default file value of "/home/user/sample.fa" for the reference input.
+> Default values in a workflow can be used at both the input object level and the step level. Add a default reference and chromosome inputs to the steps portion of the workflow. The requirement StepInputExpressionRequrirement must be declared in the requirements section to be able to add default values at the step level.
 >
 > cwlVersion: v1.0
 > class: Workflow
 > inputs:
->    bam: File
->    chromosome: string
->    sample: string
->    reference: File
+>   bam: File
+>   chromosome: string
+>   reference: File
 > outputs:
 >   HaplotypeCaller_VCF:
 >     type: File
@@ -81,60 +149,8 @@ __customize a workflow at any of the many levels__:
 >     run: GATK_HaplotypeCaller.cwl
 >     in:
 >       input_bam: bam
->       intervals: chromosome
->       reference_fasta: reference
->     out: [vcf]
->
-> > ## Solution:
-> > cwlVersion: v1.0
-> > class: Workflow
-> > inputs:
-> >    bam: File
-> >    chromosome: string
-> >    sample:
-> >      type: string
-> >      default: sample
-> >    reference:
-> >      type: File
-> >      default: /home/user/sample.fa
-> > outputs:
-> >   HaplotypeCaller_VCF:
-> >     type: File
-> >     outputSource: GATK_HaplotypeCaller/vcf
-> > steps:
-> >   GATK_HaplotypeCaller:
-> >     run: GATK_HaplotypeCaller.cwl
-> >     in:
-> >       input_bam: bam
-> >       intervals: chromosome
-> >       reference_fasta: reference
-> >     out: [vcf]
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 3:
->
-> In order to change the default value in a step input variable, the requirement StepInputExpressionRequirement must be declared. 
->
-> In this workflow, add an input called "ERC" to the GATK_HaplotypeCaller step and give it a default value of true.
-> cwlVersion: v1.0
-> class: Workflow
-> inputs:
->    bam: File
->    chromosome: string
->    sample: string
->    reference: File
-> outputs:
->   HaplotypeCaller_VCF:
->     type: File
->     outputSource: GATK_HaplotypeCaller/vcf
-> steps:
->   GATK_HaplotypeCaller:
->     run: GATK_HaplotypeCaller.cwl
->     in:
->       input_bam: bam
->       intervals: chromosome
->       reference_fasta: reference
+>       chromosome: chromosome
+>       reference: reference
 >     out: [vcf]
 >
 > > ## Solution:
@@ -143,10 +159,9 @@ __customize a workflow at any of the many levels__:
 > > requirements:
 > >   StepInputExpressionRequirement: {}
 > > inputs:
-> >    bam: File
-> >    chromosome: string
-> >    sample: string
-> >    reference: File
+> >   bam: File
+> >   chromosome: string
+> >   reference: File
 > > outputs:
 > >   HaplotypeCaller_VCF:
 > >     type: File
@@ -156,24 +171,17 @@ __customize a workflow at any of the many levels__:
 > >     run: GATK_HaplotypeCaller.cwl
 > >     in:
 > >       input_bam: bam
-> >       intervals: chromosome
-> >       reference_fasta: reference
-> >       ERC:
-> >         default: true
+> >       chromosome:
+> >         default: chr1
+> >       reference:
+> >         default:
+> >           type: File
+> >           location: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
 > >     out: [vcf]
 > {: .solution}
 {: .challenge}
 
 
-- Change hard coded values at the workflow level
-> ## Exercise 4:
->
-> 
-> > ## Solution:
-> {: .solution}
-{: .challenge}
-
-- Change default value at the Workflow step level
 - Change hard coded values at the Workflow step level
 - Change default values in the CLT description
 - Change hard coded values in the CLT description
