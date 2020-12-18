@@ -19,10 +19,9 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 1:
 >
-> Identify `requirments` for the `CommandLineTool`.
+> Identify `requirements` for the `CommandLineTool`. HINT: `'ubuntu:latest'` can be used as docker container.
 >
 > > ## Solution
-> > The base command should use the path to the binary and the type of variants you're calling.
 > > 
 > > requirements:
 > >    DockerRequirement:
@@ -36,7 +35,6 @@ __include and run their own script in a step at runtime__
 > ## Exercise 2:
 > 
 > Create an input field (with appropriate `type`) that is going to be referred within the script.
->
 >
 > > ## Solution:
 > >
@@ -79,11 +77,26 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 5:
 >
-> Try the script content without `&&`
+> Specify the `baseCommand` required to execute the script.
 >
 > > ## Solution:
 > >
+> > baseCommand: ["sh", "myscript.sh"]
 > > 
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 6:
+>
+> How can we capture script along with tool outputs using `outputs` section.
+>
+> > ## Solution:
+> > outputs:
+> >   bash_file:
+> >     type: File
+> >     outputBinding:
+> >       glob: "*.sh"
+> >
 > {: .solution}
 {: .challenge}
 
