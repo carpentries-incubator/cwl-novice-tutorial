@@ -33,21 +33,18 @@
 [mit-license]: https://opensource.org/licenses/mit-license.html
 [morea]: https://morea-framework.github.io/
 [numfocus]: https://numfocus.org/
-[objective-notes]: {{ relative_root_path }}{% link pages/objective-notes.md %}
 [osi]: https://opensource.org
 [pandoc]: https://pandoc.org/
 [paper-now]: https://github.com/PeerJ/paper-now
 [python-gapminder]: https://swcarpentry.github.io/python-novice-gapminder/
-[pyyaml]: https://pypi.python.org/pypi/PyYAML
+[pyyaml]: https://pypi.org/project/PyYAML/
 [r-markdown]: https://rmarkdown.rstudio.com/
 [rstudio]: https://www.rstudio.com/
 [ruby-install-guide]: https://www.ruby-lang.org/en/downloads/
 [ruby-installer]: https://rubyinstaller.org/
 [rubygems]: https://rubygems.org/pages/download/
 [styles]: https://github.com/carpentries/styles/
-[swc]: https://software-carpentry.org/
 [swc-lessons]: https://software-carpentry.org/lessons/
-[swc-shell]: http://swcarpentry.github.io/shell-novice/
 [swc-releases]: https://github.com/swcarpentry/swc-releases
 [training]: https://carpentries.github.io/instructor-training/
 [workshop-repo]: {{ site.workshop_repo }}
