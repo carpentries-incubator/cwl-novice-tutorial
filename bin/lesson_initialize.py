@@ -5,7 +5,6 @@ import sys
 import os
 import shutil
 
-
 BOILERPLATE = (
     '.travis.yml',
     'AUTHORS',
