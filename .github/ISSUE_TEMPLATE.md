@@ -5,12 +5,12 @@ Thanks for contributing! :heart:
 
 If this issue is about a specific episode within a lesson, please provide its link or filename.
 
-Please keep in mind that lesson maintainers are volunteers and it may be some time 
-before they can respond to your contribution. If you have any questions about the lesson
-maintenance process or would like to volunteer your time as a contribution reviewer,
-please contact The CWL Team via https://www.commonwl.org/#Support.
+Keep in mind that **lesson maintainers are volunteers** and it may take them some time to
+respond to your contribution. Although not all contributions can be incorporated into the lesson
+materials, we appreciate your time and effort to improve the curriculum. If you have any questions
+about the lesson maintenance process or would like to volunteer your time as a contribution
+reviewer, please contact the CWL Team via https://www.commonwl.org/#Support.
 
 You may delete these instructions from your comment.
 
-\- The Carpentries
 </details>
