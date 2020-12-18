@@ -132,7 +132,7 @@ _episodes/%.md: _episodes_rmd/%.Rmd install-rmd-deps
 
 ## * lesson-check     : validate lesson Markdown
 lesson-check : lesson-fixme
-	@${PYTHON} bin/lesson_check.py -s . -p ${PARSER} -r _includes/links.md
+	@${PYTHON} bin/lesson_check.py -s . -p ${PARSER} -r _includes/links.md --permissive
 
 ## * lesson-check-all : validate lesson Markdown, checking line lengths and trailing whitespace
 lesson-check-all :
