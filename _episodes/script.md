@@ -53,46 +53,57 @@ __include and run their own script in a step at runtime__
 > >
 > > InitialWorkDirRequirement:
 > >   listing:
-> >     - entryname: myscript.sh
+> >     - entryname: script.sh
 > >       entry: |
-> >         echo "Start of message" && \
-> >         echo "My message: $(inputs.message)" && \
-> >         echo "End of message"
+> >         echo "*Documenting input*" && \
+> >         echo "Input received: $(inputs.message)" && \
+> >         echo "Exit"
 > > 
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 4:
-> 
-> Create the output variable for the `CommandLineTool` and identify an appropriate `type` for it.
->
-> > ## Solution:
-> >
-> > outputs:
-> >   message:
-> >     type: stdout
-> >
-> {: .solution}
-{: .challenge}
-
 > ## Exercise 5:
->
-> Specify the `baseCommand` required to execute the script.
+> 
+> Since we are using `echo` in the script - what is the apprproiate `CWL` feature to capture standard output?
 >
 > > ## Solution:
 > >
-> > baseCommand: ["sh", "myscript.sh"]
+> > stdout: "message.txt"
 > > 
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 6:
+> 
+> Create an output variable to capture this tools' output and identify an appropriate `type` for it.
 >
-> How can we capture script along with tool outputs using `outputs` section.
+> > ## Solution:
+> >
+> > outputs:
+> >   doc:
+> >     type: stdout
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 7:
+>
+> Specify the `baseCommand` required to execute the script.
+>
+> > ## Solution:
+> >
+> > baseCommand: ["sh", "script.sh"]
+> > 
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 8:
+>
+> How can we capture the script we have created along with tools' standard output using `outputs` section.
 >
 > > ## Solution:
 > > outputs:
-> >   bash_file:
+> >   script:
 > >     type: File
 > >     outputBinding:
 > >       glob: "*.sh"
