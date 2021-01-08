@@ -19,7 +19,7 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 1:
 >
-> Identify `requirements` for the `CommandLineTool`. HINT: `'ubuntu:latest'` can be used as docker container.
+> Identify `requirements` for the `CommandLineTool`. HINT: `'debian:stable'` is a good default software container.
 >
 > > ## Solution
 > > 
