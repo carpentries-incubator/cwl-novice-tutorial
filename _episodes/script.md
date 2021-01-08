@@ -41,21 +41,8 @@ __include and run their own script in a step at runtime__
 {: .challenge}
 
 > ## Exercise 2:
-> 
-> Create an input field (with appropriate `type`) that is going to be referred within the script.
 >
-> > ## Solution:
-> >
-> > inputs:
-> >   message:
-> >     type: string
-> > 
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 3:
->
-> Identify `CWL` keywords for defining script name `script.sh` and the contents in this script.
+> Identify `CWL` keywords for defining script name `script.sh` and the contents of this script under `InitialWorkDirRequirement`.
 >
 > InitialWorkDirRequirement:
 >   listing:
@@ -65,7 +52,16 @@ __include and run their own script in a step at runtime__
 >         echo "Input received: $(inputs.message)" && \
 >         echo "Exit"
 >
+> inputs:
+>   message:
+>     type: string
+>
 > > ## Solution:
+> >
+> > class: CommandLineTool
+> > cwlVersion: v1.1
+> > requirements:
+> >    DockerRequirement:
 > >
 > > InitialWorkDirRequirement:
 > >   listing:
@@ -74,37 +70,59 @@ __include and run their own script in a step at runtime__
 > >         echo "*Documenting input*" && \
 > >         echo "Input received: $(inputs.message)" && \
 > >         echo "Exit"
+> >
+> > inputs:
+> >   message:
+> >     type: string
 > > 
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 5:
+> ## Exercise 3:
 > 
-> Since we are using `echo` in the script - what is the apprproiate `CWL` feature to capture standard output?
+> Since we are using `echo` in the script (as shown below) - what is the apprproiate `type` in the `outputs` section of following code block to capture standard output?
+>
+> class: CommandLineTool
+> cwlVersion: v1.1
+> requirements:
+>   DockerRequirement:
+>     dockerPull: 'debian:stable'
+>   InitialWorkDirRequirement:
+>     listing:
+>       - entryname: script.sh
+>         entry: |
+>           echo "*Documenting input*" && \
+>           echo "Input received: $(inputs.message)" && \
+>           echo "Exit"
+>
+> inputs:
+>   message:
+>     type: string
+>
+> stdout: "message.txt"
+>
+> outputs:
+>  message:
+>    type: ----
+> 
+> Your options are:
+> A. File
+> B. Directory
+> C. stdout
+> D. string
 >
 > > ## Solution:
 > >
-> > stdout: "message.txt"
+> > C. stdout
 > > 
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 6:
-> 
-> Create an output variable to capture this tools' output and identify an appropriate `type` for it.
+> ## Exercise 4:
 >
-> > ## Solution:
-> >
-> > outputs:
-> >   doc:
-> >     type: stdout
-> >
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 7:
+> Fix the `baseCommand` in following code snippet to execute the script we have created in previous exercises.
 >
-> Specify the `baseCommand` required to execute the script.
+> baseCommand: []
 >
 > > ## Solution:
 > >
@@ -113,16 +131,63 @@ __include and run their own script in a step at runtime__
 > {: .solution}
 {: .challenge}
 
-> ## Exercise 8:
+> ## Exercise 5:
+> 
+> CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
 >
-> How can we capture the script we have created along with tools' standard output using `outputs` section.
+> class: CommandLineTool
+> cwlVersion: v1.1
+> requirements:
+>   DockerRequirement:
+>     dockerPull: 'debian:stable'
+>   InitialWorkDirRequirement:
+>     listing:
+>       - entryname: script.sh
+>         entry: |
+>           echo "*Documenting input*" && \
+>           echo "Input received: $(inputs.message)" && \
+>           echo "Exit"
+>
+> inputs:
+>   message:
+>     type: string
+>
+> stdout: "message.txt"
+> baseCommand: ["sh", "script.sh"]
+>
+> outputs:
+>   message:
+>     type: stdout
 >
 > > ## Solution:
+> >
+> > class: CommandLineTool
+> > cwlVersion: v1.1
+> > requirements:
+> >   DockerRequirement:
+> >     dockerPull: 'debian:stable'
+> >   InitialWorkDirRequirement:
+> >     listing:
+> >       - entryname: script.sh
+> >         entry: |
+> >           echo "*Documenting input*" && \
+> >           echo "Input received: $(inputs.message)" && \
+> >           echo "Exit"
+>
+> > inputs:
+> >   message:
+> >     type: string
+> > 
+> > stdout: "message.txt"
+> > baseCommand: ["sh", "script.sh"]
+> >
 > > outputs:
+> >   message:
+> >     type: stdout
 > >   script:
 > >     type: File
 > >     outputBinding:
-> >       glob: "*.sh"
+> >       glob: "script.sh"
 > >
 > {: .solution}
 {: .challenge}
