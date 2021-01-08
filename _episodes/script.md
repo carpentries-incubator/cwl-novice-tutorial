@@ -21,6 +21,8 @@ __include and run their own script in a step at runtime__
 >
 > Complete the `requirements` field for the `CommandLineTool` that creates a script at runtime. As a HINT, `DockerRequirement` has already been filled-in.
 >
+> class: CommandLineTool
+> cwlVersion: v1.1
 > requirements:
 >   DockerRequirement:
 >     dockerPull: 'debian:stable'
@@ -28,6 +30,8 @@ __include and run their own script in a step at runtime__
 >
 > > ## Solution
 > > 
+> > class: CommandLineTool
+> > cwlVersion: v1.1
 > > requirements:
 > >    DockerRequirement:
 > >      dockerPull: 'debian:stable'
@@ -51,7 +55,15 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 3:
 >
-> Define name and content of the script (in this exercise we will create a bash script that uses `echo` on the input `message`)
+> Identify `CWL` keywords for defining script name `script.sh` and the contents in this script.
+>
+> InitialWorkDirRequirement:
+>   listing:
+>     - ------: script.sh
+>       ------: |
+>         echo "*Documenting input*" && \
+>         echo "Input received: $(inputs.message)" && \
+>         echo "Exit"
 >
 > > ## Solution:
 > >
