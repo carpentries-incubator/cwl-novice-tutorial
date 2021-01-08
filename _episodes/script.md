@@ -19,13 +19,19 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 1:
 >
-> Identify `requirements` for the `CommandLineTool`. HINT: `'debian:stable'` is a good default software container.
+> Complete the `requirements` field for the `CommandLineTool` that creates a script at runtime. As a HINT, `DockerRequirement` has already been filled-in.
+>
+> requirements:
+>   DockerRequirement:
+>     dockerPull: 'debian:stable'
+>   -----------------:
 >
 > > ## Solution
 > > 
 > > requirements:
 > >    DockerRequirement:
-> >      dockerPull: 'ubuntu:latest'
+> >      dockerPull: 'debian:stable'
+> >    InitialWorkDirRequirement:
 > > 
 > {: .solution}
 {: .challenge}
