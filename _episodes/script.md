@@ -26,8 +26,6 @@ __include and run their own script in a step at runtime__
 > > requirements:
 > >    DockerRequirement:
 > >      dockerPull: 'ubuntu:latest'
-> >    InlineJavascriptRequirement: {}
-> >    InitialWorkDirRequirement:
 > > 
 > {: .solution}
 {: .challenge}
