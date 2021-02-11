@@ -21,21 +21,27 @@ __include and run their own script in a step at runtime__
 >
 > Complete the `requirements` field for the `CommandLineTool` that creates a script at runtime. As a HINT, `DockerRequirement` has already been filled-in.
 >
+> ~~~
 > class: CommandLineTool
 > cwlVersion: v1.1
 > requirements:
 >   DockerRequirement:
 >     dockerPull: 'debian:stable'
 >   -----------------:
+> ~~~
+> {: .language-yaml }
 >
 > > ## Solution
 > > 
+> > ~~~
 > > class: CommandLineTool
 > > cwlVersion: v1.1
 > > requirements:
 > >    DockerRequirement:
 > >      dockerPull: 'debian:stable'
 > >    InitialWorkDirRequirement:
+> > ~~~
+> > {: .language-yaml }
 > > 
 > {: .solution}
 {: .challenge}
@@ -61,6 +67,7 @@ __include and run their own script in a step at runtime__
 >
 > > ## Solution:
 > >
+> > ~~~
 > > class: CommandLineTool
 > > cwlVersion: v1.1
 > > requirements:
@@ -77,6 +84,8 @@ __include and run their own script in a step at runtime__
 > > inputs:
 > >   message:
 > >     type: string
+> > ~~~
+> > {: .language-yaml }
 > > 
 > {: .solution}
 {: .challenge}
@@ -85,6 +94,7 @@ __include and run their own script in a step at runtime__
 > 
 > Since we are using `echo` in the script (as shown below) - what is the appropriate `type` in the `outputs` section of following code block to capture standard output?
 >
+> ~~~
 > class: CommandLineTool
 > cwlVersion: v1.1
 > requirements:
@@ -107,6 +117,8 @@ __include and run their own script in a step at runtime__
 > outputs:
 >  message:
 >    type: ----
+> ~~~
+> {: .language-yaml }
 > 
 > Your options are:
 > A. File
@@ -125,11 +137,17 @@ __include and run their own script in a step at runtime__
 >
 > Fix the `baseCommand` in following code snippet to execute the script we have created in previous exercises.
 >
+> ~~~
 > baseCommand: []
+> ~~~
+> {: .language-yaml }
 >
 > > ## Solution:
 > >
+> > ~~~
 > > baseCommand: ["sh", "script.sh"]
+> > ~~~
+> > {: .language-yaml }
 > > 
 > {: .solution}
 {: .challenge}
@@ -138,6 +156,7 @@ __include and run their own script in a step at runtime__
 > 
 > CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
 >
+> ~~~
 > class: CommandLineTool
 > cwlVersion: v1.1
 > requirements:
@@ -161,9 +180,12 @@ __include and run their own script in a step at runtime__
 > outputs:
 >   message:
 >     type: stdout
+> ~~~
+> {: .language-yaml }
 >
 > > ## Solution:
 > >
+> > ~~~
 > > class: CommandLineTool
 > > cwlVersion: v1.1
 > > requirements:
@@ -191,6 +213,8 @@ __include and run their own script in a step at runtime__
 > >     type: File
 > >     outputBinding:
 > >       glob: "script.sh"
+> > ~~~
+> > {: .language-yaml }
 > >
 > {: .solution}
 {: .challenge}
