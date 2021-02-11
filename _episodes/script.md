@@ -80,7 +80,7 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 3:
 > 
-> Since we are using `echo` in the script (as shown below) - what is the apprproiate `type` in the `outputs` section of following code block to capture standard output?
+> Since we are using `echo` in the script (as shown below) - what is the appropriate `type` in the `outputs` section of following code block to capture standard output?
 >
 > class: CommandLineTool
 > cwlVersion: v1.1
