@@ -44,6 +44,7 @@ __include and run their own script in a step at runtime__
 >
 > Identify `CWL` keywords for defining script name `script.sh` and the contents of this script under `InitialWorkDirRequirement`.
 >
+> ~~~
 > InitialWorkDirRequirement:
 >   listing:
 >     - ------: script.sh
@@ -55,6 +56,8 @@ __include and run their own script in a step at runtime__
 > inputs:
 >   message:
 >     type: string
+> ~~~
+> {: .language-yaml }
 >
 > > ## Solution:
 > >
