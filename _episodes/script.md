@@ -32,7 +32,7 @@ __include and run their own script in a step at runtime__
 > {: .language-yaml }
 >
 > > ## Solution
-> > 
+> >
 > > ~~~
 > > class: CommandLineTool
 > > cwlVersion: v1.1
@@ -42,7 +42,7 @@ __include and run their own script in a step at runtime__
 > >    InitialWorkDirRequirement:
 > > ~~~
 > > {: .language-yaml }
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
@@ -81,12 +81,12 @@ __include and run their own script in a step at runtime__
 > >     type: string
 > > ~~~
 > > {: .language-yaml }
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 3:
-> 
+>
 > Since we are using `echo` in the script (as shown below) - what is the appropriate `type` in the `outputs` section of following code block to capture standard output?
 >
 > ~~~
@@ -114,7 +114,7 @@ __include and run their own script in a step at runtime__
 >    type: ----
 > ~~~
 > {: .language-yaml }
-> 
+>
 > Your options are:
 > A. File
 > B. Directory
@@ -124,7 +124,7 @@ __include and run their own script in a step at runtime__
 > > ## Solution:
 > >
 > > C. stdout
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
@@ -143,12 +143,12 @@ __include and run their own script in a step at runtime__
 > > baseCommand: ["sh", "script.sh"]
 > > ~~~
 > > {: .language-yaml }
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 5:
-> 
+>
 > CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
 >
 > ~~~
@@ -193,11 +193,11 @@ __include and run their own script in a step at runtime__
 > >           echo "*Documenting input*" && \
 > >           echo "Input received: $(inputs.message)" && \
 > >           echo "Exit"
->
+> >
 > > inputs:
 > >   message:
 > >     type: string
-> > 
+> >
 > > stdout: "message.txt"
 > > baseCommand: ["sh", "script.sh"]
 > >
