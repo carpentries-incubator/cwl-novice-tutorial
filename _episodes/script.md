@@ -68,11 +68,6 @@ __include and run their own script in a step at runtime__
 > > ## Solution:
 > >
 > > ~~~
-> > class: CommandLineTool
-> > cwlVersion: v1.1
-> > requirements:
-> >    DockerRequirement:
-> >
 > > InitialWorkDirRequirement:
 > >   listing:
 > >     - entryname: script.sh
