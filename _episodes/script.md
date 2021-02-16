@@ -48,7 +48,7 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 2:
 >
-> Identify `CWL` keywords for defining script name `script.sh` and the contents of this script under `InitialWorkDirRequirement`.
+> Using the template below, add the missing instructions so that a script named `script.sh` with the specified contents is created at runtime.
 >
 > ~~~
 > InitialWorkDirRequirement:
