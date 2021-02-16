@@ -140,7 +140,7 @@ __include and run their own script in a step at runtime__
 > > ## Solution:
 > >
 > > ~~~
-> > baseCommand: ["sh", "script.sh"]
+> > baseCommand: [ sh, script.sh ]
 > > ~~~
 > > {: .language-yaml }
 > >
