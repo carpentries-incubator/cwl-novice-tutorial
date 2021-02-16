@@ -150,6 +150,8 @@ __include and run their own script in a step at runtime__
 > ## Exercise 5:
 >
 > CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
+> 
+> This will help you inspect the generated script and is useful in more complex situations to troubleshoot related issues.
 >
 > ~~~
 > class: CommandLineTool
