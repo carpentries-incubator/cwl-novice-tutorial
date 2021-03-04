@@ -19,7 +19,7 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 1:
 >
-> Complete the `requirements` field for the `CommandLineTool` that creates a script at runtime. As a HINT, `DockerRequirement` has already been filled-in.
+> Which `Requirment` is used to create a script at runtime? Fill in the blank under `requirements` field below. As a HINT, `DockerRequirement` has already been filled-in.
 >
 > ~~~
 > class: CommandLineTool
