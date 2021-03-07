@@ -19,27 +19,20 @@ __include and run their own script in a step at runtime__
 
 > ## Exercise 1:
 >
-> Which `Requirment` is used to create a script at runtime? Fill in the blank under `requirements` field below. As a HINT, `DockerRequirement` has already been filled-in.
+> Which `Requirment` from the following options is used to create a script at runtime?
 >
 > ~~~
-> class: CommandLineTool
-> cwlVersion: v1.1
-> requirements:
->   DockerRequirement:
->     dockerPull: 'debian:stable'
->   -----------------:
+> A. InlineJavascriptRequirement
+> B. InitialWorkDirRequirement
+> C. ResourceRequirement
+> D. DockerRequirement
 > ~~~
 > {: .language-yaml }
 >
 > > ## Solution
 > >
 > > ~~~
-> > class: CommandLineTool
-> > cwlVersion: v1.1
-> > requirements:
-> >    DockerRequirement:
-> >      dockerPull: 'debian:stable'
-> >    InitialWorkDirRequirement:
+> > B. InitialWorkDirRequirement
 > > ~~~
 > > {: .language-yaml }
 > >
