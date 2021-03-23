@@ -6,7 +6,7 @@ redirect_from:
 excerpt: This tutorial uses learner profiles to inform what we teach
 ---
 
-Target learners that may wish to follow this training instance will have wide range of previous experiences but will show a common, possibly frequently acquired, interest in **automating** their analysis. The reasons will vary: they may want to use distributed computing, clusters, handle large datasets, large files, etc. They may be looking for reproducibilty, ways for documenting the analysis and to cite them adequately.
+Target learners that may wish to follow this training instance will have wide range of previous experiences but will show a common, possibly recently acquired, interest in **automating** their analysis. The reasons will vary: they may want to use distributed computing, clusters, handle large datasets, large files, etc. They may be looking for reproducibilty, ways for documenting the analysis and to cite them adequately.
 Learner profiles inform what we teach,
 by describing (fictional) representatives of our target audience.
 Each profile answers three questions:
