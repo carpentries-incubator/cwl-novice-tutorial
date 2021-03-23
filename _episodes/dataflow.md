@@ -28,9 +28,9 @@ A workflow is the orchestration of the individual steps.
 
 ## Definitions
 
-> Tool description is the document that enables to run the command line tool, with CWL runner (or with any time of workflow engine that is CWL compatible)
+> A CWL Tool description is a document that enables to run a command line tool, using a CWL runner (i.e. any type of workflow engine that is CWL compatible)
 
-> The CWL workflow description is a particular chaining of steps (tools or workflows) that enable CWL runner to execute them in an orchestrated way.
+> A CWL Workflow description is a particular chaining of steps (running CWL Tools or CWL Workflows) that enables a their execution with a CWL runner in an orchestrated way.
 
 
 This is what you see in a header of a CWL Tool Description
