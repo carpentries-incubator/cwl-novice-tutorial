@@ -89,16 +89,5 @@ requirements:
 > {: .solution}
 {: .challenge}
 
-When scattering on multiple inputs,
-you need to explicitly say how the scatter should occur.
-There are 3 scatter methods in CWL:
-`dot_product`, `flat_crossproduct` and `nested_crossproduct`.
-`dot_product` is the default method,
-which takes each element of the array and runs on each nth item of the array.
-`flat_crossproduct` and `nested_crossproduct` will take both inputs and
-run on every combination of both arrays.
-The difference between flat and nested is in the output type.
-Flat will create a single array output whereas
-nested will create a nested array output.
 
 {% include links.md %}
