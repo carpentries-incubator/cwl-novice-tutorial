@@ -101,6 +101,4 @@ The difference between flat and nested is in the output type.
 Flat will create a single array output whereas
 nested will create a nested array output.
 
-# TODO Add pictures of cross product / matrix manipulation
-
 {% include links.md %}
