@@ -38,7 +38,8 @@ Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create 
 >
 > When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific parameters describing the RAM, Cores and Disk space (for both temporary and output files) it requires.
 >
-> Create the ResourceRequirements field for running 2 BAMs for the fgv joint_haplotype command.
+> Create the `ResourceRequirements` field for running 2 BAMs for
+> the `fgv joint_haplotype` command.
 >
 > > ## Solution:
 > >
@@ -50,7 +51,10 @@ Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create 
 > > ~~~
 > > {: .language-yaml }
 > >
-> > FGV requires 2 GiB of memory for each bam input, and the unit for ramMin is in MiB, so we need approximately 4000 MiB to meet the requirement. FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
+> > FGV requires 2 GiB of memory for each bam input,
+> > and the unit for `ramMin` is in MiB,
+> > so we need approximately 4000 MiB to meet the requirement.
+> > FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
 > >
 > {: .solution}
 {: .challenge}
