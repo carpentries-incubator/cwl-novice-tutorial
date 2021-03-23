@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "Key question (FIXME)"
 objectives:
-- "explain the difference between _control flow_ and _data flow_"
-- "identify the inputs and outputs, tasks, and links in a script"
-- "(recognize and remove details and configuration in a script that are specific to particular infrastructure)"
+- "identify tasks, and data links in a script"
+- "recognize loops that can be converted into scatters"
+- "finding and reusing existing CWL command line tool descriptions "
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---

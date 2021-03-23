@@ -1,38 +1,213 @@
 ---
-title: "Adding your own script to a workflow"
+title: "Adding your own script to a step"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How to include and run a script in a step at runtime?"
+- "Which requirements need to be specified?"
+- "How to capture output of a script?"
 objectives:
-- "See episode body and [this issue](https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/8)"
+- "Include and run a script in a step at runtime"
+- "Capture output of a script"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
+
 By the end of this episode,
 learners should be able to
-__include their own script as a step in a workflow__
+__include and run their own script in a step at runtime__
 
-several options for this were identified during the lesson development sprint.
-we should choose one or two to focus on in the tutorial
-(add your thoughts at the corresponding issue [here](https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/8)):
-  - make script executable and add to path
-      - advantage: quick
-      - downside:
-          - the scripts are not shipped with the CWL document itself
-          - not portable to other execution environment without putting the script first
-  - pack the scripts into a docker container and make them executable there:
-      - advantage: portable
-      - downside:
-          - only works for people that are using containers
-  - use InitialWorkDirRequirement to list script content directly in the CWLToolWrapper
-      - example: https://github.com/CompEpigen/ATACseq_workflows/blob/master/CWL/tools/generate_atac_signal_tags.cwl (bad example as here the scripts are too long, only for short scripts)
-      - advantage:
-          - portable
-          - can be used independent of the dependency management solution
-      - disadvantage:
-          - explodes the complexity of a CWL tool wrapper
-          - having to deal with escapes and so on
-  - distribute as seperate package via pip / cran / ...
+> ## Exercise 1:
+>
+> Which `Requirment` from the following options is used to create a script at runtime?
+>
+> ~~~
+> A. InlineJavascriptRequirement
+> B. InitialWorkDirRequirement
+> C. ResourceRequirement
+> D. DockerRequirement
+> ~~~
+> {: .language-yaml }
+>
+> > ## Solution
+> >
+> > ~~~
+> > B. InitialWorkDirRequirement
+> > ~~~
+> > {: .language-yaml }
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 2:
+>
+> Using the template below, add the missing instructions so that a script named `script.sh` with the specified contents is created at runtime.
+>
+> ~~~
+> InitialWorkDirRequirement:
+>   listing:
+>     - ------: script.sh
+>       ------: |
+>         echo "*Documenting input*" && \
+>         echo "Input received: $(inputs.message)" && \
+>         echo "Exit"
+>
+> inputs:
+>   message:
+>     type: string
+> ~~~
+> {: .language-yaml }
+>
+> > ## Solution:
+> >
+> > ~~~
+> > InitialWorkDirRequirement:
+> >   listing:
+> >     - entryname: script.sh
+> >       entry: |
+> >         echo "*Documenting input*" && \
+> >         echo "Input received: $(inputs.message)" && \
+> >         echo "Exit"
+> >
+> > inputs:
+> >   message:
+> >     type: string
+> > ~~~
+> > {: .language-yaml }
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3:
+>
+> Since we are using `echo` in the script (as shown below) - what is the appropriate `type` in the `outputs` section of following code block to capture standard output?
+>
+> ~~~
+> class: CommandLineTool
+> cwlVersion: v1.1
+> requirements:
+>   DockerRequirement:
+>     dockerPull: 'debian:stable'
+>   InitialWorkDirRequirement:
+>     listing:
+>       - entryname: script.sh
+>         entry: |
+>           echo "*Documenting input*" && \
+>           echo "Input received: $(inputs.message)" && \
+>           echo "Exit"
+>
+> inputs:
+>   message:
+>     type: string
+>
+> stdout: "message.txt"
+>
+> outputs:
+>  message:
+>    type: ----
+> ~~~
+> {: .language-yaml }
+>
+> Your options are:
+> A. File
+> B. Directory
+> C. stdout
+> D. string
+>
+> > ## Solution:
+> >
+> > C. stdout
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 4:
+>
+> Fix the `baseCommand` in following code snippet to execute the script we have created in previous exercises.
+>
+> ~~~
+> baseCommand: []
+> ~~~
+> {: .language-yaml }
+>
+> > ## Solution:
+> >
+> > ~~~
+> > baseCommand: [ sh, script.sh ]
+> > ~~~
+> > {: .language-yaml }
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 5:
+>
+> CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
+> 
+> This will help you inspect the generated script and is useful in more complex situations to troubleshoot related issues.
+>
+> ~~~
+> class: CommandLineTool
+> cwlVersion: v1.1
+> requirements:
+>   DockerRequirement:
+>     dockerPull: 'debian:stable'
+>   InitialWorkDirRequirement:
+>     listing:
+>       - entryname: script.sh
+>         entry: |
+>           echo "*Documenting input*" && \
+>           echo "Input received: $(inputs.message)" && \
+>           echo "Exit"
+>
+> inputs:
+>   message:
+>     type: string
+>
+> stdout: "message.txt"
+> baseCommand: ["sh", "script.sh"]
+>
+> outputs:
+>   message:
+>     type: stdout
+> ~~~
+> {: .language-yaml }
+>
+> > ## Solution:
+> >
+> > ~~~
+> > class: CommandLineTool
+> > cwlVersion: v1.1
+> > requirements:
+> >   DockerRequirement:
+> >     dockerPull: 'debian:stable'
+> >   InitialWorkDirRequirement:
+> >     listing:
+> >       - entryname: script.sh
+> >         entry: |
+> >           echo "*Documenting input*" && \
+> >           echo "Input received: $(inputs.message)" && \
+> >           echo "Exit"
+> >
+> > inputs:
+> >   message:
+> >     type: string
+> >
+> > stdout: "message.txt"
+> > baseCommand: ["sh", "script.sh"]
+> >
+> > outputs:
+> >   message:
+> >     type: stdout
+> >   script:
+> >     type: File
+> >     outputBinding:
+> >       glob: "script.sh"
+> > ~~~
+> > {: .language-yaml }
+> >
+> {: .solution}
+{: .challenge}
+
 
 {% include links.md %}
