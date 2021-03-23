@@ -79,7 +79,7 @@ __define the files that will be included as output of a workflow__.
 > >       glob: "*fastqc*"
 > > ~~~
 > > {: .language-yaml }
-> > {: .solution }
+> {: .solution }
 >
 > Actually, `fastqc` may create more than 3 of these files,
 > depending on the input parameters you give it,
