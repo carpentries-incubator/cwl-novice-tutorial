@@ -18,33 +18,38 @@ By the end of this episode,
 learners should be able to
 __describe all the requirements for running a tool__
 
-Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a CommandLineTool
+Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a `CommandLineTool`
 
-> ## Exercise 1:
+> ## Exercise 1
 >
 > Create the baseCommand for running the joint_haplotype caller using the fast_genome_variants README.
 >
 > > ## Solution
 > > The base command should use the path to the binary and the type of variants you're calling.
-> > 
-> >  baseCommand: [fgv, joint_haplotype]
-> > 
+> >
+> > ~~~
+> > baseCommand: [fgv, joint_haplotype]
+> > ~~~
+> > {: .language-yaml }
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 2:
-> 
+>
 > When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific parameters describing the RAM, Cores and Disk space (for both temporary and output files) it requires.
 >
 > Create the ResourceRequirements field for running 2 BAMs for the fgv joint_haplotype command.
 >
 > > ## Solution:
 > >
+> > ~~~
 > > requirements:
 > >   ResourceRequirement:
 > >     ramMin: 4000
 > >     coresMin: 2
-> > 
+> > ~~~
+> > {: .language-yaml }
+> >
 > > FGV requires 2 GiB of memory for each bam input, and the unit for ramMin is in MiB, so we need approximately 4000 MiB to meet the requirement. FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
 > >
 > {: .solution}
@@ -52,10 +57,14 @@ Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create 
 
 > ## Exercise 3:
 >
-> Create the input field for running fgv_joint_haplotype and also add an optional flag for calling a GVCF output. Also add a string input for intervals chr2:1-10000 and an output name.
+> 1. Create the `input` field for running `fgv_joint_haplotype`
+> 2. Add an optional flag for calling a GVCF output
+> 3. Add a string input for intervals `chr2:1-10000`
+> 4. Add an output name.
 >
 > > ## Solution:
 > >
+> > ~~~
 > > inputs:
 > >   bam:
 > >     type: File[]
@@ -78,32 +87,35 @@ Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create 
 > >     inputBinding:
 > >       position: 4
 > >       prefix: -o
-> > 
+> > ~~~
+> > {: .language-yaml }
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 4:
-> 
+>
 > Create the output variable for the CommandLineTool and name it output_vcf.
 >
 > > ## Solution:
 > >
+> > ~~~
 > > outputs:
 > >   output_vcf:
 > >     type: File
 > >     outputBinding:
 > >       glob: $(inputs.output_name)
-> >
+> > ~~~
+> > {: .language-yaml }
 > {: .solution}
 {: .challenge}
 
 > ## Exercise 5:
 >
->
+> TODO
 >
 > > ## Solution:
 > >
-> > 
+> >
 > {: .solution}
 {: .challenge}
 
