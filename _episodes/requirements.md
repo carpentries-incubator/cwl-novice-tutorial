@@ -34,7 +34,7 @@ Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create 
 
 > ## Exercise 2:
 > 
-> When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific RAM, Cores and Disk space parameters.
+> When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific parameters describing the RAM, Cores and Disk space (for both temporary and output files) it requires.
 >
 > Create the ResourceRequirements field for running 2 BAMs for the fgv joint_haplotype command.
 >
