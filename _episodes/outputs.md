@@ -67,7 +67,7 @@ __define the files that will be included as output of a workflow__.
 > - `supplemental_figures_fastqc.html`
 >
 > Create a CWL `outputs` field using a `File` array that
-> captures all the files in a single output variable.
+> captures all the fastqc files in a single output variable.
 >
 > > ## Solution
 > >
