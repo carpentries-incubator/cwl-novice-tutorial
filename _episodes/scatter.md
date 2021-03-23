@@ -19,11 +19,15 @@ Use the ScatterFeatureRequirement in the requirements section of a workflow to b
 requirements:
    ScatterFeatureRequirement: {}
 ~~~
+{: .language-yaml }
 
 > ## Exercise 1
 >
-> In this workflow, we have a job that uses GATK Haplotype Caller. Currently, the job is configured to run on a single chromosome. How would you parallelize GATK_HaplotypeCaller to run all chromosomes simultaneously?
-> 
+> In this workflow, we have a job that uses GATK Haplotype Caller.
+> Currently, the job is configured to run on a single chromosome.
+> How would you parallelize `GATK_HaplotypeCaller` to run all chromosomes simultaneously?
+>
+> ~~~
 > cwlVersion: v1.0
 > class: Workflow
 > requirements:
@@ -42,9 +46,17 @@ requirements:
 >       input_bam: bam
 >       intervals: chromosome
 >     out: [vcf]
+> ~~~
+> {: .language-yaml }
 >
 > > ## Solution
-> > Given that we need to scatter on an array of chromosomes, we changed the chromosome input variable to become a string array. Following that, in the steps section, the scatter function on the intervals is added so GATK HaplotypeCaller will run on each chromosome. Finally, in the outputs section, the final output will be an array of VCFs.
+> > Given that we need to scatter on an array of chromosomes,
+> > we changed the chromosome input variable to become a string array.
+> > Following that, in the steps section, the scatter function on the intervals
+> > is added so GATK `HaplotypeCaller` will run on each chromosome.
+> > Finally, in the outputs section, the final output will be an array of VCFs.
+> >
+> > ~~~
 > > cwlVersion: v1.0
 > > class: Workflow
 > > requirements:
@@ -64,21 +76,41 @@ requirements:
 > >       input_bam: bam
 > >       intervals: chromosomes
 > >     out: [vcf]
-> > GATK will take the array of chromosome strings, and then using it's intervals input option, create multiple VCFs, one for each chromosome. All these jobs will be run in parallel, and run on as maybe compute nodes available.
-> > # TODO: Add diagram of how the job will run
+> > ~~~
+> > {: .language-yaml }
+> >
+> > GATK will take the array of chromosome strings,
+> > and then using it's intervals input option,
+> > create multiple VCFs, one for each chromosome.
+> > All these jobs will be run in parallel,
+> > and run on as maybe compute nodes available.
+> >
+> > TODO: Add diagram of how the job will run
 > {: .solution}
 {: .challenge}
 
-When scattering on multiple inputs, you need to explicitly say how the scatter should occur. There are 3 scatter methods in CWL: dot_product, flat_crossproduct and nested_crossproduct. dot_product is the default method, which takes each element of the array and runs on each nth item of the array. flat_crossproduct and nested_crossproduct will take both inputs and run on every combination of both arrays. The difference between flat and nested is in the output type. Flat will create a single array output whereas Nested will create a nested array output.
+When scattering on multiple inputs,
+you need to explicitly say how the scatter should occur.
+There are 3 scatter methods in CWL:
+`dot_product`, `flat_crossproduct` and `nested_crossproduct`.
+`dot_product` is the default method,
+which takes each element of the array and runs on each nth item of the array.
+`flat_crossproduct` and `nested_crossproduct` will take both inputs and
+run on every combination of both arrays.
+The difference between flat and nested is in the output type.
+Flat will create a single array output whereas
+nested will create a nested array output.
 
 # TODO Add pictures of cross product / matrix manipulation
 
 > ## Exercise 2:
 >
-> What if you had two arrays, one a file array of bams and an array of chromosomes? How would you run all chromosomes on each bam?
+> What if you had two arrays,
+> one a file array of bams and an array of chromosomes?
+> How would you run all chromosomes on each bam?
 >
 > > ## Solution:
-> > 
+> >
 > > steps:
 > >   GATK_HaplotypeCaller:
 > >     run: GATK_HaplotypeCaller.cwl
@@ -88,11 +120,11 @@ When scattering on multiple inputs, you need to explicitly say how the scatter s
 {. challenge}
 
 > ## Exercise 3:
-> 
+>
 > How does this change the inputs and outputs for the workflow?
 >
 > > ## Solution:
-> > 
+> >
 > > cwlVersion: v1.0
 > > class: Workflow
 > > requirements:
@@ -118,6 +150,6 @@ When scattering on multiple inputs, you need to explicitly say how the scatter s
 > >       intervals: chromosomes
 > >     out: [vcf]
 > {. solution}
-{. challenge}
+{: .challenge}
 
 {: .source}
