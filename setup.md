@@ -1,7 +1,9 @@
 ---
 title: Setup
 ---
-FIXME
+
+- VSCode + Benson
+- reference runner
 
 
 {% include links.md %}
