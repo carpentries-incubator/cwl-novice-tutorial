@@ -2,8 +2,8 @@
 title: Setup
 ---
 
-- VSCode + Benson
-- reference runner
+- VSCode + https://github.com/rabix/benten
+- CWL reference runner (`cwltool`)
 
 
 {% include links.md %}
