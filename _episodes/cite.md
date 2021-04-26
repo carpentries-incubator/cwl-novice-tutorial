@@ -5,6 +5,7 @@ exercises: 0
 questions:
 - "Key question (FIXME)"
 objectives:
+- "explain the importance of correctly citing research software"
 - "give credit for all the tools used in their workflow(s)"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
@@ -12,6 +13,7 @@ keypoints:
 By the end of this epsiode,
 learners should be able to
 __explain the importance of correctly citing research software__.
+**TODO: define some specific objectives to capture the skills being taught in this section.**
 
 See [this page](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage).
 
