@@ -23,9 +23,7 @@ against it. In this lesson we will learn how to convert this shell script to a C
 ```bash=
 #!/usr/bin/env bash
 
-if ! [ -f data/reference.fa.sa ]; then
-   bwa index data/reference.fa
-fi
+bwa index data/reference.fa
 
 for sample in samples; do
    bwa mem data/reference.fa $sample > outputs/$sample.sam
@@ -55,7 +53,6 @@ Answers
 
 ## Making tool invocation portable
 
-
 Question: Which of these commands will refer to a user-supplied reference genome?
 
 Answers
@@ -66,7 +63,7 @@ Answers
 
 ## Identifying workflow dependencies
 
-Question: what files does the bwa mem command use?
+Question: what files does the `bwa mem` command use?
 
 Answer:
 1. The genome reference FASTA and the FASTQ format sequence file
@@ -75,7 +72,7 @@ Answer:
 
 ## Identifying workflow inputs and outputs
 
-Question: What files does the workflow as a whole require as input? 
+Question: What files does the workflow as a whole require as input?
 
 Answer:
 1. The genome reference FASTA and the FASTQ format sequence file
@@ -89,8 +86,24 @@ Answer:
 2. The BAM format mapped reads
 3. The BAM format mapped reads and the BWA index of the genome reference FASTA
 
-## Cleanup of working directories
+## What parts of the script can we skip
 
-Question: in CWL, do we need to cleanup "temporary" data?
+Question: Which parts of the script can we skip
 
-Answer: No, CWL runners run each workflow in a temporary working area and clean up any temporary files automatically.
+Answer: Cleaning up the temporary files. CWL workflows have defined inputs and outputs and any temporary files created during workflow execution get automatically deleted.
+
+## CWL and loops
+
+In the example script, there is a section that loops over a collection of samples.
+
+```bash
+for sample in samples; do
+   bwa mem data/reference.fa $sample > outputs/$sample.sam
+done
+```
+
+This section of the script runs the same `bwa mem` command for each `sample` in the list `samples`.
+
+Question: How can we do something similar in a CWL workflow?
+
+Answer: The CWL equivalent of a loop over inputs is called a *scatter*. A scatter runs a tool for each element of an input list. *TODO: express this better*
