@@ -1,10 +1,30 @@
 ---
-title: "Capturing output"
+title: "Shell to CWL workflow conversion"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "What is the difference between a CWL tool description and a CWL workflow?"
+- "How can we create a tool descriptor?"
+- "How can we use this in a single step workflow?"
+- "How can we expand to a multi-step workflow?"
 objectives:
+- "dataflow objectives:"
+- "explain the difference between a CWL tool description and a CWL workflow"
+- "describe the relationship between a tool and its corresponding CWL document"
+- "exercise good practices when naming inputs and outputs"
+- "Be able to make understandable and valid names for inputs and outputs (not 'input3')"
+- "describing requirements objectives:"
+- "identify all the requirements of a tool and define them in the tool description"
+- "use `runtime` parameters to access information about the runtime environment"
+- "define environment variables necessary for execution"
+- "use `secondaryFiles` or `InitialWorkDirRequirement` to access files in the same directory as another referenced file"
+- "use `$(runtime.cores)` to define the number of cores to be used"
+- "use `type: File`, instead of a string, to reference a filepath"
+- "converting shell to cwl objectives:"
+- "identify tasks, and data links in a script"
+- "recognize loops that can be converted into scatters"
+- "finding and reusing existing CWL command line tool descriptions"
+- "capturing outputs objectives:"
 - "explain that only files explicitly mentioned in a description will be included in the output of a step/workflow"
 - "implement bulk capturing of all files produced by a step/workflow for debugging purposes"
 - "use STDIN and STDOUT as input and output"
@@ -14,7 +34,120 @@ keypoints:
 ---
 By the end of this episode,
 learners should be able to
-__define the files that will be included as output of a workflow__.
+__explain how a workflow document describes the input and output of a workflow and the flow of data between tools__
+and __describe all the requirements for running a tool__
+and __define the files that will be included as output of a workflow__
+and __convert a shell script into a CWL workflow__.
+
+
+## Tool Descriptors
+
+Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a `CommandLineTool`
+
+> ## Exercise 1
+>
+> Create the baseCommand for running the joint_haplotype caller using the fast_genome_variants README.
+>
+> > ## Solution
+> > The base command should use the path to the binary and the type of variants you're calling.
+> >
+> > ~~~
+> > baseCommand: [fgv, joint_haplotype]
+> > ~~~
+> > {: .language-yaml }
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 2:
+>
+> When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific parameters describing the RAM, Cores and Disk space (for both temporary and output files) it requires.
+>
+> Create the `ResourceRequirements` field for running 2 BAMs for
+> the `fgv joint_haplotype` command.
+>
+> > ## Solution:
+> >
+> > ~~~
+> > requirements:
+> >   ResourceRequirement:
+> >     ramMin: 4000
+> >     coresMin: 2
+> > ~~~
+> > {: .language-yaml }
+> >
+> > FGV requires 2 GiB of memory for each bam input,
+> > and the unit for `ramMin` is in MiB,
+> > so we need approximately 4000 MiB to meet the requirement.
+> > FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 3:
+>
+> 1. Create the `input` field for running `fgv_joint_haplotype`
+> 2. Add an optional flag for calling a GVCF output
+> 3. Add a string input for intervals `chr2:1-10000`
+> 4. Add an output name.
+>
+> > ## Solution:
+> >
+> > ~~~
+> > inputs:
+> >   bam:
+> >     type: File[]
+> >     inputBinding:
+> >       position: 1
+> >       prefix: -bam
+> >     secondaryFiles:
+> >       - .bai
+> >   gvcf:
+> >     type: boolean
+> >     inputBinding:
+> >       position: 2
+> >       prefix: -gvcf
+> >   interval:
+> >     type: string
+> >     inputBinding:
+> >       position: 3
+> >   output_name:
+> >     type: string
+> >     inputBinding:
+> >       position: 4
+> >       prefix: -o
+> > ~~~
+> > {: .language-yaml }
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 4:
+>
+> Create the output variable for the CommandLineTool and name it output_vcf.
+>
+> > ## Solution:
+> >
+> > ~~~
+> > outputs:
+> >   output_vcf:
+> >     type: File
+> >     outputBinding:
+> >       glob: $(inputs.output_name)
+> > ~~~
+> > {: .language-yaml }
+> {: .solution}
+{: .challenge}
+
+> ## Exercise 5:
+>
+> TODO
+>
+> > ## Solution:
+> >
+> >
+> {: .solution}
+{: .challenge}
+
+## Capturing Output
 
 > ## Exercise 1
 >
@@ -227,4 +360,9 @@ __define the files that will be included as output of a workflow__.
 > {: .solution }
 {: .challenge }
 
+
 {% include links.md %}
+
+
+
+

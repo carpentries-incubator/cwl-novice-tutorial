@@ -1,14 +1,18 @@
 ---
-title: "Adding your own script to a step"
+title: "Solving more complex problems with scripts and toolkits"
 teaching: 0
 exercises: 0
 questions:
 - "How to include and run a script in a step at runtime?"
 - "Which requirements need to be specified?"
 - "How to capture output of a script?"
+- "How to find other tools/solutions for awkward problems?"
 objectives:
+- "script objectives:"
 - "Include and run a script in a step at runtime"
 - "Capture output of a script"
+- "tools objectives:"
+- "know good resources for finding solutions to common problems"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
@@ -16,10 +20,11 @@ keypoints:
 By the end of this episode,
 learners should be able to
 __include and run their own script in a step at runtime__
+and __be aware of where they can look for CWL recipes and more help for common, but awkward, tasks__.
 
 > ## Exercise 1:
 >
-> Which `Requirment` from the following options is used to create a script at runtime?
+> Which `Requirement` from the following options is used to create a script at runtime?
 >
 > ~~~
 > A. InlineJavascriptRequirement
@@ -143,7 +148,7 @@ __include and run their own script in a step at runtime__
 > ## Exercise 5:
 >
 > CHALLENGE question. Extend the `outputs` section of the following CWLtool definition to capture the script we have created along with tools' standard output.
-> 
+>
 > This will help you inspect the generated script and is useful in more complex situations to troubleshoot related issues.
 >
 > ~~~
