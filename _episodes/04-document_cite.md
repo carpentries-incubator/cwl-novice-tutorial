@@ -1,23 +1,28 @@
 ---
-title: "Citing the tools in your workflow"
+title: "Documentation and Citation in Workflows"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How to document your workflow?"
+- "How to cite research software in your workflow?"
 objectives:
+- "Documentation Objectives:"
+- "explain the importance of documenting a workflow"
+- "use description fields to document purpose, intent, and other factors at multiple levels within their workflow"
+- "recognise when it is appropriate to include this documentation"
+- "Citation Objectives:"
 - "explain the importance of correctly citing research software"
 - "give credit for all the tools used in their workflow(s)"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-By the end of this epsiode,
+By the end of this episode,
 learners should be able to
-__explain the importance of correctly citing research software__.
-**TODO: define some specific objectives to capture the skills being taught in this section.**
+__document their workflows to increase reusability__ and __explain the importance of correctly citing research software__.
+
+**TODO (CITE): define some specific objectives to capture the skills being taught in this section.**
 
 See [this page](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage).
-
-{% include links.md %}
 
 
 
@@ -28,7 +33,7 @@ See [this page](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePacka
 When your workflow is using a pre-existing command line tool, it is good practice to provide
 _citation_ for the tool, beyond which command line it is executed with.
 
-The `SoftwareRequirement` hint can list named `packages` that should be installed in order to run the tool. 
+The `SoftwareRequirement` hint can list named `packages` that should be installed in order to run the tool.
 So for instance if you installed using the package management system with `apt install bamtools` the package `bamtools` can be
 cited in CWL as:
 
@@ -44,7 +49,7 @@ hints:
 
 Q: `bamtools --version` prints out `blablabla 2.3.1` - how would you indicate in CWL that this is the version of BAMTools the workflow was tested against?
 
-A: 
+A:
 
 ```yaml
 hints:
@@ -101,7 +106,7 @@ hints:
   SoftwareRequirement:
     packages:
       bamtools:
-        specs: 
+        specs:
           - "https://identifiers.org/rrid/RRID:SCR_015987"
           - "https://bio.tools/bamtools"
 ```
@@ -114,14 +119,14 @@ hints:
 
 Q: You have used `apt install bamtools` in the Linux distribution Debian 10.8 "Buster". How would you in CWL `SoftwareRequirement` identify the [Debian package recipe](https://www.debian.org/distrib/packages), and with which `version`?
 
-A: 
+A:
 
 ```yaml
 hints:
   SoftwareRequirement:
     packages:
       bamtools:
-        specs: 
+        specs:
           - "https://identifiers.org/rrid/RRID:SCR_015987"
           - "https://bio.tools/bamtools"
           - "https://packages.debian.org/buster/bamtools"
@@ -138,7 +143,7 @@ Under `version` list in CWL we'll include `2.5.1` which is the upstream version,
 
 Q: You have a workflow using bowtie2, how would you add a citation?
 
-A: 
+A:
 ```yaml
 hints:
   SoftwareRequirement:
@@ -153,14 +158,14 @@ RRID for bowtie2
 
 RRID:SCR_005476 ->
 https://scicrunch.org/resolver/RRID:SCR_005476 #bowtie not bowtie2
-https://identifiers.org/rrid/ + RRID -> 
-https://identifiers.org/rrid/RRID:SCR_005476  PID 
+https://identifiers.org/rrid/ + RRID ->
+https://identifiers.org/rrid/RRID:SCR_005476  PID
 
 
 https://bio.tools/bowtie2
 
 http://bioconda.github.io/recipes/bowtie2/README.html
-vs. 
+vs.
 https://anaconda.org/bioconda/bowtie2
 
 
@@ -191,7 +196,7 @@ hints:
 
 ## Trickier: Only Github and homepage
 ```yaml
-s:codeRepository: 
+s:codeRepository:
 ```
 
 ```yaml
@@ -199,7 +204,7 @@ hints:
   SoftwareRequirement:
     packages:
       interproscan:
-        specs: [ "https://github.com/BenLangmead/bowtie2"]                 
+        specs: [ "https://github.com/BenLangmead/bowtie2"]
         version: [ "fb688f7264daa09dd65fdfcb9d0f008a7817350f" ]
 ```
 
@@ -254,3 +259,5 @@ How to publisize CWL tools
 
 About how to wire together CommandLineTool steps in a cwl Workflow file.
 
+
+{% include links.md %}
