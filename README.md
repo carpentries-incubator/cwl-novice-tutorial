@@ -4,6 +4,8 @@
 
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/common-workflow-lab/cwl-novice-tutorial)
 
+Rendered version: https://carpentries-incubator.github.io/cwl-novice-tutorial/
+
 We welcome all contributions to improve the lesson! Maintainers will do their best to help you if you have any
 questions, concerns, or experience any difficulties along the way.
 
