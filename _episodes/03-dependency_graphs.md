@@ -1,12 +1,12 @@
 ---
-title: "Workflows Design and Development"
+title: "Developing Multi-Step Workflows"
 teaching: 0
 exercises: 0
 questions:
+- "How can we expand to a multi-step workflow?"
+- "Iterative workflow development"
 - "Workflows as dependency graphs"
 - "How to use sketches for workflow design?"
-- "Iterative workflow development"
-- "Adding your own script as a step to a workflow"
 objectives:
 - "graph objectives:"
 - "explain that a workflow is a dependency graph"

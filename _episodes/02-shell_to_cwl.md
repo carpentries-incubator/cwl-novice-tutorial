@@ -1,12 +1,11 @@
 ---
-title: "Shell to CWL workflow conversion"
+title: "CWL vs Shell Workflows"
 teaching: 0
 exercises: 0
 questions:
 - "What is the difference between a CWL tool description and a CWL workflow?"
 - "How can we create a tool descriptor?"
 - "How can we use this in a single step workflow?"
-- "How can we expand to a multi-step workflow?"
 objectives:
 - "dataflow objectives:"
 - "explain the difference between a CWL tool description and a CWL workflow"
