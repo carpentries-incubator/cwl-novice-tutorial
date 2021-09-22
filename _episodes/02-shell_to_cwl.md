@@ -35,11 +35,244 @@ By the end of this episode,
 learners should be able to
 __explain how a workflow document describes the input and output of a workflow and the flow of data between tools__
 and __describe all the requirements for running a tool__
-and __define the files that will be included as output of a workflow__
-and __convert a shell script into a CWL workflow__.
+and __define the files that will be included as output of a workflow__.
+
+CWL workflows are defined by a YAML script, containing the workflow and the requirements for running that workflow. Similarly
+
+All CWL scripts should start with two lines of code:
+~~~
+cwlVersion: v1.2
+class:
+~~~
+{: .language-yaml}
+The `cwlVersion` defines which standard of the language is required for the tool or workflow. The most recent version is v1.2 - defaulting to this will enable your scripts to use all versions of the language, though some workflow engines which are not up-to-date may not be able to run the script. That is a hurdle to be tackled when you reach it, however.
+
+The `class` field defines what this particular script is. Most CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The former class is used for describing the interface for a command-line tool, while the latter class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and how to use a tool descriptor within a workflow.
+
+
+
 
 
 ## Tool Descriptors
+
+To demonstrate the basic requirements for a tool descriptor we will recreate the standard hello world example. __Note: replace this with a domain specific (but similar complexity) example!__ This is the shell `echo` command that we will use:
+~~~
+echo 'hello World!'
+~~~
+{: .language-bash}
+~~~
+hello World!
+~~~
+{: .output}
+
+Create a file, `echo.cwl`, to contain your CWL example for this:
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: [echo, 'hello World!']
+~~~
+{: .language-yaml}
+We present `baseCommand` as a two item list containing the command and the input string. CWL will combine these two items (in the order given) to make the full command when the script is run. This is not a complete tool descriptor yet, however - to find out what is missing we can use `cwl-runner` to validate the script:
+~~~
+cwl-runner --validate echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+ERROR Tool definition failed validation:
+echo.cwl:1:1: "outputs" section is not valid.
+~~~
+{: .output}
+`cwl-runner` has noted that we are missing an `outputs` section, so we will add this to our script:
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: [echo, 'hello World!']
+outputs: []
+~~~
+{: .language-yaml}
+note that we are using an empty list `[]` here, as we do not want to capture any output for the moment. We will now validate the script again:
+~~~
+cwl-runner --validate echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+ERROR Tool definition failed validation:
+echo.cwl:1:1: Object `echo.cwl` is not valid because
+                        tried `CommandLineTool` but
+                          missing required field `inputs`
+~~~
+{: .output}
+`cwl-runner` has noted that we are missing an `inputs` field, so we will add this also to our script (again as an empty list):
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: [echo, 'hello World!']
+inputs: []
+outputs: []
+~~~
+{: .language-yaml}
+We will now validate the script again:
+~~~
+cwl-runner --validate echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+echo.cwl is valid CWL.
+~~~
+{: .output}
+Finally we have a valid CWL tool descriptor, so we will run this using `cwl-runner`:
+~~~
+cwl-runner echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+INFO [job echo.cwl] /private/tmp/docker_tmpwvj2kdvw$ echo \
+    'hello World!'
+hello World!
+INFO [job echo.cwl] completed success
+{}
+INFO Final process status is success
+~~~
+{: .output}
+Our script has been run successfully!
+
+> ## Location, Location, Location
+> Note the string after `INFO [job echo.cwl]` shows the location `/private/tmp/docker_tmpwvj2kdvw` in our example, but will show a different randomly named, and temporary, directory when you run this example. CWL will always create a separate, temporary, working directory for running each tool instance. This ensures that the run-time environment for each tool instance is well controlled, and does not contain anything left behind by another tool.
+{: .callout}
+
+> ## Script order
+> To make our script more readable we have put the `input` field in front of the `output` field. However CWL syntax requires only that each field is properly defined, it does not require them to be in a particular order. Try changing around the order of fields in our example script, and run the validation step on these to make sure this is true.
+{: .callout}
+
+So far our script is rather limited, with no inputs specified, and the string that we are printing out has been merged into the `baseCommand`. We will now split out the input string, so that we can make this tool more flexible.
+
+We remove the `hello World!` string from the `baseCommand` (where it should not have been in the first place...), and create an `inputs` item which we will call `message_text`:
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: echo
+inputs:
+  message_text:
+    type: string
+    default: 'hello World!'
+    inputBinding:
+      position: 1
+
+outputs: []
+~~~
+{: .language-yaml}
+We set the type of `message_text` to string, and set the `inputBinding` `position` (defining where the input item appears after the `baseCommand`) as 1. We also give a default value, `hello World!`, for this item, which will be used if the item is not defined within an input file.
+
+We can now validate, and then run, this tool again:
+~~~
+cwl-runner --validate echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+echo.cwl is valid CWL.
+~~~
+{: .output}
+~~~
+cwl-runner echo.cwl
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+INFO [job echo.cwl] /private/tmp/docker_tmprm65mucw$ echo \
+    'hello World!'
+hello World!
+INFO [job echo.cwl] completed success
+{}
+INFO Final process status is success
+~~~
+{: .output}
+
+The script is now ready to accept an input from us. This we will put in another YAML file (`moon.yml`):
+~~~
+message_text: 'hello Moon!'
+~~~
+{: .language-yaml}
+
+And then run:
+~~~
+cwl-runner echo.cwl moon.yml
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+INFO [job echo.cwl] /private/tmp/docker_tmpu7z20wc7$ echo \
+    'hello Moon!'
+hello Moon!
+INFO [job echo.cwl] completed success
+{}
+INFO Final process status is success
+~~~
+{: .output}
+Note that we have not yet captured the output from the command. We can do this by adding an outputs item to the script:
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: echo
+inputs:
+  message_text:
+    type: string
+    default: 'hello World!'
+    inputBinding:
+      position: 1
+
+outputs:
+  message_out:
+    type: stdout
+
+~~~
+{: .language-yaml}
+Here we have added the `message_out` item, which has been given type `stdout` (as we want to capture the output at the command line, rather than any particular files).
+
+Now we run the script:
+~~~
+~~~
+{: .language-bash}
+~~~
+INFO .../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+INFO [job echo.cwl] /private/tmp/docker_tmp7k0bqeg5$ echo \
+    'hello Moon!' > /private/tmp/docker_tmp7k0bqeg5/9611f21693018fe4ce4bf1f3884e47dae2ce3aab
+INFO [job echo.cwl] completed success
+{
+    "message_out": {
+        "location": "file:///.../9611f21693018fe4ce4bf1f3884e47dae2ce3aab",
+        "basename": "9611f21693018fe4ce4bf1f3884e47dae2ce3aab",
+        "class": "File",
+        "checksum": "sha1$d4413a97a36059e8855168ac7939a4cb5d4da9c9",
+        "size": 12,
+        "path": "/.../9611f21693018fe4ce4bf1f3884e47dae2ce3aab"
+    }
+}
+INFO Final process status is success
+~~~
+{: .output}
+Note that the output has been saved as a file called `9611f21693018fe4ce4bf1f3884e47dae2ce3aab` (not `message_out`, which is only the output variable name) in this instance. When you run this script the file name will be different. You can open this text file with a text editor to confirm that it contains the expected message.
+
+
+
+## Example Exercises
 
 Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a `CommandLineTool`
 
