@@ -53,8 +53,8 @@ The `class` field defines what this particular script is. The majority of CWL sc
 
 
 
-
 ## Tool Descriptors
+
 
 To demonstrate the basic requirements for a tool descriptor we will recreate the standard hello world example. __Note: replace this with a domain specific (but similar complexity) example!__ This is the shell `echo` command that we will use:
 ~~~
@@ -323,6 +323,7 @@ Note now that the file returned is called `output.txt`, but it has the same cont
 
 
 ## Example Exercises
+
 
 Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a `CommandLineTool`
 
