@@ -31,23 +31,24 @@ objectives:
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-By the end of this episode,
-learners should be able to
-__explain how a workflow document describes the input and output of a workflow and the flow of data between tools__
-and __describe all the requirements for running a tool__
-and __define the files that will be included as output of a workflow__.
 
-CWL workflows are defined by a YAML script, containing the workflow and the requirements for running that workflow. Similarly
+> ## learning objectives
+> By the end of this episode,
+> learners should be able to
+> __explain how a workflow document describes the input and output of a workflow and the flow of data between tools__
+> and __describe all the requirements for running a tool__
+> and __define the files that will be included as output of a workflow__.
+{: .callout}
 
-All CWL scripts should start with two lines of code:
+CWL workflows are defined in a YAML script, containing the workflow and the requirements for running that workflow. All CWL scripts should start with two lines of code:
 ~~~
 cwlVersion: v1.2
 class:
 ~~~
 {: .language-yaml}
-The `cwlVersion` defines which standard of the language is required for the tool or workflow. The most recent version is v1.2 - defaulting to this will enable your scripts to use all versions of the language, though some workflow engines which are not up-to-date may not be able to run the script. That is a hurdle to be tackled when you reach it, however.
+The `cwlVersion` string defines which standard of the language is required for the tool or workflow. The most recent version is v1.2, and defaulting to this will enable your scripts to use all versions of the language, though some workflow engines which are not up-to-date may not run the script. This is, however, a hurdle to be tackled when you reach it.
 
-The `class` field defines what this particular script is. Most CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The former class is used for describing the interface for a command-line tool, while the latter class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and how to use a tool descriptor within a workflow.
+The `class` field defines what this particular script is. The majority of CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The former class is used for describing the interface for a command-line tool, while the latter class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and finally how to use a tool descriptor within a workflow.
 
 
 
@@ -57,7 +58,7 @@ The `class` field defines what this particular script is. Most CWL scripts will 
 
 To demonstrate the basic requirements for a tool descriptor we will recreate the standard hello world example. __Note: replace this with a domain specific (but similar complexity) example!__ This is the shell `echo` command that we will use:
 ~~~
-echo 'hello World!'
+$ echo 'hello World!'
 ~~~
 {: .language-bash}
 ~~~
@@ -75,7 +76,7 @@ baseCommand: [echo, 'hello World!']
 {: .language-yaml}
 We present `baseCommand` as a two item list containing the command and the input string. CWL will combine these two items (in the order given) to make the full command when the script is run. This is not a complete tool descriptor yet, however - to find out what is missing we can use `cwl-runner` to validate the script:
 ~~~
-cwl-runner --validate echo.cwl
+$ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -96,7 +97,7 @@ outputs: []
 {: .language-yaml}
 note that we are using an empty list `[]` here, as we do not want to capture any output for the moment. We will now validate the script again:
 ~~~
-cwl-runner --validate echo.cwl
+$ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -120,7 +121,7 @@ outputs: []
 {: .language-yaml}
 We will now validate the script again:
 ~~~
-cwl-runner --validate echo.cwl
+$ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -177,7 +178,7 @@ We set the type of `message_text` to string, and set the `inputBinding` `positio
 
 We can now validate, and then run, this tool again:
 ~~~
-cwl-runner --validate echo.cwl
+$ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -187,7 +188,7 @@ echo.cwl is valid CWL.
 ~~~
 {: .output}
 ~~~
-cwl-runner echo.cwl
+$ cwl-runner echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -210,7 +211,7 @@ message_text: 'hello Moon!'
 
 And then run:
 ~~~
-cwl-runner echo.cwl moon.yml
+$ cwl-runner echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
@@ -247,6 +248,7 @@ Here we have added the `message_out` item, which has been given type `stdout` (a
 
 Now we run the script:
 ~~~
+$ cwl-runner echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
