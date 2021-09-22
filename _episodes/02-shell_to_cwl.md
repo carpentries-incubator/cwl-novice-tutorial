@@ -272,6 +272,54 @@ INFO Final process status is success
 {: .output}
 Note that the output has been saved as a file called `9611f21693018fe4ce4bf1f3884e47dae2ce3aab` (not `message_out`, which is only the output variable name) in this instance. When you run this script the file name will be different. You can open this text file with a text editor to confirm that it contains the expected message.
 
+It is not very user-friendly to have our script return a randomly named file each time, so we will make use of the `stdout` field to specify the name of the text file that we want standard output to be captured to:
+~~~
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: echo
+inputs:
+  message_text:
+    type: string
+    default: 'hello World!'
+    inputBinding:
+      position: 1
+
+stdout: output.txt
+
+outputs:
+  message_out:
+    type: stdout
+~~~
+{: .language-yaml}
+
+Running the script will produce this output:
+~~~
+$ cwl-runner echo.cwl moon.yml
+~~~
+{: .language-bash}
+~~~
+INFO /.../cwl-runner 3.0.20200807132242
+INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
+INFO [job echo.cwl] /private/tmp/docker_tmp5iazb06g$ echo \
+    'hello Moon!' > /private/tmp/docker_tmp5iazb06g/output.txt
+INFO [job echo.cwl] completed success
+{
+    "message_out": {
+        "location": "file:///.../output.txt",
+        "basename": "output.txt",
+        "class": "File",
+        "checksum": "sha1$d4413a97a36059e8855168ac7939a4cb5d4da9c9",
+        "size": 12,
+        "path": "/.../output.txt"
+    }
+}
+INFO Final process status is success
+~~~
+{: .output}
+Note now that the file returned is called `output.txt`, but it has the same contents as the previous, randomly named, file.
+
+
 
 
 ## Example Exercises
