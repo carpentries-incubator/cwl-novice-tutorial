@@ -1,5 +1,5 @@
 ---
-title: "CWL vs Shell Workflows"
+title: "CWL and Shell Tools"
 teaching: 0
 exercises: 0
 questions:
@@ -7,23 +7,24 @@ questions:
 - "How can we create a tool descriptor?"
 - "How can we use this in a single step workflow?"
 objectives:
-- "dataflow objectives:"
-- "explain the difference between a CWL tool description and a CWL workflow"
+#- "dataflow objectives:"
+# "explain the difference between a CWL tool description and a CWL workflow"
 - "describe the relationship between a tool and its corresponding CWL document"
 - "exercise good practices when naming inputs and outputs"
-- "Be able to make understandable and valid names for inputs and outputs (not 'input3')"
-- "describing requirements objectives:"
-- "identify all the requirements of a tool and define them in the tool description"
-- "use `runtime` parameters to access information about the runtime environment"
-- "define environment variables necessary for execution"
-- "use `secondaryFiles` or `InitialWorkDirRequirement` to access files in the same directory as another referenced file"
-- "use `$(runtime.cores)` to define the number of cores to be used"
-- "use `type: File`, instead of a string, to reference a filepath"
-- "converting shell to cwl objectives:"
-- "identify tasks, and data links in a script"
-- "recognize loops that can be converted into scatters"
-- "finding and reusing existing CWL command line tool descriptions"
-- "capturing outputs objectives:"
+## "Be able to make understandable and valid names for inputs and outputs (not 'input3')"
+# "describing requirements objectives:"
+# "identify all the requirements of a tool and define them in the tool description"
+# "use `runtime` parameters to access information about the runtime environment"
+# "define environment variables necessary for execution"
+# "use `secondaryFiles` or `InitialWorkDirRequirement` to access files in the same directory as another referenced file"
+# "use `$(runtime.cores)` to define the number of cores to be used"
+## "use `type: File`, instead of a string, to reference a filepath"
+- "understand how to reference files for input and output"
+#- "converting shell to cwl objectives:"
+# "identify tasks, and data links in a script"
+# "recognize loops that can be converted into scatters"
+# "finding and reusing existing CWL command line tool descriptions"
+#- "capturing outputs objectives:"
 - "explain that only files explicitly mentioned in a description will be included in the output of a step/workflow"
 - "implement bulk capturing of all files produced by a step/workflow for debugging purposes"
 - "use STDIN and STDOUT as input and output"
@@ -147,6 +148,7 @@ INFO Final process status is success
 ~~~
 {: .output}
 Our script has been run successfully!
+__Note: add graphic here that identifies what each part of the returned information is (for example, what is CWL information, what is the command run, what is STDOUT, and what is the (currently empty) returned information__
 
 > ## Location, Location, Location
 > Note the string after `INFO [job echo.cwl]` shows the location `/private/tmp/docker_tmpwvj2kdvw` in our example, but will show a different randomly named, and temporary, directory when you run this example. CWL will always create a separate, temporary, working directory for running each tool instance. This ensures that the run-time environment for each tool instance is well controlled, and does not contain anything left behind by another tool.
@@ -319,7 +321,188 @@ INFO Final process status is success
 {: .output}
 Note now that the file returned is called `output.txt`, but it has the same contents as the previous, randomly named, file.
 
+We will now make use of the VSCode/Benten tool to illustrate the tool descriptor. Please press the CWL Viewer button at the top-left of the VSCode window:
+![Diagram showing location of CWL preview button in VSCode window](../fig/cwlpreview_button.png)
 
+You will now be able to see a sketch of the tool descriptor. This will show the input (in green) and output (in yellow) items for this tool descriptor. This is not very helpful information at the moment, but leave this window open as we move onto writing our first workflow.
+![Two side by side VSCode windows. The left one shows the tool descriptor code, the right one the tool input and outputs sketched from that code.](../fig/first_tool_graph.png)
+
+> ## Creating tool descriptor for your tool
+>
+> Add here a challenge for creating a tool descriptor for another tool? Perhaps make the
+> input a file and a text string, and introduce `prefix: ...` to the `inputBinding`
+> interface (as well as giving more positions than just 1)?
+>
+>
+{: .challenge}
+
+
+## CWL single step workflow
+
+Now that we have created a tool descriptor we can use it in our workflow. We will start with a single step workflow, to illustrate how workflows and tool descriptors interact.
+
+Create a file `workflow_example.cwl`, containing these lines:
+~~~
+cwlVersion: v1.2
+class: Workflow
+
+inputs: []
+
+outputs: []
+~~~
+{: .language-yaml}
+
+Workflows use `inputs` and `outputs` fields, just as the tool descriptors do, but they don't use `baseCommand`. Run the validation tool to find out what is missing:
+~~~
+$ cwl-runner --validate workflow_example.cwl
+~~~
+{: .language-bash}
+~~~
+INFO /.../cwl-runner 3.0.20200807132242
+INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
+ERROR Tool definition failed validation:
+workflow_example.cwl:1:1: Object `workflow_example.cwl` is not valid because
+                            tried `Workflow` but
+                              missing required field `steps`
+~~~
+{: .output}
+
+Workflows need a `steps` field, in which are listed the workflow tasks or steps that are to be run. In this instance we wish only to run the `echo.cwl` tool that we wrote above, so we will add one step to this workflow. This step will require us to specify what tool we will `run`, as well as providing lists of `in` and `out` items for the tool. To begin with we will provide the bare minimum to make this workflow run:
+~~~
+cwlVersion: v1.2
+class: Workflow
+
+inputs: []
+
+outputs: []
+
+steps:
+  01_echo:
+    run: echo.cwl
+    in: []
+    out: []
+~~~
+{: .language-yaml}
+And then we run the script:
+~~~
+$ cwl-runner workflow_example.cwl
+~~~
+{: .language-bash}
+~~~
+INFO /.../cwl-runner 3.0.20200807132242
+INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
+INFO [workflow ] start
+INFO [workflow ] starting step 01_echo
+INFO [step 01_echo] start
+INFO [job 01_echo] /private/tmp/docker_tmpx4889wo6$ echo \
+    'hello World!' > /private/tmp/docker_tmpx4889wo6/output.txt
+INFO [job 01_echo] completed success
+INFO [step 01_echo] completed success
+INFO [workflow ] completed success
+{}
+INFO Final process status is success
+~~~
+{: .output}
+This was a success, but the workflow has not returned any files this time, and the echo'd message is the default 'hello World!' message. Now we must connect our tool inputs and outputs up in the workflow.
+
+First we will specify the flow of inputs for our workflow, taking them from the YAML configuration file, and passing them through to the echo tool:
+~~~
+cwlVersion: v1.2
+class: Workflow
+
+inputs:
+  message_text: string
+
+outputs: []
+
+steps:
+  01_echo:
+    run: echo.cwl
+    in:
+      message_text: message_text
+    out: []
+~~~
+{: .language-yaml}
+The `inputs` entry is similar to that for the `echo.cwl` tool (as we are going to read the same input file), but we have not given a default value or input binding. Within the `in` list we explicitly link the tool's `message_text` field with our workflow's `message_text` field. These do not need to have matching names, in the next episode we will show how these can change as you start linking steps together.
+
+Now run this workflow:
+~~~
+$ cwl-runner workflow_example.cwl moon.yml
+~~~
+{: .language-bash}
+~~~
+INFO /.../cwl-runner 3.0.20200807132242
+INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
+INFO [workflow ] start
+INFO [workflow ] starting step 01_echo
+INFO [step 01_echo] start
+INFO [job 01_echo] /private/tmp/docker_tmpd9ghguo8$ echo \
+    'hello Moon!' > /private/tmp/docker_tmpd9ghguo8/output.txt
+INFO [job 01_echo] completed success
+INFO [step 01_echo] completed success
+INFO [workflow ] completed success
+{}
+INFO Final process status is success
+~~~
+{: .output}
+We can see that the echo'd text has changed. But still no files are being returned from our tool, so we need to explicitly list the files that we want the workflow to return.
+
+~~~
+cwlVersion: v1.2
+class: Workflow
+
+inputs:
+  message_text: string
+
+outputs:
+  message_file:
+    type: File
+    outputSource: 01_echo/message_out
+
+steps:
+  01_echo:
+    run: echo.cwl
+    in:
+      message_text: message_text
+    out: [message_out]
+~~~
+{: .language-yaml}
+The `outputs` entry is again similar to that for the `echo.cwl` tool. However we are using the `File` type, as that is what the tool descriptor returns, and specifying an `outputSource`, which makes clear the link to step `01_echo` and the `message_out` object. For the `out` field of our workflow step we simply provide a list of the objects we require outputting.
+
+Now we can run this workflow, to provide the same output as running the tool descriptor did:
+~~~
+$ cwl-runner workflow_example.cwl moon.yml
+~~~
+{: .language-bash}
+~~~
+INFO /.../cwl-runner 3.0.20200807132242
+INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
+INFO [workflow ] start
+INFO [workflow ] starting step 01_echo
+INFO [step 01_echo] start
+INFO [job 01_echo] /private/tmp/docker_tmpvkqoq0n3$ echo \
+    'hello Moon!' > /private/tmp/docker_tmpvkqoq0n3/output.txt
+INFO [job 01_echo] completed success
+INFO [step 01_echo] completed success
+INFO [workflow ] completed success
+{
+    "message_file": {
+        "location": "file:///.../output.txt",
+        "basename": "output.txt",
+        "class": "File",
+        "checksum": "sha1$d4413a97a36059e8855168ac7939a4cb5d4da9c9",
+        "size": 12,
+        "path": "/.../output.txt"
+    }
+}
+INFO Final process status is success
+~~~
+{: .output}
+
+In the `CWL Preview` window of the VSCode editor we will now be able to see the input and outputs that were there for the tool descriptor, but these will now be connected by the step of our workflow, illustrating their connection.
+![Two side by side VSCode windows. The left one shows the workflow code, the right one the workflow graph sketched from that code.](../fig/first_workflow_graph.png)
+
+This connection is quite basic here, but in the next episode we will make use of this feature of VSCode/Benten to plan more complicated workflows.
 
 
 ## Example Exercises
