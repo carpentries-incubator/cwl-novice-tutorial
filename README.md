@@ -2,7 +2,7 @@
 
 ## Contributing
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/common-workflow-lab/cwl-novice-tutorial)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/carpentries-incubator/cwl-novice-tutorial)
 
 Rendered version: https://carpentries-incubator.github.io/cwl-novice-tutorial/
 
@@ -42,5 +42,5 @@ A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 To cite this lesson, please consult with [CITATION](CITATION)
 
 [curriculum-development-handbook]: https://carpentries.github.io/curriculum-development/
-[issues]: https://github.com/common-workflow-lab/cwl-novice-tutorial/issues
+[issues]: https://github.com/carpentries-incubator/cwl-novice-tutorial/issues
 [lesson-example]: https://carpentries.github.io/lesson-example
