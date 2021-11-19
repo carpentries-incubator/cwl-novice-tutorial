@@ -60,20 +60,20 @@ class: CommandLineTool
 baseCommand: [echo, 'hello World!']
 ~~~
 {: .language-yaml}
-We present `baseCommand` as a two item list containing the command and the input string. CWL will combine these two items (in the order given) to make the full command when the script is run. This is not a complete tool descriptor yet, however - to find out what is missing we can use `cwl-runner` to validate the script:
+We present `baseCommand` as a two item list containing the command and the input string. CWL will combine these two items (in the order given) to make the full command when the script is run. This is not a complete tool descriptor yet, however - to find out what is missing we can use `cwltool` to validate the script:
 ~~~
-$ cwl-runner --validate echo.cwl
+$ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
 
-INFO .../cwl-runner 
+INFO .../cwltool 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: "outputs" section is not valid.
 ~~~
 {: .output}
-`cwl-runner` has noted that we are missing an `outputs` section, so we will add this to our script:
+`cwltool` has noted that we are missing an `outputs` section, so we will add this to our script:
 ~~~
 cwlVersion: v1.2
 class: CommandLineTool
@@ -84,12 +84,12 @@ outputs: []
 {: .language-yaml}
 note that we are using an empty list `[]` here, as we do not want to capture any output for the moment. We will now validate the script again:
 ~~~
-$ cwl-runner --validate echo.cwl
+$ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
 
-INFO .../cwl-runner 
+INFO .../cwltool 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: Object `echo.cwl` is not valid because
@@ -97,7 +97,7 @@ echo.cwl:1:1: Object `echo.cwl` is not valid because
                           missing required field `inputs`
 ~~~
 {: .output}
-`cwl-runner` has noted that we are missing an `inputs` field, so we will add this also to our script (again as an empty list):
+`cwltool` has noted that we are missing an `inputs` field, so we will add this also to our script (again as an empty list):
 ~~~
 cwlVersion: v1.2
 class: CommandLineTool
@@ -109,22 +109,22 @@ outputs: []
 {: .language-yaml}
 We will now validate the script again:
 ~~~
-$ cwl-runner --validate echo.cwl
+$ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 
+INFO .../cwltool 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 echo.cwl is valid CWL.
 ~~~
 {: .output}
-Finally we have a valid CWL tool descriptor, so we will run this using `cwl-runner`:
+Finally we have a valid CWL tool descriptor, so we will run this using `cwltool`:
 ~~~
-cwl-runner echo.cwl
+cwltool echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 
+INFO .../cwltool 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpwvj2kdvw$ echo \
     'hello World!'
@@ -167,21 +167,21 @@ We set the type of `message_text` to string, and set the `inputBinding` `positio
 
 We can now validate, and then run, this tool again:
 ~~~
-$ cwl-runner --validate echo.cwl
+$ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner
+INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 echo.cwl is valid CWL.
 ~~~
 {: .output}
 ~~~
-$ cwl-runner echo.cwl
+$ cwltool echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner
+INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmprm65mucw$ echo \
     'hello World!'
@@ -200,11 +200,11 @@ message_text: 'hello Moon!'
 
 And then run:
 ~~~
-$ cwl-runner echo.cwl moon.yml
+$ cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner
+INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpu7z20wc7$ echo \
     'hello Moon!'
@@ -237,11 +237,11 @@ Here we have added the `message_out` item, which has been given type `stdout` (a
 
 Now we run the script:
 ~~~
-$ cwl-runner echo.cwl moon.yml
+$ cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner
+INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp7k0bqeg5$ echo \
     'hello Moon!' > /private/tmp/docker_tmp7k0bqeg5/9611f21693018fe4ce4bf1f3884e47dae2ce3aab
@@ -284,11 +284,11 @@ outputs:
 
 Running the script will produce this output:
 ~~~
-$ cwl-runner echo.cwl moon.yml
+$ cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner
+INFO /.../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp5iazb06g$ echo \
     'hello Moon!' > /private/tmp/docker_tmp5iazb06g/output.txt
@@ -341,11 +341,11 @@ outputs: []
 
 Workflows use `inputs` and `outputs` fields, just as the tool descriptors do, but they don't use `baseCommand`. Run the validation tool to find out what is missing:
 ~~~
-$ cwl-runner --validate workflow_example.cwl
+$ cwltool --validate workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner
+INFO /.../cwltool
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 ERROR Tool definition failed validation:
 workflow_example.cwl:1:1: Object `workflow_example.cwl` is not valid because
@@ -372,11 +372,11 @@ steps:
 {: .language-yaml}
 And then we run the script:
 ~~~
-$ cwl-runner workflow_example.cwl
+$ cwltool workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner
+INFO /.../cwltool
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
@@ -414,11 +414,11 @@ The `inputs` entry is similar to that for the `echo.cwl` tool (as we are going t
 
 Now run this workflow:
 ~~~
-$ cwl-runner workflow_example.cwl moon.yml
+$ cwltool workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner
+INFO /.../cwltool
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
@@ -458,11 +458,11 @@ The `outputs` entry is again similar to that for the `echo.cwl` tool. However we
 
 Now we can run this workflow, to provide the same output as running the tool descriptor did:
 ~~~
-$ cwl-runner workflow_example.cwl moon.yml
+$ cwltool workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 
+INFO /.../cwltool 
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
