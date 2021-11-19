@@ -7,24 +7,9 @@ questions:
 - "How can we create a tool descriptor?"
 - "How can we use this in a single step workflow?"
 objectives:
-#- "dataflow objectives:"
-# "explain the difference between a CWL tool description and a CWL workflow"
 - "describe the relationship between a tool and its corresponding CWL document"
 - "exercise good practices when naming inputs and outputs"
-## "Be able to make understandable and valid names for inputs and outputs (not 'input3')"
-# "describing requirements objectives:"
-# "identify all the requirements of a tool and define them in the tool description"
-# "use `runtime` parameters to access information about the runtime environment"
-# "define environment variables necessary for execution"
-# "use `secondaryFiles` or `InitialWorkDirRequirement` to access files in the same directory as another referenced file"
-# "use `$(runtime.cores)` to define the number of cores to be used"
-## "use `type: File`, instead of a string, to reference a filepath"
 - "understand how to reference files for input and output"
-#- "converting shell to cwl objectives:"
-# "identify tasks, and data links in a script"
-# "recognize loops that can be converted into scatters"
-# "finding and reusing existing CWL command line tool descriptions"
-#- "capturing outputs objectives:"
 - "explain that only files explicitly mentioned in a description will be included in the output of a step/workflow"
 - "implement bulk capturing of all files produced by a step/workflow for debugging purposes"
 - "use STDIN and STDOUT as input and output"
@@ -81,7 +66,8 @@ $ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+
+INFO .../cwl-runner 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: "outputs" section is not valid.
@@ -102,7 +88,8 @@ $ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+
+INFO .../cwl-runner 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: Object `echo.cwl` is not valid because
@@ -126,7 +113,7 @@ $ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 echo.cwl is valid CWL.
 ~~~
@@ -137,7 +124,7 @@ cwl-runner echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpwvj2kdvw$ echo \
     'hello World!'
@@ -184,7 +171,7 @@ $ cwl-runner --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 echo.cwl is valid CWL.
 ~~~
@@ -194,7 +181,7 @@ $ cwl-runner echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmprm65mucw$ echo \
     'hello World!'
@@ -217,7 +204,7 @@ $ cwl-runner echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpu7z20wc7$ echo \
     'hello Moon!'
@@ -254,7 +241,7 @@ $ cwl-runner echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO .../cwl-runner 3.0.20200807132242
+INFO .../cwl-runner
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp7k0bqeg5$ echo \
     'hello Moon!' > /private/tmp/docker_tmp7k0bqeg5/9611f21693018fe4ce4bf1f3884e47dae2ce3aab
@@ -301,7 +288,7 @@ $ cwl-runner echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 3.0.20200807132242
+INFO /.../cwl-runner
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp5iazb06g$ echo \
     'hello Moon!' > /private/tmp/docker_tmp5iazb06g/output.txt
@@ -358,7 +345,7 @@ $ cwl-runner --validate workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 3.0.20200807132242
+INFO /.../cwl-runner
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 ERROR Tool definition failed validation:
 workflow_example.cwl:1:1: Object `workflow_example.cwl` is not valid because
@@ -389,7 +376,7 @@ $ cwl-runner workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 3.0.20200807132242
+INFO /.../cwl-runner
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
@@ -431,7 +418,7 @@ $ cwl-runner workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 3.0.20200807132242
+INFO /.../cwl-runner
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
@@ -475,7 +462,7 @@ $ cwl-runner workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
-INFO /.../cwl-runner 3.0.20200807132242
+INFO /.../cwl-runner 
 INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
 INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
