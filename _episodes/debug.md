@@ -1,9 +1,9 @@
 ---
-title: "Debugging workflows"
+title: "Debugging Workflows"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "introduce within above lessons?"
 objectives:
 - "interpret commonly encountered error messages"
 - "solve these common issues"
