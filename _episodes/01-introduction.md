@@ -29,7 +29,7 @@ The CWL standards explicitly support the use of software container technologies,
 
 # RNA sequencing example
 
-In this tutorial a bio-informatics RNA-sequencing analysis is used as an example. However, there is no specific knowledge needed for this tutorial. RNA-sequencing is a technique which examines the quantity and sequences of RNA in a sample using next-generation sequencing. The RNA reads are analzed to measure the relative numbers of different RNA molecules in the sample. This analysis is differential gene expression.
+In this tutorial a bio-informatics RNA-sequencing analysis is used as an example. However, there is no specific knowledge needed for this tutorial. RNA-sequencing is a technique which examines the quantity and sequences of RNA in a sample using next-generation sequencing. The RNA reads are analyzed to measure the relative numbers of different RNA molecules in the sample. This analysis is differential gene expression.
 
 The process looks like this:
 
@@ -41,7 +41,7 @@ These steps will be done:
 - Alignment (mapping)
 - Counting reads associated with genes
 
-The different tools neccesary for this analysis are already available. In this tutorial we will set up a workflow to connect these tools and generate the desired output files.
+The different tools necessary for this analysis are already available. In this tutorial we will set up a workflow to connect these tools and generate the desired output files.
 
 {% include links.md %}
 
