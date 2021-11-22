@@ -13,6 +13,8 @@ keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
 
+# Common Workflow Language
+
 Computational workflows are widely used for data analysis, enabling rapid innovation and decision making. _Workflow thinking_ is a form of "conceptualizing processes as recipes and protocols, structured as [work- or] dataflow graphs with computational steps, and subsequently developing tools and approaches for formalizing, analyzing and communicating these process descriptions" ([Gryk & Ludascher, 2017](https://doi.org/10.1353/lib.2017.0018)).
 
 However as the rise in popularity of workflows has been matched by a rise in the number of dispirit workflow managers that are available, each with their own standards for describing the tools and workflows, reducing portability and interoperability of these workflows.
@@ -24,6 +26,22 @@ Previously researchers might write shell scripts to link together these command-
 CWL workflows are written in a subset of YAML, with a syntax that does not restrict the amount of detail provided for a tool or workflow. The execution model is explicit, all required elements of a tool's runtime environment must be specified by the CWL tool-description author. On top of these basic requirements they can also add hints or requirements to the tool-description, helping to guide users (and workflow engines) on what resources are needed for a tool.
 
 The CWL standards explicitly support the use of software container technologies, helping ensure that the execution of tools is reproducible. Data locations are explicitly defined, and working directories kept separate for each tool invocation. These standards ensure the portability of tools and workflows, allowing the same workflows to be run on your local machine, or in a HPC or cloud environment, with minimal changes required.
+
+# RNA sequencing example
+
+In this tutorial a bio-informatics RNA-sequencing analysis is used as an example. However, there is no specific knowledge needed for this tutorial. RNA-sequencing is a technique which examines the quantity and sequences of RNA in a sample using next-generation sequencing. The RNA reads are analzed to measure the relative numbers of different RNA molecules in the sample. This analysis is differential gene expression.
+
+The process looks like this:
+
+![](../assets/imp/RNAseqWorkflow.png){: height="400px"}
+
+During this tutorial, we will only do the middle analytical steps and skip adapter trimming.
+These steps will be done:
+- Quality control (FASTQC)
+- Alignment (mapping)
+- Counting reads associated with genes
+
+The different tools neccesary for this analysis are already available. In this tutorial we will set up a workflow to connect these tools and generate the desired output files.
 
 {% include links.md %}
 
