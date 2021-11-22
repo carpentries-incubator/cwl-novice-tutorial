@@ -17,7 +17,7 @@ Computational workflows are widely used for data analysis, enabling rapid innova
 
 However as the rise in popularity of workflows has been matched by a rise in the number of dispirit workflow managers that are available, each with their own standards for describing the tools and workflows, reducing portability and interoperability of these workflows.
 
-CWL is a free and open standard for describing command-line tool based workflows. These standards provide a common, but reduced, set of abstractions that are both used in practice and implemented in many popular workflow systems. The CWL language is declarative, enabling computational workflows to be constructed from diverse software tools, executing each through their command-line interface.
+CWL is a free and open standard for describing command-line tool based workflows[^1]. These standards provide a common, but reduced, set of abstractions that are both used in practice and implemented in many popular workflow systems. The CWL language is declarative, enabling computational workflows to be constructed from diverse software tools, executing each through their command-line interface.
 
 Previously researchers might write shell scripts to link together these command-line tools. Although these scripts might provide a direct means of accessing the tools, writing and maintaining them requires specific knowledge of the system that they will be used on. Shell scripts are not easily portable, and so researchers can easily end up spending more time maintaining the scripts than carrying out their research. The aim of CWL is to reduce that barrier of usage of these tools to researchers.
 
@@ -27,3 +27,6 @@ The CWL standards explicitly support the use of software container technologies,
 
 {% include links.md %}
 
+[^1]: Michael R. Crusoe, Sanne Abeln, Alexandru Iosup, Peter Amstutz, John Chilton, Nebojša Tijanić, Hervé Ménager, Stian Soiland-Reyes, Bogdan Gavrilović, Carole Goble, The CWL Community (2021):
+  Methods Included: Standardizing Computational Reuse and Portability with the Common Workflow Language.
+  Communication of the ACM. https://doi.org/10.1145/3486897 Retrieved from arXiv 2105.07028 [cs.DC] https://arxiv.org/abs/2105.07028
