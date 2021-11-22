@@ -27,6 +27,4 @@ The CWL standards explicitly support the use of software container technologies,
 
 {% include links.md %}
 
-[^1]: Michael R. Crusoe, Sanne Abeln, Alexandru Iosup, Peter Amstutz, John Chilton, Nebojša Tijanić, Hervé Ménager, Stian Soiland-Reyes, Bogdan Gavrilović, Carole Goble, The CWL Community (2021):
-  Methods Included: Standardizing Computational Reuse and Portability with the Common Workflow Language.
-  Communication of the ACM. https://doi.org/10.1145/3486897 Retrieved from arXiv 2105.07028 [cs.DC] https://arxiv.org/abs/2105.07028
+[^1]: M. R. Crusoe, S. Abeln, A. Iosup, P. Amstutz, J. Chilton, N. Tijanić, H. Ménager, S. Soiland-Reyes, B. Gavrilović, C. Goble, The CWL Community (2021): Methods Included: Standardizing Computational Reuse and Portability with the Common Workflow Language. Communication of the ACM. https://doi.org/10.1145/3486897
