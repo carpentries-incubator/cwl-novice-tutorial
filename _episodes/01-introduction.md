@@ -33,7 +33,7 @@ In this tutorial a bio-informatics RNA-sequencing analysis is used as an example
 
 The process looks like this:
 
-![](../assets/imp/RNAseqWorkflow.png){: height="400px"}
+![]({{page.root}}/fig/RNAseqWorkflow.png){: height="400px"}
 
 During this tutorial, we will only do the middle analytical steps and skip adapter trimming.
 These steps will be done:
