@@ -7,6 +7,7 @@ questions:
 - "How can we create a tool descriptor?"
 - "How can we use this in a single step workflow?"
 objectives:
+
 - "describe the relationship between a tool and its corresponding CWL document"
 - "exercise good practices when naming inputs and outputs"
 - "understand how to reference files for input and output"
@@ -66,8 +67,8 @@ $ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-
 INFO .../cwltool 
+
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: "outputs" section is not valid.
@@ -88,8 +89,8 @@ $ cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
-
 INFO .../cwltool 
+
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 ERROR Tool definition failed validation:
 echo.cwl:1:1: Object `echo.cwl` is not valid because
