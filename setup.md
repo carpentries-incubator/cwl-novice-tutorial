@@ -27,22 +27,22 @@ You will need to install some example files for this lesson. In this tutorial we
 For this tutorial some existing tools are needed to build the workflow. These existing tools will be imported via GitHub. 
 First we need to create an empty git repository for all our files. To do this, use this command:
 ~~~
-$ git init novice-tutorial-exercises
+git init novice-tutorial-exercises
 ~~~
 {: .language-bash}
 
 Next, we need to import bio-cwl-tools with this command:
 ~~~
-$ git submodule add https://github.com/common-workflow-library/bio-cwl-tools.git
+git submodule add https://github.com/common-workflow-library/bio-cwl-tools.git
 ~~~
 {: .language-bash}
 
 ### Downloading sample and reference data
 Move inside the `novice-tutorial-exercises` directory and download the data:
 ~~~
-$ mkdir rnaseq
-$ cd rnaseq
-$ wget --mirror --no-parent --no-host --cut-dirs=1 https://download.jutro.arvadosapi.com/c=9178fe1b80a08a422dbe02adfd439764+925/
+mkdir rnaseq
+cd rnaseq
+wget --mirror --no-parent --no-host --cut-dirs=1 https://download.jutro.arvadosapi.com/c=9178fe1b80a08a422dbe02adfd439764+925/
 ~~~
 {: .language-bash}
 
@@ -52,9 +52,9 @@ This is a large download (4 GB), so it is also possible to generate these files 
 
 #### Downloading
 ~~~
-$ mkdir hg19-chr1-STAR-index
-$ cd hg19-chr1-STAR-index
-$ wget --mirror --no-parent --no-host --cut-dirs=1 https://download.jutro.arvadosapi.com/c=02a12ce9e2707610991bd29d38796b57+2912/
+mkdir hg19-chr1-STAR-index
+cd hg19-chr1-STAR-index
+wget --mirror --no-parent --no-host --cut-dirs=1 https://download.jutro.arvadosapi.com/c=02a12ce9e2707610991bd29d38796b57+2912/
 ~~~
 {: .language-bash}
 
@@ -75,7 +75,7 @@ Overhang: 99
 
 Generate the index files with `cwltool`:
 ~~~
-$ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
+cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 ~~~
 {: .language-bash}
 
