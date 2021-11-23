@@ -43,13 +43,13 @@ The `class` field defines what this particular script is. The majority of CWL sc
 ## Tool Descriptors
 
 
-To demonstrate the basic requirements for a tool descriptor we will recreate the standard hello world example. __Note: replace this with a domain specific (but similar complexity) example!__ This is the shell `echo` command that we will use:
+To demonstrate the basic requirements for a tool descriptor we will recreate the standard "Hello world!" example. This is the shell `echo` command that we will use:
 ~~~
-$ echo 'hello World!'
+echo 'Hello world!'
 ~~~
 {: .language-bash}
 ~~~
-hello World!
+Hello world!
 ~~~
 {: .output}
 
@@ -58,12 +58,12 @@ Create a file, `echo.cwl`, to contain your CWL example for this:
 cwlVersion: v1.2
 class: CommandLineTool
 
-baseCommand: [echo, 'hello World!']
+baseCommand: [echo, 'Hello world!']
 ~~~
 {: .language-yaml}
 We present `baseCommand` as a two item list containing the command and the input string. CWL will combine these two items (in the order given) to make the full command when the script is run. This is not a complete tool descriptor yet, however - to find out what is missing we can use `cwltool` to validate the script:
 ~~~
-$ cwltool --validate echo.cwl
+cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -79,13 +79,13 @@ echo.cwl:1:1: "outputs" section is not valid.
 cwlVersion: v1.2
 class: CommandLineTool
 
-baseCommand: [echo, 'hello World!']
+baseCommand: [echo, 'Hello world!']
 outputs: []
 ~~~
 {: .language-yaml}
 note that we are using an empty list `[]` here, as we do not want to capture any output for the moment. We will now validate the script again:
 ~~~
-$ cwltool --validate echo.cwl
+cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -103,14 +103,14 @@ echo.cwl:1:1: Object `echo.cwl` is not valid because
 cwlVersion: v1.2
 class: CommandLineTool
 
-baseCommand: [echo, 'hello World!']
+baseCommand: [echo, 'Hello world!']
 inputs: []
 outputs: []
 ~~~
 {: .language-yaml}
 We will now validate the script again:
 ~~~
-$ cwltool --validate echo.cwl
+cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -128,8 +128,8 @@ cwltool echo.cwl
 INFO .../cwltool 
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpwvj2kdvw$ echo \
-    'hello World!'
-hello World!
+    'Hello world!'
+Hello world!
 INFO [job echo.cwl] completed success
 {}
 INFO Final process status is success
@@ -148,7 +148,7 @@ __Note: add graphic here that identifies what each part of the returned informat
 
 So far our script is rather limited, with no inputs specified, and the string that we are printing out has been merged into the `baseCommand`. We will now split out the input string, so that we can make this tool more flexible.
 
-We remove the `hello World!` string from the `baseCommand` (where it should not have been in the first place...), and create an `inputs` item which we will call `message_text`:
+We remove the `Hello world!` string from the `baseCommand` (where it should not have been in the first place...), and create an `inputs` item which we will call `message_text`:
 ~~~
 cwlVersion: v1.2
 class: CommandLineTool
@@ -157,7 +157,7 @@ baseCommand: echo
 inputs:
   message_text:
     type: string
-    default: 'hello World!'
+    default: 'Hello world!'
     inputBinding:
       position: 1
 
@@ -168,7 +168,7 @@ We set the type of `message_text` to string, and set the `inputBinding` `positio
 
 We can now validate, and then run, this tool again:
 ~~~
-$ cwltool --validate echo.cwl
+cwltool --validate echo.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -185,8 +185,8 @@ $ cwltool echo.cwl
 INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmprm65mucw$ echo \
-    'hello World!'
-hello World!
+    'Hello world!'
+Hello world!
 INFO [job echo.cwl] completed success
 {}
 INFO Final process status is success
@@ -195,21 +195,21 @@ INFO Final process status is success
 
 The script is now ready to accept an input from us. This we will put in another YAML file (`moon.yml`):
 ~~~
-message_text: 'hello Moon!'
+message_text: 'Hello Moon!'
 ~~~
 {: .language-yaml}
 
 And then run:
 ~~~
-$ cwltool echo.cwl moon.yml
+cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
 INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmpu7z20wc7$ echo \
-    'hello Moon!'
-hello Moon!
+    'Hello Moon!'
+Hello Moon!
 INFO [job echo.cwl] completed success
 {}
 INFO Final process status is success
@@ -224,7 +224,7 @@ baseCommand: echo
 inputs:
   message_text:
     type: string
-    default: 'hello World!'
+    default: 'Hello world!'
     inputBinding:
       position: 1
 
@@ -238,14 +238,14 @@ Here we have added the `message_out` item, which has been given type `stdout` (a
 
 Now we run the script:
 ~~~
-$ cwltool echo.cwl moon.yml
+cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
 INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp7k0bqeg5$ echo \
-    'hello Moon!' > /private/tmp/docker_tmp7k0bqeg5/9611f21693018fe4ce4bf1f3884e47dae2ce3aab
+    'Hello Moon!' > /private/tmp/docker_tmp7k0bqeg5/9611f21693018fe4ce4bf1f3884e47dae2ce3aab
 INFO [job echo.cwl] completed success
 {
     "message_out": {
@@ -271,7 +271,7 @@ baseCommand: echo
 inputs:
   message_text:
     type: string
-    default: 'hello World!'
+    default: 'Hello world!'
     inputBinding:
       position: 1
 
@@ -285,14 +285,14 @@ outputs:
 
 Running the script will produce this output:
 ~~~
-$ cwltool echo.cwl moon.yml
+cwltool echo.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
 INFO /.../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmp5iazb06g$ echo \
-    'hello Moon!' > /private/tmp/docker_tmp5iazb06g/output.txt
+    'Hello Moon!' > /private/tmp/docker_tmp5iazb06g/output.txt
 INFO [job echo.cwl] completed success
 {
     "message_out": {
@@ -342,7 +342,7 @@ outputs: []
 
 Workflows use `inputs` and `outputs` fields, just as the tool descriptors do, but they don't use `baseCommand`. Run the validation tool to find out what is missing:
 ~~~
-$ cwltool --validate workflow_example.cwl
+cwltool --validate workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -373,7 +373,7 @@ steps:
 {: .language-yaml}
 And then we run the script:
 ~~~
-$ cwltool workflow_example.cwl
+cwltool workflow_example.cwl
 ~~~
 {: .language-bash}
 ~~~
@@ -383,7 +383,7 @@ INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
 INFO [step 01_echo] start
 INFO [job 01_echo] /private/tmp/docker_tmpx4889wo6$ echo \
-    'hello World!' > /private/tmp/docker_tmpx4889wo6/output.txt
+    'Hello world!' > /private/tmp/docker_tmpx4889wo6/output.txt
 INFO [job 01_echo] completed success
 INFO [step 01_echo] completed success
 INFO [workflow ] completed success
@@ -391,7 +391,7 @@ INFO [workflow ] completed success
 INFO Final process status is success
 ~~~
 {: .output}
-This was a success, but the workflow has not returned any files this time, and the echo'd message is the default 'hello World!' message. Now we must connect our tool inputs and outputs up in the workflow.
+This was a success, but the workflow has not returned any files this time, and the echo'd message is the default 'Hello world!' message. Now we must connect our tool inputs and outputs up in the workflow.
 
 First we will specify the flow of inputs for our workflow, taking them from the YAML configuration file, and passing them through to the echo tool:
 ~~~
@@ -415,7 +415,7 @@ The `inputs` entry is similar to that for the `echo.cwl` tool (as we are going t
 
 Now run this workflow:
 ~~~
-$ cwltool workflow_example.cwl moon.yml
+cwltool workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
@@ -425,7 +425,7 @@ INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
 INFO [step 01_echo] start
 INFO [job 01_echo] /private/tmp/docker_tmpd9ghguo8$ echo \
-    'hello Moon!' > /private/tmp/docker_tmpd9ghguo8/output.txt
+    'Hello Moon!' > /private/tmp/docker_tmpd9ghguo8/output.txt
 INFO [job 01_echo] completed success
 INFO [step 01_echo] completed success
 INFO [workflow ] completed success
@@ -459,7 +459,7 @@ The `outputs` entry is again similar to that for the `echo.cwl` tool. However we
 
 Now we can run this workflow, to provide the same output as running the tool descriptor did:
 ~~~
-$ cwltool workflow_example.cwl moon.yml
+cwltool workflow_example.cwl moon.yml
 ~~~
 {: .language-bash}
 ~~~
@@ -469,7 +469,7 @@ INFO [workflow ] start
 INFO [workflow ] starting step 01_echo
 INFO [step 01_echo] start
 INFO [job 01_echo] /private/tmp/docker_tmpvkqoq0n3$ echo \
-    'hello Moon!' > /private/tmp/docker_tmpvkqoq0n3/output.txt
+    'Hello Moon!' > /private/tmp/docker_tmpvkqoq0n3/output.txt
 INFO [job 01_echo] completed success
 INFO [step 01_echo] completed success
 INFO [workflow ] completed success
