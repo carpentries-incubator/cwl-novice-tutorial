@@ -27,7 +27,7 @@ keypoints:
 > and __define the files that will be included as output of a workflow__.
 {: .callout}
 
-CWL workflows are defined in a YAML script, containing the workflow and the requirements for running that workflow. All CWL scripts should start with two lines of code:
+CWL workflows are defined in a YAML script. This [quick tutorial](https://www.commonwl.org/user_guide/yaml/) explains the YAML script used in CWL. A CWL script contains the workflow and the requirements for running that workflow. All CWL scripts should start with two lines of code:
 ~~~
 cwlVersion: v1.2
 class:
@@ -35,7 +35,7 @@ class:
 {: .language-yaml}
 The `cwlVersion` string defines which standard of the language is required for the tool or workflow. The most recent version is v1.2, and defaulting to this will enable your scripts to use all versions of the language, though some workflow engines which are not up-to-date may not run the script. This is, however, a hurdle to be tackled when you reach it.
 
-The `class` field defines what this particular script is. The majority of CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The former class is used for describing the interface for a command-line tool, while the latter class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and finally how to use a tool descriptor within a workflow.
+The `class` field defines what this particular script is. The majority of CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The `CommandLineTool` class is used for describing the interface for a command-line tool, while the `Workflow` class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and finally how to use a tool descriptor within a workflow.
 
 
 
@@ -53,7 +53,7 @@ Hello world!
 ~~~
 {: .output}
 
-Create a file, `echo.cwl`, to contain your CWL example for this:
+To start our workflow we first create a file, `echo.cwl`, to contain our code:
 ~~~
 cwlVersion: v1.2
 class: CommandLineTool
@@ -164,7 +164,12 @@ inputs:
 outputs: []
 ~~~
 {: .language-yaml}
-We set the type of `message_text` to string, and set the `inputBinding` `position` (defining where the input item appears after the `baseCommand`) as 1. We also give a default value, `hello World!`, for this item, which will be used if the item is not defined within an input file.
+
+> ## Variable names
+> It is very important to give your variables a sensible name. In this example we use `message_text` as our variable name, because it contains our message. Try to not use variable names like `inputA` or `inputB` because others might not understand what you mean by it.
+{: .callout}
+
+We set the type of `message_text` to string, and set the `inputBinding` `position` (defining where the input item appears after the `baseCommand`) as 1. We also give a default value, `Hello world!`, for this item, which will be used if the item is not defined within an input file.
 
 We can now validate, and then run, this tool again:
 ~~~
