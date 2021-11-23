@@ -183,7 +183,7 @@ echo.cwl is valid CWL.
 ~~~
 {: .output}
 ~~~
-$ cwltool echo.cwl
+cwltool echo.cwl
 ~~~
 {: .language-bash}
 ~~~
