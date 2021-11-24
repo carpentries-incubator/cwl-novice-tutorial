@@ -116,7 +116,7 @@ inputs:
 This block of code contains the `inputs` section of our workflow. In this section we provide all the inputs that are needed for the workflow. 
 In this example a string is needed that will be printed on the command line. We first define an id for our input: `message_text`. 
 Then we need to define the type of the input. In our case it will be a `string`. The `InputBinding` describes how the input should appear on the command line.
-The `position` field indicates at which position the input will be on the command line, in our example at 1.
+The `position` field indicates at which position the input will be on the command line, in our example it is at the first position.
 
 ~~~
 outputs: []
