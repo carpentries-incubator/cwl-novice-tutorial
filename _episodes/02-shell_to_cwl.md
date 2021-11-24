@@ -122,7 +122,8 @@ The `position` field indicates at which position the input will be on the comman
 outputs: []
 ~~~
 {: .language-yaml}
-Lastly the `outputs` of our workflow. In this example we don't have a formal output. Our text is printed directly on the command line. So we use an empty list (`[]`) as our output. 
+Lastly the `outputs` of our workflow. In this example we don't have a formal output.
+Our text is printed directly in the terminal. So we use an empty YAML list (`[]`) as our output. 
 
 > ## Script order
 > To make our script more readable we have put the `input` field in front of the `output` field. However CWL syntax requires only that each field is properly defined, it does not require them to be in a particular order. Try changing around the order of fields in our example script, and run the validation step on these to make sure this is true.
