@@ -37,7 +37,7 @@ class:
 ~~~
 {: .language-yaml}
 
-The `cwlVersion` string defines which standard of the language is required for the tool or workflow. The most recent version is v1.2, and defaulting to this will enable your scripts to use all versions of the language, though some workflow engines which are not up-to-date may not run the script. This is, however, a hurdle to be tackled when you reach it.
+The `cwlVersion` string defines which standard of the language is required for the tool or workflow. The most recent version is v1.2.
 
 The `class` field defines what this particular script is. The majority of CWL scripts will fall into one of two classes: `CommandLineTool`, or `Workflow`. The `CommandLineTool` class is used for describing the interface for a command-line tool, while the `Workflow` class is used for collecting those tool descriptions into a workflow. In this lesson we will learn the differences between these two classes, how to pass data to and from command-line tools and specify working environments for these, and finally how to use a tool descriptor within a workflow.
 
