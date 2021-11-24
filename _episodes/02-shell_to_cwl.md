@@ -55,7 +55,7 @@ To demonstrate the basic requirements for a tool descriptor we will create a CWL
 
 __echo.cwl__
 ~~~
-clwVersion: v1.2
+cwlVersion: v1.2
 class: CommandLineTool
 
 baseCommand: echo
