@@ -27,7 +27,9 @@ keypoints:
 > and __define the files that will be included as output of a workflow__.
 {: .callout}
 
-CWL workflows are defined in a YAML script. This [quick tutorial](https://www.commonwl.org/user_guide/yaml/) explains the YAML script used in CWL. A CWL script contains the workflow and the requirements for running that workflow. All CWL scripts should start with two lines of code:
+CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
+explains the parts of YAML used in CWL. A CWL document contains the workflow and the
+requirements for running that workflow. All CWL document should start with two lines of code:
 
 ~~~
 cwlVersion: v1.2
