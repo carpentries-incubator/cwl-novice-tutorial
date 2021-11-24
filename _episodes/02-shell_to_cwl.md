@@ -71,7 +71,7 @@ message_text: Hello world!
 ~~~
 {: .language-yaml}
 
-Now we can run our CWL script with the `cwltool`. This command needs our `cwl` workflow file and our input file.
+Now we can run our CWL script with the `cwltool`. This command needs our `cwl` workflow file along with our input file.
 
 ~~~
 cwltool echo.cwl hello_world.yml
@@ -141,492 +141,101 @@ Lastly the `outputs` of our workflow. In this example we don't have a formal out
 
 ## CWL single step workflow
 
-Now that we have created a tool descriptor we can use it in our workflow. We will start with a single step workflow, to illustrate how workflows and tool descriptors interact.
+Next we will be using the RNA-seq data for our first CWL workflow. The first step of the RNA-seq process is quality control of the RNA reads using `fastqc`.
+This tool is already available for us to use so we don't have to write a tool descriptor for it.
 
-Create a file `workflow_example.cwl`, containing these lines:
-~~~
-cwlVersion: v1.2
-class: Workflow
+First we create our workflow file: `rna_seq_workflow.cwl`.
 
-inputs: []
-
-outputs: []
+__rna_seq_workflow.cwl__
 ~~~
-{: .language-yaml}
-
-Workflows use `inputs` and `outputs` fields, just as the tool descriptors do, but they don't use `baseCommand`. Run the validation tool to find out what is missing:
-~~~
-cwltool --validate workflow_example.cwl
-~~~
-{: .language-bash}
-~~~
-INFO /.../cwltool
-INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
-ERROR Tool definition failed validation:
-workflow_example.cwl:1:1: Object `workflow_example.cwl` is not valid because
-                            tried `Workflow` but
-                              missing required field `steps`
-~~~
-{: .output}
-
-Workflows need a `steps` field, in which are listed the workflow tasks or steps that are to be run. In this instance we wish only to run the `echo.cwl` tool that we wrote above, so we will add one step to this workflow. This step will require us to specify what tool we will `run`, as well as providing lists of `in` and `out` items for the tool. To begin with we will provide the bare minimum to make this workflow run:
-~~~
-cwlVersion: v1.2
-class: Workflow
-
-inputs: []
-
-outputs: []
-
-steps:
-  01_echo:
-    run: echo.cwl
-    in: []
-    out: []
-~~~
-{: .language-yaml}
-And then we run the script:
-~~~
-cwltool workflow_example.cwl
-~~~
-{: .language-bash}
-~~~
-INFO /.../cwltool
-INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
-INFO [workflow ] start
-INFO [workflow ] starting step 01_echo
-INFO [step 01_echo] start
-INFO [job 01_echo] /private/tmp/docker_tmpx4889wo6$ echo \
-    'Hello world!' > /private/tmp/docker_tmpx4889wo6/output.txt
-INFO [job 01_echo] completed success
-INFO [step 01_echo] completed success
-INFO [workflow ] completed success
-{}
-INFO Final process status is success
-~~~
-{: .output}
-This was a success, but the workflow has not returned any files this time, and the echo'd message is the default 'Hello world!' message. Now we must connect our tool inputs and outputs up in the workflow.
-
-First we will specify the flow of inputs for our workflow, taking them from the YAML configuration file, and passing them through to the echo tool:
-~~~
-cwlVersion: v1.2
+clwVersion: v1.2
 class: Workflow
 
 inputs:
-  message_text: string
-
-outputs: []
-
+  fastq: File
+  
 steps:
-  01_echo:
-    run: echo.cwl
-    in:
-      message_text: message_text
-    out: []
-~~~
-{: .language-yaml}
-The `inputs` entry is similar to that for the `echo.cwl` tool (as we are going to read the same input file), but we have not given a default value or input binding. Within the `in` list we explicitly link the tool's `message_text` field with our workflow's `message_text` field. These do not need to have matching names, in the next episode we will show how these can change as you start linking steps together.
+  fastqc:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+	in:
+	  reads_file: fastq
+    out: [html_file]
 
-Now run this workflow:
-~~~
-cwltool workflow_example.cwl moon.yml
-~~~
-{: .language-bash}
-~~~
-INFO /.../cwltool
-INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
-INFO [workflow ] start
-INFO [workflow ] starting step 01_echo
-INFO [step 01_echo] start
-INFO [job 01_echo] /private/tmp/docker_tmpd9ghguo8$ echo \
-    'Hello Moon!' > /private/tmp/docker_tmpd9ghguo8/output.txt
-INFO [job 01_echo] completed success
-INFO [step 01_echo] completed success
-INFO [workflow ] completed success
-{}
-INFO Final process status is success
-~~~
-{: .output}
-We can see that the echo'd text has changed. But still no files are being returned from our tool, so we need to explicitly list the files that we want the workflow to return.
-
-~~~
-cwlVersion: v1.2
-class: Workflow
-
-inputs:
-  message_text: string
-
-outputs:
-  message_file:
+outputs: 
+  qc_html:
     type: File
-    outputSource: 01_echo/message_out
-
-steps:
-  01_echo:
-    run: echo.cwl
-    in:
-      message_text: message_text
-    out: [message_out]
+	outputSource: fastqc/html_file
 ~~~
 {: .language-yaml}
-The `outputs` entry is again similar to that for the `echo.cwl` tool. However we are using the `File` type, as that is what the tool descriptor returns, and specifying an `outputSource`, which makes clear the link to step `01_echo` and the `message_out` object. For the `out` field of our workflow step we simply provide a list of the objects we require outputting.
 
-Now we can run this workflow, to provide the same output as running the tool descriptor did:
+In this workflow we use the `steps` field. In this field workflow tasks or steps that are to be run are listed. At the moment we only have a workflow of one step: `fastqc`. 
+In the next episode we will add more steps to our workflow. 
+
+Let's take a closer look at the workflow. First we will investigate our `inputs`.
+
 ~~~
-cwltool workflow_example.cwl moon.yml
+inputs:
+  fastq: File
+~~~
+{: .language-yaml}
+
+Looking at the `fastqc` tool, it needs a fastq file as its input. So we also need a `File` for our inputs. To make this workflow interpretable for other researchers, we use self-explanatory variable names.
+In our case, we use `fastq` as our input name.
+
+> ## Input and output names
+> It is very important to give your inputs and outputs a sensible name. Try to not use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
+{: .callout}
+
+The next part of the script is the `steps` field. Workflows need a `steps`field, in which are listed the workflow tasks or steps that are to be run.
+
+~~~
+steps:
+  fastqc:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+	in:
+	  reads_file: fastq
+    out: [html_file]
+~~~
+{: .language-yaml}
+
+Every step of a workflow needs an name, the first step of our workflow is called `fastqc`. Each of the steps needs a `run` field, `in` field and `out` field. 
+The `run` field contains the location of the cwl file of the tool we want to run. The `in` field connects the `inputs` field to the `fastqc` tool we want to run.
+The `fastqc` tool has an input parameter callen `reads_file`, so we need to connect the `reads_file_fi` to `fastq`. 
+Lastly, the `out` field is a list of output parameters from the tool we want to use. In our example, the `fastqc` tool produces an output file called `html_file`.
+
+The last part of the script is the `output` field.
+~~~
+outputs: 
+  qc_html:
+    type: File
+	outputSource: fastqc/html_file
+~~~
+{: .language-yaml}
+
+For our output, we need to declare the type of output and what parameter has the output value. The output of the `fastqc` step is a file, so we define `qc_html` type as `File`.
+The `outputSource` field refers to where the output is located, in our example it came from the step `fastqc` and it is called `html_file`.
+
+To be able to run this workflow, we need to provide a file with the inputs. This file is similar to the `hello_world.yml` file in the previous section. 
+We will call our input file `workflow_input.yml`
+
+__workflow_input.yml__
+~~~
+fastq:
+  class: File
+  location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
+  format: http://edamontology.org/format_1930
+~~~
+{: .language-yaml}
+
+In the input file we provide the values for the inputs declared in the `inputs` section of our workflow. Our workflow takes `fastq` as an input parameter.
+When setting inputs, we need to define the class of the object, for example `class: File` or `class: Directory`. The last line is needed to provide a format for the fastq file.
+
+Now we can finally run our workflow:
+
+~~~
+cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
-~~~
-INFO /.../cwltool 
-INFO Resolved 'workflow_example.cwl' to 'file:///.../workflow_example.cwl'
-INFO [workflow ] start
-INFO [workflow ] starting step 01_echo
-INFO [step 01_echo] start
-INFO [job 01_echo] /private/tmp/docker_tmpvkqoq0n3$ echo \
-    'Hello Moon!' > /private/tmp/docker_tmpvkqoq0n3/output.txt
-INFO [job 01_echo] completed success
-INFO [step 01_echo] completed success
-INFO [workflow ] completed success
-{
-    "message_file": {
-        "location": "file:///.../output.txt",
-        "basename": "output.txt",
-        "class": "File",
-        "checksum": "sha1$d4413a97a36059e8855168ac7939a4cb5d4da9c9",
-        "size": 12,
-        "path": "/.../output.txt"
-    }
-}
-INFO Final process status is success
-~~~
-{: .output}
-
-In the `CWL Preview` window of the VSCode editor we will now be able to see the input and outputs that were there for the tool descriptor, but these will now be connected by the step of our workflow, illustrating their connection.
-![Two side by side VSCode windows. The left one shows the workflow code, the right one the workflow graph sketched from that code.](../fig/first_workflow_graph.png)
-
-This connection is quite basic here, but in the next episode we will make use of this feature of VSCode/Benten to plan more complicated workflows.
-
-
-## Example Exercises
-
-
-Use https://github.com/bcosc/fast_genome_variants/blob/main/README.md to create a `CommandLineTool`
-
-> ## Exercise 1
->
-> Create the baseCommand for running the joint_haplotype caller using the fast_genome_variants README.
->
-> > ## Solution
-> > The base command should use the path to the binary and the type of variants you're calling.
-> >
-> > ~~~
-> > baseCommand: [fgv, joint_haplotype]
-> > ~~~
-> > {: .language-yaml }
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 2:
->
-> When working in a cloud environment, you need to specify what machine type you would like to run on. Which means the job has to have specific parameters describing the RAM, Cores and Disk space (for both temporary and output files) it requires.
->
-> Create the `ResourceRequirements` field for running 2 BAMs for
-> the `fgv joint_haplotype` command.
->
-> > ## Solution:
-> >
-> > ~~~
-> > requirements:
-> >   ResourceRequirement:
-> >     ramMin: 4000
-> >     coresMin: 2
-> > ~~~
-> > {: .language-yaml }
-> >
-> > FGV requires 2 GiB of memory for each bam input,
-> > and the unit for `ramMin` is in MiB,
-> > so we need approximately 4000 MiB to meet the requirement.
-> > FGV also requires 1 core for each BAM, so here we ask for at least 2 cores.
-> >
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 3:
->
-> 1. Create the `input` field for running `fgv_joint_haplotype`
-> 2. Add an optional flag for calling a GVCF output
-> 3. Add a string input for intervals `chr2:1-10000`
-> 4. Add an output name.
->
-> > ## Solution:
-> >
-> > ~~~
-> > inputs:
-> >   bam:
-> >     type: File[]
-> >     inputBinding:
-> >       position: 1
-> >       prefix: -bam
-> >     secondaryFiles:
-> >       - .bai
-> >   gvcf:
-> >     type: boolean
-> >     inputBinding:
-> >       position: 2
-> >       prefix: -gvcf
-> >   interval:
-> >     type: string
-> >     inputBinding:
-> >       position: 3
-> >   output_name:
-> >     type: string
-> >     inputBinding:
-> >       position: 4
-> >       prefix: -o
-> > ~~~
-> > {: .language-yaml }
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 4:
->
-> Create the output variable for the CommandLineTool and name it output_vcf.
->
-> > ## Solution:
-> >
-> > ~~~
-> > outputs:
-> >   output_vcf:
-> >     type: File
-> >     outputBinding:
-> >       glob: $(inputs.output_name)
-> > ~~~
-> > {: .language-yaml }
-> {: .solution}
-{: .challenge}
-
-> ## Exercise 5:
->
-> TODO
->
-> > ## Solution:
-> >
-> >
-> {: .solution}
-{: .challenge}
-
-## Capturing Output
-
-> ## Exercise 1
->
-> Using this `CommandLineTool` description,
-> what files would be the output of the tool?
->
-> ~~~
-> cwlVersion: v1.0
-> class: CommandLineTool
->
-> baseCommand: [bwa, mem]
->
-> inputs:
->   reference:
->     type: File
->     inputBinding:
->       position: 1
->   fastq_reads:
->     type: File[]
->     inputBinding:
->       position: 2
->
-> stdout: output.sam
->
-> outputs:
->   output:
->     type: File
->     outputBinding:
->       glob: output.sam
-> ~~~
-> {: .language-yaml }
->
->
-> > ## Solution
-> >
-> > `output.sam` will be the only file outputted.
-> Only files explicitly stated in the outputs field will be included
-> in the output of the step.
-> {: .solution }
-{: .challenge }
-
-> ## Exercise 2
->
-> Your colleague tells you to run `fastqc`,
-> which creates several files describing the quality of the data.
-> For now, let's assume the tool creates three files:
->
-> - `final_report_fastqc.html`
-> - `final_figures_fastqc.zip`
-> - `supplemental_figures_fastqc.html`
->
-> Create a CWL `outputs` field using a `File` array that
-> captures all the fastqc files in a single output variable.
->
-> > ## Solution
-> >
-> > ~~~
-> > outputs:
-> >   output:
-> >     type: File[]
-> >     outputBinding:
-> >       glob: "*fastqc*"
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
->
-> Actually, `fastqc` may create more than 3 of these files,
-> depending on the input parameters you give it,
-> it may create a `results` directory that contains additional files such as
-> `results/fastqc_per_base_content.html` and
-> `results/fastqc_per_base_gc_content.html`.
->
-> Create a CWL `outputs` field that captures the
-> `results/fastqc_per_base_content.html` and
-> `results/fastqc_per_base_gc_content.html` in separate output variables.
->
-> > ## Solution
-> >
-> > ~~~
-> > outputs:
-> >   per_base_content:
-> >     type: File
-> >     outputBinding:
-> >       glob: "results/fastqc_per_base_content.html"
-> >   per_base_gc_content:
-> >     type: File
-> >     outputBinding:
-> >       glob: "results/fastqc_per_base_gc_content.html"
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
->
-> Finally, instead of explicitly defining each file to be captured,
-> create a CWL `outputs` field that captures the entire `results` directory.
->
-> > ## Solution
-> >
-> > ~~~
-> > outputs:
-> >   results:
-> >     type: Directory
-> >     outputBinding:
-> >       glob: "results"
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
-{: .challenge }
-
-> ## Exercise 3
->
-> Since `fastqc` can be unpredictable in its outputs and file naming, create a CWL outputs field using a `Directory` that captures all the files in a single output variable.
->
-> > ## Solution
-> >
-> > ~~~
-> > outputs:
-> >   output:
-> >     type: Directory
-> >     outputBinding:
-> >       glob: .
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
-{: .challenge }
-
-> ## Exercise 4
->
-> Your colleague says that he is running `samtools index` in CWL,
-> but the index is not being outputted.
-> Fix the following CWL to have output the index along with
-> the `bam` as a `secondaryFile`.
->
-> ~~~
-> cwlVersion: v1.0
-> class: CommandLineTool
->
-> requirements:
->   InitialWorkDirRequirement:
->     listing:
->       - $(inputs.bam)
->
-> baseCommand: [samtools, index]
->
-> inputs:
->   bam:
->     type: File
->     inputBinding:
->       position: 1
->       valueFrom: $(self.basename)
->
-> outputs:
->   output_bam_and_index:
->     type: File
->     outputBinding:
->       glob: $(inputs.bam.basename)
-> ~~~
-> {: .language-yaml }
->
-> > ## Solution
-> >
-> > ~~~
-> > cwlVersion: v1.0
-> > class: CommandLineTool
-> >
-> > requirements:
-> >   InitialWorkDirRequirement:
-> >     listing:
-> >       - $(inputs.bam)
-> >
-> > baseCommand: [samtools, index]
-> >
-> > inputs:
-> >   bam:
-> >     type: File
-> >     inputBinding:
-> >       position: 1
-> >       valueFrom: $(self.basename)
-> >
-> > outputs:
-> >   output_bam_and_index:
-> >     type: File
-> >     secondaryFiles:
-> >       - .bai
-> >     outputBinding:
-> >       glob: $(inputs.bam.basename)
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
-{: .challenge }
-
-> ## Exercise 5
->
-> What if `InitialWorkDirRequirement` was not used,
-> and the index file was created where the input bam was located?
-> How would you capture the output?
-> Create the `outputs` field using the same CWL in exercise 4.
->
-> > ## Solution
-> >
-> > ~~~
-> > outputs:
-> >   output_bam_and_index:
-> >     type: File
-> >     secondaryFile:
-> >       - .bai
-> >     outputBinding:
-> >       glob: $(inputs.bam)
-> > ~~~
-> > {: .language-yaml }
-> {: .solution }
-{: .challenge }
 
 
 {% include links.md %}
