@@ -51,7 +51,7 @@ how to use a tool description within a workflow.
 
 ## Our first CWL script
 
-To demonstrate the basic requirements for a tool descriptor we will recreate the standard "Hello world!" example.
+To demonstrate the basic requirements for a tool descriptor we will create a CWL description for the popular "Hello world!" demonstration.
 
 __echo.cwl__
 ~~~
