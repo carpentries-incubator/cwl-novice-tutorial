@@ -246,6 +246,91 @@ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
+> ## Fill in the blanks
+>
+> The next step of the RNA-seq analysis is mapping of the reads to a reference genome. In this workflow the STAR tool is used.
+> Below the mapping step is added to the workflow. However, it missses some information. 
+>  
+> Please fill in the blanks.
+>
+> > ## Solution
+> > The `run` field missses the link to the START `.cwl` script. The input `GenomeDir` is linked to `genome` in de `inputs` section.
+> > `ForwardReads` is the `fastq` file.
+> > 
+> > ~~~
+> > clwVersion: v1.2
+> > class: Workflow
+> > 
+> > inputs:
+> >   fastq: File
+> >   genome: Directory
+> >   gtf: File
+> >   
+> > steps:
+> >   fastqc:
+> >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
+> > 	in:
+> > 	  reads_file: fastq
+> >     out: [html_file]
+> > 	
+> >   STAR:
+> >     run: ___
+> >     in:
+> >       RunThreadN: {default: 4}
+> >       GenomeDir: ___
+> >       ForwardReads: ___
+> >       OutSAMtype: {default: BAM}
+> >       SortedByCoordinate: {default: true}
+> >       OutSAMunmapped: {default: Within}
+> >     out: [alignment]
+> > 
+> > outputs: 
+> >   qc_html:
+> >     type: File
+> > 	outputSource: fastqc/html_file
+> > ~~~
+> > {: .language-yaml}
+
+{: .language-yaml}
+> > ## Solution
+> > ~~~
+> > clwVersion: v1.2
+> > class: Workflow
+> > 
+> > inputs:
+> >   fastq: File
+> >   genome: Directory
+> >   gtf: File
+> >   
+> > steps:
+> >   fastqc:
+> >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
+> > 	in:
+> > 	  reads_file: fastq
+> >     out: [html_file]
+> > 	
+> >   STAR:
+> >     run: bio-cwl-tools/STAR/STAR-Align.cwl
+> >     in:
+> >       RunThreadN: {default: 4}
+> >       GenomeDir: genome
+> >       ForwardReads: fastq
+> >       OutSAMtype: {default: BAM}
+> >       SortedByCoordinate: {default: true}
+> >       OutSAMunmapped: {default: Within}
+> >     out: [alignment]
+> > 
+> > outputs: 
+> >   qc_html:
+> >     type: File
+> > 	outputSource: fastqc/html_file
+> > ~~~
+> > {: .language-yaml}
+> {: .solution}
+{: .challenge}
+
+
+
 
 {% include links.md %}
 
