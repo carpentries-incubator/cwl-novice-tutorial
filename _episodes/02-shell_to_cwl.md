@@ -29,7 +29,7 @@ keypoints:
 
 CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
 explains the parts of YAML used in CWL. A CWL document contains the workflow and the
-requirements for running that workflow. All CWL document should start with two lines of code:
+requirements for running that workflow. All CWL documents should start with two lines of code:
 
 ~~~
 cwlVersion: v1.2
