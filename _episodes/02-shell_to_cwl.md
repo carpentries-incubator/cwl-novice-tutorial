@@ -29,7 +29,7 @@ keypoints:
 
 CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
 explains the parts of YAML used in CWL. A CWL document contains the workflow and the
-requirements for running that workflow. All CWL document should start with two lines of code:
+requirements for running that workflow. All CWL documents should start with two lines of code:
 
 ~~~
 cwlVersion: v1.2
@@ -113,7 +113,7 @@ inputs:
 
 This block of code contains the `inputs` section of the workflow. This section provides all the inputs that are needed for the workflow. 
 In this example a string is needed that will be printed on the command line. An id is defined first for the input: `message_text`. 
-Then the type of the input needs to be defined. In this case it will be a `string`. The `InputBinding` describes how the input should appear on the command line.
+Then the type of the input needs to be defined. In this case it will be a `string`. The `inputBinding` describes how the input should appear on the command line.
 The `position` field indicates at which position the input will be on the command line, in this example it is at the first position.
 
 ~~~
