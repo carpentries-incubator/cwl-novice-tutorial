@@ -120,7 +120,7 @@ The `position` field indicates at which position the input will be on the comman
 outputs: []
 ~~~
 {: .language-yaml}
-Lastly the `outputs` of the workflow. In this example don't have a formal output.
+Lastly the `outputs` of the workflow. This example doesn't have a formal output.
 The text is printed directly in the terminal. So an empty YAML list (`[]`) is used as the output. 
 
 > ## Script order
@@ -131,11 +131,11 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 
 > ## Changing input text
 >
-> What needs to be changed to print another text on the command line?
+> What do you need to change to print another text on the command line?
 >
 > > ## Solution
 > >
-> > To change the text on the command line, only the text in the `hello_world.yml` file needs to be changed.
+> > To change the text on the command line, you only have to change the text in the `hello_world.yml` file.
 > > 
 > > For example:
 > > ~~~
@@ -149,7 +149,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 ## CWL single step workflow
 
 Next the RNA-seq data will be used for the first CWL workflow. The first step of RNA-sequensing analysis is a quality control of the RNA reads using `fastqc`.
-This tool is already available for to use so there is no need to write a tool descriptor.
+This tool is already available to use so there is no need to write a tool descriptor.
 
 This is the workflow file (`rna_seq_workflow.cwl`).
 
@@ -175,8 +175,8 @@ outputs:
 ~~~
 {: .language-yaml}
 
-In a __workflow__ the `steps` field must always be present. In this field workflow tasks or steps that are to be run are listed. 
-At the moment the workflow only contains one step: `fastqc`. In the next episode more steps will be added to the workflow. 
+In a __workflow__ the `steps` field must always be present. The workflow tasks or steps that you want to run are listed in this field. 
+At the moment the workflow only contains one step: `fastqc`. In the next episodes more steps will be added to the workflow. 
 
 Let's take a closer look at the workflow. First the `inputs` field will be explained.
 
@@ -188,10 +188,10 @@ inputs:
 
 Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. So this workflow also needs a `File` for its inputs. 
 To make this workflow interpretable for other researchers, self-explanatory and sensible variable names are used.
-In this case, `fastq` is used as the input name.
+In this case, `fastq` is used as the input name for the fastq file.
 
 > ## Input and output names
-> It is very important to give inputs and outputs a sensible name. Try to not use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
+> It is very important to give inputs and outputs a sensible name. Try not to use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
 {: .callout}
 
 The next part of the script is the `steps` field. 
@@ -208,7 +208,7 @@ steps:
 
 Every step of a workflow needs an name, the first step of the workflow is called `fastqc`. Each step needs a `run` field, an `in` field and an `out` field. 
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool. 
-The `fastqc` tool has an input parameter callen `reads_file`, so it needs to connect the `reads_file_fi` to `fastq`. 
+The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `fastq`. 
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.
 
 The last part of the script is the `output` field.
@@ -224,7 +224,7 @@ Each output in the `outputs` field needs its own name. In this example the outpu
 Inside `qc_html` the type of output is defined. The output of the `fastqc` step is a file, so the `qc_html` type is `File`. 
 The `outputSource` field refers to where the output is located, in this example it came from the step `fastqc` and it is called `html_file`.
 
-To be able to run this workflow, a file with the inputs needs to be provided. This file is similar to the `hello_world.yml` file in the previous section. 
+When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section. 
 The input file is called `workflow_input.yml`
 
 __workflow_input.yml__
@@ -237,98 +237,18 @@ fastq:
 {: .language-yaml}
 
 In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. The workflow takes `fastq` as an input parameter.
-When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The last line is needed to provide a format for the fastq file.
+When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The `location` field contains the location of the input file.
+The last line is needed in this example to provide a format for the fastq file.
 
-Now the workflow can be run using the following command:
+Now you can run the workflow using the following command:
 
 ~~~
 cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
-> ## Fill in the blanks
->
-> The next step of the RNA-seq analysis is mapping of the reads to a reference genome. In this workflow the STAR tool is used.
-> Below the mapping step is added to the workflow. However, it missses some information. 
->  
-> Please fill in the blanks.
->
-> > ## Solution
-> > The `run` field missses the link to the START `.cwl` script. The input `GenomeDir` is linked to `genome` in de `inputs` section.
-> > `ForwardReads` is the `fastq` file.
-> > 
-> > ~~~
-> > clwVersion: v1.2
-> > class: Workflow
-> > 
-> > inputs:
-> >   fastq: File
-> >   genome: Directory
-> >   gtf: File
-> >   
-> > steps:
-> >   fastqc:
-> >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-> > 	in:
-> > 	  reads_file: fastq
-> >     out: [html_file]
-> > 	
-> >   STAR:
-> >     run: ___
-> >     in:
-> >       RunThreadN: {default: 4}
-> >       GenomeDir: ___
-> >       ForwardReads: ___
-> >       OutSAMtype: {default: BAM}
-> >       SortedByCoordinate: {default: true}
-> >       OutSAMunmapped: {default: Within}
-> >     out: [alignment]
-> > 
-> > outputs: 
-> >   qc_html:
-> >     type: File
-> > 	outputSource: fastqc/html_file
-> > ~~~
-> > {: .language-yaml}
-
-{: .language-yaml}
-> > ## Solution
-> > ~~~
-> > clwVersion: v1.2
-> > class: Workflow
-> > 
-> > inputs:
-> >   fastq: File
-> >   genome: Directory
-> >   gtf: File
-> >   
-> > steps:
-> >   fastqc:
-> >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-> > 	in:
-> > 	  reads_file: fastq
-> >     out: [html_file]
-> > 	
-> >   STAR:
-> >     run: bio-cwl-tools/STAR/STAR-Align.cwl
-> >     in:
-> >       RunThreadN: {default: 4}
-> >       GenomeDir: genome
-> >       ForwardReads: fastq
-> >       OutSAMtype: {default: BAM}
-> >       SortedByCoordinate: {default: true}
-> >       OutSAMunmapped: {default: Within}
-> >     out: [alignment]
-> > 
-> > outputs: 
-> >   qc_html:
-> >     type: File
-> > 	outputSource: fastqc/html_file
-> > ~~~
-> > {: .language-yaml}
-> {: .solution}
-{: .challenge}
-
+### Exercise
+Needs some exercises
 
 
 
