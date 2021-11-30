@@ -130,7 +130,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 
 > ## Changing input text
 >
-> What do you need to change to print different text on the command line?
+> What do you need to change to print a different text on the command line?
 >
 > > ## Solution
 > >
@@ -158,36 +158,36 @@ clwVersion: v1.2
 class: Workflow
 
 inputs:
-  fastq: File
+  fastq_file: File
   
 steps:
-  fastqc:
+  quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 	in:
-	  reads_file: fastq
+	  reads_file: fastq_file
     out: [html_file]
 
 outputs: 
   qc_html:
     type: File
-	outputSource: fastqc/html_file
+	outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
 In a __workflow__ the `steps` field must always be present. The workflow tasks or steps that you want to run are listed in this field. 
-At the moment the workflow only contains one step: `fastqc`. In the next episodes more steps will be added to the workflow. 
+At the moment the workflow only contains one step: `quality_control`. In the next episodes more steps will be added to the workflow. 
 
 Let's take a closer look at the workflow. First the `inputs` field will be explained.
 
 ~~~
 inputs:
-  fastq: File
+  fastq_file: File
 ~~~
 {: .language-yaml}
 
-Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. So this workflow also needs a `File` for its inputs. 
+Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. So the variable `fastq_file` has `File` as its type. 
 To make this workflow interpretable for other researchers, self-explanatory and sensible variable names are used.
-In this case, `fastq` is used as the input name for the fastq file.
+In this case, `fastq_file` is used as the input name for the fastq file.
 
 > ## Input and output names
 > It is very important to give inputs and outputs a sensible name. Try not to use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
@@ -197,17 +197,17 @@ The next part of the script is the `steps` field.
 
 ~~~
 steps:
-  fastqc:
+  quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 	in:
-	  reads_file: fastq
+	  reads_file: fastq_file
     out: [html_file]
 ~~~
 {: .language-yaml}
 
-Every step of a workflow needs an name, the first step of the workflow is called `fastqc`. Each step needs a `run` field, an `in` field and an `out` field. 
+Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field. 
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool. 
-The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `fastq`. 
+The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `fastq_file`. 
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.
 
 The last part of the script is the `output` field.
@@ -215,27 +215,27 @@ The last part of the script is the `output` field.
 outputs: 
   qc_html:
     type: File
-	outputSource: fastqc/html_file
+	outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
 Each output in the `outputs` field needs its own name. In this example the output is called `qc_html`. 
-Inside `qc_html` the type of output is defined. The output of the `fastqc` step is a file, so the `qc_html` type is `File`. 
-The `outputSource` field refers to where the output is located, in this example it came from the step `fastqc` and it is called `html_file`.
+Inside `qc_html` the type of output is defined. The output of the `quality_control` step is a file, so the `qc_html` type is `File`. 
+The `outputSource` field refers to where the output is located, in this example it came from the step `quality_control` and it is called `html_file`.
 
 When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section. 
 The input file is called `workflow_input.yml`
 
 __workflow_input.yml__
 ~~~
-fastq:
+fastq_file:
   class: File
   location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
   format: http://edamontology.org/format_1930
 ~~~
 {: .language-yaml}
 
-In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. The workflow takes `fastq` as an input parameter.
+In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. The workflow takes `fastq_file` as an input parameter.
 When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The `location` field contains the location of the input file.
 The last line is needed in this example to provide a format for the fastq file.
 
