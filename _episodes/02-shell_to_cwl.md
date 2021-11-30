@@ -22,7 +22,7 @@ keypoints:
 > ## learning objectives
 > By the end of this episode,
 > learners should be able to
-> __explain how a workflow document describes the input and output of a workflow and the flow of data between tools__
+> __explain how a workflow document describes the input and output of a workflow__
 > and __describe all the requirements for running a tool__
 > and __define the files that will be included as output of a workflow__.
 {: .callout}
@@ -147,7 +147,8 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 
 ## CWL single step workflow
 
-The RNA-seq data from the introduction episode will be used for the first CWL workflow. The first step of RNA-sequencing analysis is a quality control of the RNA reads using `fastqc`.
+The RNA-seq data from the introduction episode will be used for the first CWL workflow. 
+The first step of RNA-sequencing analysis is a quality control of the RNA reads using the `fastqc` tool.
 This tool is already available to use so there is no need to write a new CWL tool description.
 
 This is the workflow file (`rna_seq_workflow.cwl`).
@@ -158,13 +159,13 @@ clwVersion: v1.2
 class: Workflow
 
 inputs:
-  fastq_file: File
+  rna_reads_human: File
   
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 	in:
-	  reads_file: fastq_file
+	  reads_file: rna_reads_human
     out: [html_file]
 
 outputs: 
@@ -181,13 +182,13 @@ Let's take a closer look at the workflow. First the `inputs` field will be expla
 
 ~~~
 inputs:
-  fastq_file: File
+  rna_reads_human: File
 ~~~
 {: .language-yaml}
 
-Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. So the variable `fastq_file` has `File` as its type. 
+Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. In this example the fastq file consists of human RNA reads. 
+So we call the variable `rna_reads_human` and it has `File` as its type. 
 To make this workflow interpretable for other researchers, self-explanatory and sensible variable names are used.
-In this case, `fastq_file` is used as the input name for the fastq file.
 
 > ## Input and output names
 > It is very important to give inputs and outputs a sensible name. Try not to use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
@@ -200,14 +201,14 @@ steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 	in:
-	  reads_file: fastq_file
+	  reads_file: rna_reads_human
     out: [html_file]
 ~~~
 {: .language-yaml}
 
 Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field. 
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool. 
-The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `fastq_file`. 
+The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`. 
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.
 
 The last part of the script is the `output` field.
@@ -228,16 +229,17 @@ The input file is called `workflow_input.yml`
 
 __workflow_input.yml__
 ~~~
-fastq_file:
+rna_reads_human:
   class: File
   location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
   format: http://edamontology.org/format_1930
 ~~~
 {: .language-yaml}
 
-In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. The workflow takes `fastq_file` as an input parameter.
+In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. 
+The workflow takes `rna_reads_human` as an input parameter, so we use the same variable name in the input file.
 When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The `location` field contains the location of the input file.
-The last line is needed in this example to provide a format for the fastq file.
+In this example the last line is needed to provide a format for the fastq file.
 
 Now you can run the workflow using the following command:
 
