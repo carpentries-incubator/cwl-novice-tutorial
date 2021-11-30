@@ -119,7 +119,7 @@ Here the `position` field indicates at which position the input will be on the c
 outputs: []
 ~~~
 {: .language-yaml}
-Lastly the `outputs` of the workflow. This example doesn't have a formal output.
+Lastly the `outputs` of the tool description. This example doesn't have a formal output.
 The text is printed directly in the terminal. So an empty YAML list (`[]`) is used as the output. 
 
 > ## Script order
