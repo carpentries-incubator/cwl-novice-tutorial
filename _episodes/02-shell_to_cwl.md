@@ -149,7 +149,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 ## CWL single step workflow
 
 Next the RNA-seq data will be used for the first CWL workflow. The first step of RNA-sequensing analysis is a quality control of the RNA reads using `fastqc`.
-This tool is already available to use so there is no need to write a tool descriptor.
+This tool is already available to use so there is no need to write a new CWL tool description.
 
 This is the workflow file (`rna_seq_workflow.cwl`).
 
