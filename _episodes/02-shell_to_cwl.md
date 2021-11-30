@@ -110,10 +110,10 @@ inputs:
 ~~~
 {: .language-yaml}
 
-This block of code contains the `inputs` section of the workflow. This section provides all the inputs that are needed for the workflow. 
-In this example a string is needed that will be printed on the command line. An id is defined first for the input: `message_text`. 
-Then the type of the input needs to be defined. In this case it will be a `string`. The `inputBinding` describes how the input should appear on the command line.
-The `position` field indicates at which position the input will be on the command line, in this example it is at the first position.
+This block of code contains the `inputs` section of the tool description. This section provides all the inputs that are needed for running this specific tool. 
+To run this example we will need to provide a string which will be included on the command line. Each of the inputs has a name, to help us tell them apart; this first input has the name : `message_text`. 
+The field `inputBinding` is one way to specify how the input should appear on the command line.
+Here the `position` field indicates at which position the input will be on the command line; in this case the `message_text` value will be the first thing added to the command line (after the `baseCommand`, `echo`).
 
 ~~~
 outputs: []
