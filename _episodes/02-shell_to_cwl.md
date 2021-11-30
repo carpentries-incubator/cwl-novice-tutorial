@@ -75,7 +75,7 @@ message_text: Hello world!
 ~~~
 {: .language-yaml}
 
-The reference CWL runner, `cwltool`, is used to run the CWL script. This command needs the `.cwl` workflow file along with the `.yml` input file.
+We will use the reference CWL runner, `cwltool` to run this CWL document (the `.cwl` workflow file) along with the `.yml` input file.
 
 ~~~
 cwltool echo.cwl hello_world.yml
