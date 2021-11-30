@@ -130,7 +130,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 
 > ## Changing input text
 >
-> What do you need to change to print another text on the command line?
+> What do you need to change to print different text on the command line?
 >
 > > ## Solution
 > >
