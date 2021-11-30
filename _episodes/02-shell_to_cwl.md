@@ -83,7 +83,6 @@ cwltool echo.cwl hello_world.yml
 {: .language-bash}
 
 ~~~
-INFO .../cwltool
 INFO Resolved 'echo.cwl' to 'file:///.../echo.cwl'
 INFO [job echo.cwl] /private/tmp/docker_tmprm65mucw$ echo \
     'Hello world!'
