@@ -17,16 +17,17 @@ keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
 > ## Learning objectives
->By the end of this episode, >learners should be able to >__explain that a workflow is a dependency graph__
+>By the end of this episode, learners should be able to __understand the flow of data between tools__ 
+> and __explain that a workflow is a dependency graph__
 >and __sketch their workflow, both by hand, and with an automated visualizer__
 >and __recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once__.
 {: .callout}
 
 
 ## Multi-Step Workflow
-In the previous episode a single step workflow was shown. To make a multi-step workflow, you extend the `steps` field. 
-In this episode, this workflow is extended with the next 2 steps of the RNA-sequencing analysis.
-The next 2 steps are alingment of the reads and sorting the reads. In this example `STAR` and `samtools` are used for these tasks.
+In the previous episode a single step workflow was shown. To make a multi-step workflow, you extend the `steps` field.
+In this episode, the workflow is extended with the next 2 steps of the RNA-sequencing analysis.
+The next 2 steps are alingment of the reads and indexing the alignment. In this example `STAR` and `samtools` are used for these tasks.
 
 __rna_seq_workflow.cwl__
 ~~~
@@ -35,20 +36,20 @@ class: Workflow
 
 inputs:
   rna_reads_human: File
-  genome_dir: Directory
+  ref_genome: Directory
   
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 	in:
-	  reads_file: fastq
+	  reads_file: rna_reads_human
     out: [html_file]
 	
   mapping_reads:
     run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}
-      GenomeDir: genome_dir
+      GenomeDir: ref_genome
       ForwardReads: rna_reads_human
       OutSAMtype: {default: BAM}
       SortedByCoordinate: {default: true}
@@ -71,21 +72,21 @@ outputs:
 ~~~
 {: .language-yaml}
 
-The workflow file shows the 3 steps of the RNA-seq analysis: `quality_control`, `mapping_reads` and `index_alignment`.
-The `index_alignment` step uses the output of `mapping_reads` step. 
-You do this by referencing the output of the `mapping_reads` step in the `in` field of the `index_alignment` step 
+The workflow file shows the first 3 steps of the RNA-seq analysis: `quality_control`, `mapping_reads` and `index_alignment`.
+The `index_alignment` step uses the `alignment` output of the `mapping_reads` step. 
+You do this by referencing the output of the `mapping_reads` step in the `in` field of the `index_alignment` step.
 This is similar to referencing the outputs of the different steps in the `outputs` section. 
 
-The newly added steps also need more inputs. The `mapping_reads` step needs a directory that contains the genome necessary for the mapping.
+The newly added steps also need more inputs. The `mapping_reads` step needs a directory that contains the reference genome necessary for the mapping.
 This is added in the `inputs` field and in the YAML input file, `workflow_input.yml`.
 
 __workflow_input.yml__
 ~~~
-fastq:
+rna_reads_human:
   class: File
   location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
   format: http://edamontology.org/format_1930
-genome:
+ref_genome:
   class: Directory
   location: hg19-chr1-STAR-index
 ~~~
@@ -93,22 +94,25 @@ genome:
 
 > ## Exercise
 >
-> Draw the connecting arrows in the following graph of our workflow.
+> Draw the connecting arrows in the following graph of our workflow. 
+> You can use for example Paint or print out the graph.
+> 
+> #![]({{page.root}}/fig/Ep3_empty_graph.png){: height="300px"}
 > 
 > > ## Solution
 > > 
-> > IMAGE WITH ARROWS
-> > 
+> > To find out how the inputs and the steps are connected to eachother, you look at the `in` field of the different steps.
+> >
+> > #![]({{page.root}}/fig/Ep3_graph_answer.png){: height="300px"}
 > {: .solution}
 {: .challenge}
 
 
-
 > ## Iterative working
 > Working on a workflow is often not something that happens all at once. 
-> Sometimes there is already a shell script that can be converted to a CWL workflow. 
-> It is also possible that there is already a CWL workflow, but that it is constantly being supplemented. 
-> This is all iterative working.
+> Sometimes you already have a shell script ready that can be converted to a CWL workflow. 
+> Other times it is similar to this tutorial, you start with a single-step workflow and extend it to a multi-step workflow.
+> This is all iterative working, a continuous work in progress.
 {: . callout}
 
 ## Visualising a workflow
@@ -120,7 +124,6 @@ To visualise a workflow, a graph can be used. This can be done before a CWL scri
 It is also possible to make a graph after the CWL script has been written. This graph can be generated using online tools or the build-in function in `cwltool`.
 When a graph is generated, it can be used to visualise the steps taken and could make it easier to explain a workflow to other researchers.
 
-
 ### From CWL script to graph
 
 In this example the workflow is already made, so the graph can be generated using [cwlviewer](https://view.commonwl.org/) online or using `cwltool`.
@@ -131,31 +134,29 @@ The graph ends with the workflow outputs.
 
 The graph of the RNA-seq workflow looks a follows:
 
-FIGURE GRAPH
+#![]({{page.root}}/fig/Ep3_graph_answer.png){: height="400px"}
 
 It is also possible to generate the graph in the command line. `cwltool` has a function that makes a graph. 
-The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the onliner to generate a Scalable Vector Graphic (SVG) file:
+The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the command to generate a Scalable Vector Graphic (SVG) file:
+
 ~~~
 cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
 ~~~
 {: .language-bash}
 
-If `dot` is not installed yet, use the following command:
-~~~
-sudo apt install graphviz
-~~~
-{: .language-bash}
+The resulting SVG file displays the same graph as the one in the cwlviewer. The SVG file can be opened in a internetbrowser and in [Inkscape](https://inkscape.org/)
 
-The resulting SVG file displays the same graph as the one in the cwlviewer. 
-
+### Visualisation in VSCode
 [__Benten__](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) is an extension in Visual Studio Code (VSCode) that among other things visualises 
 a workflow in a graph. When Benten is installed in VSCode, the tool can be used to visualise the workflow.
-In the top-right corner of the VSCode window the CWL viewer can be opened, see the screenshots below.
+In the top-right corner of the VSCode window the CWL viewer can be opened, see the screenshot below.
 
-SCREENSHOT VSCode
+![]({{page.root}}/fig/VSCode_CWL_Preview_(step1).png){: height="400px"}
 
 In VSCode/Benten the inputs are shown in green, the steps in blue and the outputs in yellow. This graph looks a little bit different from the graph made with cwlviewer or `cwltool`.
-The graph by VSCode/Benten doesn't show the output-input between the different steps.
+The graph by VSCode/Benten doesn't show the output-input names between the different steps.
+
+![]({{page.root}}/fig/VSCode_CWL_Preview_(step2).png){: height="400px"}
 
 
 {% include links.md %}
