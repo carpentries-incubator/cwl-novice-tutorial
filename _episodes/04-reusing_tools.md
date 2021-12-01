@@ -18,30 +18,42 @@ keypoints:
 
 
 ## Pre-written tool descriptions
-Starting a CWL workflow, it is recommended to check if there is already a CWL description available for the tools to be used.
+When you start a CWL workflow, it is recommended to check if there is already a CWL document available for the tools to be used.
+[Bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools) is a library of CWL documents for biology/life-sciences related application.
 
-[Bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools): library of CWL descriptions for biology/life-sciences related application.
+In this episode you will use the bio-cwl-tools library to add the last step of the workflow. 
+All of the steps of this workflow are available in this library and we have used it in the previous episodes for the first 3 steps.
 
-In this tutorial the bio-cwl-tools library is used. The RNA-sequencing analysis workflow uses the fastqc, STAR and samtools CWL descriptions of this library.
+There are different methods to use the tools from the bio-cwl-tools. 
+The easiest method is downloading the whole library, however this makes it harder to update tools the newer versions.
 
-### Bio-cwl-tools
-There are 4 different methods to use tools from the [bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools):
-1. Make a git submodule of the repository to the Git repository of the workflow. This enables control of the version used.
-2. Copy the contents of the repository to the repository of the workflow. This might make it harder to managing updates.
-3. Use the in-development [CWL Dependency Manager](https://github.com/common-workflow-language/cwldep).
-4. Use the URL of the repository to refer to the tool.
+You can also use git to add the tool as a submodule to your directory. 
+First you need to create a new Git repository. Then you can add the submodule.
+
+~~~
+git init
+git submodule add GITHUB_URL 
+~~~
+{: .language-bash} 
 
 
 ## Adding new step in workflow
+The last step of the workflow is counting of the reads. For this step the `featureCounts` step will be used.
+To implement the last step the bio-cwl-tools library library will be used.
 
-TODO: Adding the featureCounts step
 
 > ## Exercise
 >
+> Find the `featureCounts` tool in the [bio-cwl-tools library](https://github.com/common-workflow-library/bio-cwl-tools).
+> Have a look at the CWL document.
+> Which inputs does this tool need? And what are the outputs of this tool?
 >
 > > ## Solution
-> > 
+> > The `featureCounts` CWL document has 2 inputs: `annotations` and `mapped_reads`, both files. These inputs can be found on lines 6 and 9.
+> > The output of this tool is a file called `featurecounts` (line 21).
 > >
 > {: .solution}
 {: .challenge}
 {% include links.md %}
+
+
