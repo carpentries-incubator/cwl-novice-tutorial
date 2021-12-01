@@ -97,13 +97,13 @@ ref_genome:
 > Draw the connecting arrows in the following graph of our workflow. 
 > You can use for example Paint or print out the graph.
 > 
-> #![]({{page.root}}/fig/Ep3_empty_graph.png){: height="300px"}
+> ![]({{page.root}}/fig/Ep3_empty_graph.png){: height="300px"}
 > 
 > > ## Solution
 > > 
 > > To find out how the inputs and the steps are connected to eachother, you look at the `in` field of the different steps.
 > >
-> > #![]({{page.root}}/fig/Ep3_graph_answer.png){: height="300px"}
+> > ![]({{page.root}}/fig/Ep3_graph_answer.png){: height="300px"}
 > {: .solution}
 {: .challenge}
 
@@ -134,7 +134,7 @@ The graph ends with the workflow outputs.
 
 The graph of the RNA-seq workflow looks a follows:
 
-#![]({{page.root}}/fig/Ep3_graph_answer.png){: height="400px"}
+![]({{page.root}}/fig/Ep3_graph_answer.png){: height="400px"}
 
 It is also possible to generate the graph in the command line. `cwltool` has a function that makes a graph. 
 The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the command to generate a Scalable Vector Graphic (SVG) file:
