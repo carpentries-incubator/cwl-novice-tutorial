@@ -42,14 +42,14 @@ inputs:
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-	in:
-	  reads_file: rna_reads_human
+    in:
+      reads_file: rna_reads_human
     out: [html_file]
-	
+
   mapping_reads:
     requirements:
-	    ResourceRequirement:
-	      ramMin: 9000
+      ResourceRequirement:
+        ramMin: 9000
     run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}

@@ -75,10 +75,10 @@ wget [URL]
 > > steps:
 > >   quality_control:
 > >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-> > 	in:
-> > 	  reads_file: rna_reads_human
+> >     in:
+> >       reads_file: rna_reads_human
 > >     out: [html_file]
-> > 	
+> > 
 > >   mapping_reads:
 > >     requirements:
 > >	      ResourceRequirement:
@@ -112,13 +112,13 @@ wget [URL]
 > > outputs: 
 > >   qc_html:
 > >     type: File
-> > 	outputSource: quality_control/html_file
+> >     outputSource: quality_control/html_file
 > >   bam_sorted_indexed:
 > >     type: File
-> > 	outputSource: index_alignment/bam_sorted_indexed
+> >     outputSource: index_alignment/bam_sorted_indexed
 > >   featurecounts:
 > >     type: File
-> > 	outputSource: count_reads/featurecounts
+> >     outputSource: count_reads/featurecounts
 ~~~
 > > {: .language-yaml}
 > {: .solution}
