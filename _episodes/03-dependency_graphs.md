@@ -153,7 +153,7 @@ cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
 ~~~
 {: .language-bash}
 
-The resulting SVG file displays the same graph as the one in the cwlviewer. The SVG file can be opened in a internetbrowser and in [Inkscape](https://inkscape.org/)
+The resulting SVG file displays the same graph as the one in the cwlviewer. The SVG file can be opened in any web browser and in [Inkscape](https://inkscape.org/), for example.
 
 ### Visualisation in VSCode
 [__Benten__](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) is an extension in Visual Studio Code (VSCode) that among other things visualises 
