@@ -108,7 +108,7 @@ ref_genome:
 > 
 > > ## Solution
 > > 
-> > To find out how the inputs and the steps are connected to eachother, you look at the `in` field of the different steps.
+> > To find out how the inputs and the steps are connected to each other, you look at the `in` field of the different steps.
 > >
 > > ![]({{page.root}}/fig/Ep3_graph_answer.png){: height="300px"}
 > {: .solution}
