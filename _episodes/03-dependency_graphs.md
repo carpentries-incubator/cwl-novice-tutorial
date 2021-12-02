@@ -80,7 +80,7 @@ The `index_alignment` step uses the `alignment` output of the `mapping_reads` st
 You do this by referencing the output of the `mapping_reads` step in the `in` field of the `index_alignment` step.
 This is similar to referencing the outputs of the different steps in the `outputs` section. 
 
-The `mapping_reads` step needs some extra information which are command line arguments if you run the STAR aligner on the command line.
+The `mapping_reads` step needs some extra information beyond the inputs from the other steps, which is done by providing `default` values. If you want, you can read the `bio-cwl-tools/STAR/STAR-Align.cwl` file to see how these extra inputs are transformed into command line options to the `STAR` program.
 This information is provided in the `in` field.
 
 To run the tool better, it needs more RAM than the default. So there is a `requirements` entry inside the `mapping_reads` step definition with a `ResourceRequirement` to allocate a minimum of 9000 MiB of RAM.
