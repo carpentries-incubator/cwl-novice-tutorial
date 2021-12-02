@@ -124,5 +124,28 @@ wget [URL]
 > {: .solution}
 {: .challenge}
 
+The workflow is complete and we only need to complete the YAML input file. 
+The last entry in the input file is the `annotations` file.
+
+__workflow_input.yml__
+~~~
+rna_reads_human:
+  class: File
+  location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
+  format: http://edamontology.org/format_1930
+ref_genome:
+  class: Directory
+  location: hg19-chr1-STAR-index
+annotations:
+  class: File
+  location: rnaseq/reference_data/chr1-hg19_genes.gtf
+~~~
+{: .language-yaml}
+
+You have finished the workflow and the input file and now you can run the whole workflow.
+~~~
+cwltool rna_seq_workflow.cwl workflow_input.yml
+~~~
+{: .language-bash}
 
 {% include links.md %}
