@@ -44,7 +44,7 @@ After finding the `featureCounts` tool, we need to download the tool to the dire
 To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file. 
 The screenshot below shows where you can find this button.
 
-!{}({{page.root}}/fig/GitHub_featureCounts.png)
+![]({{page.root}}/fig/GitHub_featureCounts.png)
 
 There are two approaches to download the CWL document.
 1. Copy the script to a new file in an editor, for example VSCode, and save the document in your directory.
