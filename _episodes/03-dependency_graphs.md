@@ -26,8 +26,8 @@ keypoints:
 
 ## Multi-Step Workflow
 In the previous episode a single step workflow was shown. To make a multi-step workflow, you add more entries to the `steps` field.
-In this episode, the workflow is extended with the next 2 steps of the RNA-sequencing analysis.
-The next 2 steps are alingment of the reads and indexing the alignment. In this example `STAR` and `samtools` are used for these tasks.
+In this episode, the workflow is extended with the next two steps of the RNA-sequencing analysis.
+The next two steps are alignment of the reads and indexing the alignments. We will be using the `STAR` and `samtools` tools for these tasks.
 
 __rna_seq_workflow.cwl__
 ~~~
