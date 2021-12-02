@@ -80,8 +80,8 @@ wget [URL]
 > > 
 > >   mapping_reads:
 > >     requirements:
-> >	      ResourceRequirement:
-> >	        ramMin: 9000
+> >       ResourceRequirement:
+> >         ramMin: 9000
 > >     run: bio-cwl-tools/STAR/STAR-Align.cwl
 > >     in:
 > >       RunThreadN: {default: 4}
