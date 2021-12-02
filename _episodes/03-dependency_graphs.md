@@ -81,8 +81,9 @@ You do this by referencing the output of the `mapping_reads` step in the `in` fi
 This is similar to referencing the outputs of the different steps in the `outputs` section. 
 
 The `mapping_reads` step needs some extra information which are command line arguments if you run the STAR aligner on the command line.
-This information is provided in the `in` field. To run the tool better, it needs more RAM than the default.
-In the `requirements` field the `ResourceRequirement` field allocates a minimum of 9000 MB of RAM.
+This information is provided in the `in` field.
+
+To run the tool better, it needs more RAM than the default. So there is a `requirements` entry inside the `mapping_reads` step definition with a `ResourceRequirement` to allocate a minimum of 9000 MiB of RAM.
 
 The newly added steps also need more inputs. The `mapping_reads` step needs a directory that contains the reference genome necessary for the mapping.
 This is added in the `inputs` field and in the YAML input file, `workflow_input.yml`.
