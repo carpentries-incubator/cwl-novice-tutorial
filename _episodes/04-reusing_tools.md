@@ -33,7 +33,7 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 > Have a look at the CWL document. Which inputs does this tool need? And what are the outputs of this tool?
 >
 > > ## Solution
-> > The `featureCounts` CWL document has 2 inputs: `annotations` and `mapped_reads`, both files. These inputs can be found on lines 6 and 9.
+> > The `featureCounts` CWL document can be found at https://github.com/common-workflow-library/bio-cwl-tools/blob/release/subread/featureCounts.cwl ; it has 2 inputs: `annotations` (line 6) and `mapped_reads`, both files. These inputs can be found on lines 6 and 9.
 > > The output of this tool is a file called `featurecounts` (line 21).
 > >
 > {: .solution}
