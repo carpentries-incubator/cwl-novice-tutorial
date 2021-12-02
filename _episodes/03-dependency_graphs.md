@@ -126,7 +126,10 @@ ref_genome:
 
 ## Visualising a workflow
 
-A workflow is actually a directed acyclic graph (DAG). This means that the workflow has a certain direction, from inputs to outputs, and has no cycles.
+A CWL workflow is a directed acyclic graph (DAG). This means that
+1) The workflow has a certain direction, from workflow inputs to step inputs, from step outputs to other step inputs, and from step outputs to workflow outputs
+and
+2) The workflow definition has no cycles.
 A CWL workflow is a dependency graph. Each input for a step in the workflow depends on either a workflow-level input or a particular output from another step.
 
 To visualise a workflow, a graph can be used. This can be done before a CWL script is written to visualise how the different steps connect to eachother.
