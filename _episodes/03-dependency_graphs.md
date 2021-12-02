@@ -68,10 +68,10 @@ steps:
 outputs: 
   qc_html:
     type: File
-	outputSource: quality_control/html_file
+    outputSource: quality_control/html_file
   bam_sorted_indexed:
     type: File
-	outputSource: index_alignment/bam_sorted_indexed
+    outputSource: index_alignment/bam_sorted_indexed
 ~~~
 {: .language-yaml}
 
