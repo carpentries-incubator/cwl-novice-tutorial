@@ -85,8 +85,9 @@ This information is provided in the `in` field.
 
 To run the tool better, it needs more RAM than the default. So there is a `requirements` entry inside the `mapping_reads` step definition with a `ResourceRequirement` to allocate a minimum of 9000 MiB of RAM.
 
-The newly added steps also need more inputs. The `mapping_reads` step needs a directory that contains the reference genome necessary for the mapping.
-This is added in the `inputs` field and in the YAML input file, `workflow_input.yml`.
+The newly added `mapping_reads` step also need an input not provided by any of our other steps, therefore an additional workflow-level input is added: a directory that contains the reference genome necessary for the mapping.
+
+This `ref_genome` is added in the `inputs` field of the workflow and in the YAML input file, `workflow_input.yml`.
 
 __workflow_input.yml__
 ~~~
