@@ -46,6 +46,9 @@ steps:
     out: [html_file]
 	
   mapping_reads:
+    requirements:
+	  ResourceRequirement:
+	    ramMin: 9000
     run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}
@@ -76,6 +79,10 @@ The workflow file shows the first 3 steps of the RNA-seq analysis: `quality_cont
 The `index_alignment` step uses the `alignment` output of the `mapping_reads` step. 
 You do this by referencing the output of the `mapping_reads` step in the `in` field of the `index_alignment` step.
 This is similar to referencing the outputs of the different steps in the `outputs` section. 
+
+The `mapping_reads` step needs some extra information which are command line arguments if you run the STAR aligner on the command line.
+This information is provided in the `in` field. To run the tool better, it needs more RAM than the default.
+In the `requirements` field the `ResourceRequirement` field allocates a minimum of 9000 MB of RAM.
 
 The newly added steps also need more inputs. The `mapping_reads` step needs a directory that contains the reference genome necessary for the mapping.
 This is added in the `inputs` field and in the YAML input file, `workflow_input.yml`.
