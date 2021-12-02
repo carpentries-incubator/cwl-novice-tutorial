@@ -47,8 +47,8 @@ The screenshot below shows where you can find this button.
 !{}({{page.root}}/fig/screenshot_featureCounts_tool.png){: height="400px"}
 
 There are two approaches to download the CWL document.
-1) Copy the script to a new file in an editor, for example VSCode, and save the document in your directory.
-2) Use the `wget` command in the command line. You need to copy the URL of the raw file and use this command:
+1. Copy the script to a new file in an editor, for example VSCode, and save the document in your directory.
+2. Use the `wget` command in the command line. You need to copy the URL of the raw file and use this command:
 ```
 wget [URL]
 ```
