@@ -104,7 +104,7 @@ ref_genome:
 
 > ## Exercise
 >
-> Draw the connecting arrows in the following graph of our workflow. 
+> Draw the connecting arrows in the following graph of our workflow. Also, provide the outputs/inputs of the different steps.
 > You can use for example Paint or print out the graph.
 > 
 > ![]({{page.root}}/fig/Ep3_empty_graph.png){: height="300px"}
