@@ -41,7 +41,7 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 {% include links.md %}
 
 After finding the `featureCounts` tool, we need to download the tool to the directory in which our workflow is located.
-To download the tool, we go to the `featureCounts.cwl` page and open the raw file. 
+To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file. 
 The screenshot below shows where you can find this button.
 
 !{}({{page.root}}/fig/screenshot_featureCounts_tool.png)
