@@ -47,10 +47,10 @@ Errors with typos in field names will show `invalid field`.
 These errors will show `Field references unknown identifier.`
 
 ## Wiring errors
-
-
+Forgetting to put the step output in the `outputs` section. No error, only file won't show in the directory.
 
 ## Type mismatch
+
 
 ## Format error
 
