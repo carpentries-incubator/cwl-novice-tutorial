@@ -35,7 +35,7 @@ cwltool --debug` CWL_SCRIPT.cwl
 ~~~
 {: .language-bash}
 
-## YAML errors
+### YAML errors
 First of all, errors in the YAML syntax. When writing a piece of code, it is very easy to make a mistake.
 
 Some very common YAML errors are:
@@ -49,13 +49,13 @@ Errors with typos in field names will show `invalid field`.
 These errors will show `Field references unknown identifier.`
 ![]({{page.root}}/fig/YAML_error_typo_variable.png)
 
-## Wiring error
+### Wiring error
 Wiring errors often occur when you forget to add an output from a workflows step to the `outputs` section.
 This doesn't cause an error message, but there won't be any output in your directory.
 To get the desired output you have to run the workflow again.
 Best practice is to check your `outputs` section before running your script to make sure all the outputs you want are there.
 
-## Type mismatch
+### Type mismatch
 Type errors take place when there is a mismatch in type between variables. 
 When you declare a variable in the `inputs` section, the type of this variable has to match the type in the YAML inputs file 
 and the type used in one of the workflows steps. 
@@ -63,7 +63,7 @@ The error message that is shown when this error occurs will tell you on which li
 
 ![]({{page.root}}/fig/Type_error.png)
 
-## Format error
+### Format error
 Some files need a specific format that needs to be specified in the YAML inputs file, for example the fastq file in the RNA-seq analysis.
 When you don't specify a format, an error will occur. You can for example use the [EDAM](https://www.ebi.ac.uk/ols/ontologies/edam)ontology) ontology.
 
