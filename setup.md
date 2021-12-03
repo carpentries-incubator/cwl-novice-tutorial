@@ -90,7 +90,7 @@ Create `chr1-star-index.yaml` in the the `novice-tutorial-exercises` directory:
 InputFiles:
   - class: File
     location: rnaseq/reference_data/chr1.fa
-	format: http://edamontology.org/format_1930
+    format: http://edamontology.org/format_1930
 IndexName: 'hg19-chr1-STAR-index'
 Gtf:
   class: File
