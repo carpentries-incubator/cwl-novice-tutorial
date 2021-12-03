@@ -16,8 +16,34 @@ The VSCode Benten extension will require the Benten server to be installed too. 
 
 ### CWL installation
 
-To install the cwltool on Linux or Windows, follow these [instructions](https://github.com/common-workflow-language/cwltool#install).
+__Windows users__ first need to install the "Windows Subsystem for Linux 2" (WSL2) and the Docker Desktop before installing the `cwltool`.
+Follow [these steps](https://github.com/common-workflow-language/cwltool#ms-windows-users). At step 6 follow the `venv` method below, explained below.
+__Linux users__ already have a Linux terminal and can start with following the steps below.
 
+In this tutorial the latest version of `cwltool` is needed. To ensure this, a virtual environment is using `pip` and `venv` is used.
+
+~~~
+python3 -m venv env			# Create a virtual environment named 'env' in the current directory
+source env/bin/activate		# Activate the 'env' environment
+~~~
+{: .language-bash}
+
+The virtual environment needs to be activated every time you start the terminal using the `source env/bin/activate` command.
+
+Next, install `cwltool`.
+
+~~~
+pip install cwltool
+~~~
+{: .language-bash}
+
+
+For the visualisation of the workflow, please install graphviz:
+
+~~~
+sudo apt install graphviz
+~~~
+{: .language-bash}
 
 ## Files
 
