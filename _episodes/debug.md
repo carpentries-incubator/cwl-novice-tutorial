@@ -46,8 +46,11 @@ Errors with typos in field names will show `invalid field`.
 - Typos in variable names. Similar to typos in field names, it is easy to make a mistake in referencing to a variable.
 These errors will show `Field references unknown identifier.`
 
-## Wiring errors
-Forgetting to put the step output in the `outputs` section. No error, only file won't show in the directory.
+## Wiring error
+A wiring error occurs when you forget to add an output from a workflows step to the `outputs` section.
+This doesn't cause an error message, but there won't be any output in your directory.
+To get the desired output you have to run the workflow again.
+Best practice is to check your `outputs` section before running your script to make sure all the outputs you want are there.
 
 ## Type mismatch
 
