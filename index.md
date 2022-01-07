@@ -125,7 +125,7 @@ After following one of these tutorials, learners will be able to:
 - recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once
 - explain the importance of correctly citing research software
   - [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools used in their workflows
-    - See also <https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py>
+    - See also <https://github.com/common-workflow-language/cwl-utils/blob/main/cwl_utils/cite_extract.py>
 
 [swc]: https://software-carpentry.org/
 [swc-shell]: https://swcarpentry.github.io/shell-novice/
