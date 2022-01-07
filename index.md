@@ -127,4 +127,6 @@ After following one of these tutorials, learners will be able to:
   - [give credit](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage) for all the tools used in their workflows
     - See also https://github.com/common-workflow-language/cwl-utils/blob/master/cwl_utils/cite_extract.py
 
+[swc]: https://software-carpentry.org/
+[swc-shell]: https://swcarpentry.github.io/shell-novice/
 {% include links.md %}
