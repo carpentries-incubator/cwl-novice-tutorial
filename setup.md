@@ -57,7 +57,14 @@ git init novice-tutorial-exercises
 ~~~
 {: .language-bash}
 
-Next, we need to import bio-cwl-tools with this command:
+Next, we need to move into our empty git repo:
+
+~~~
+cd novice-tutorial-exercises
+~~~
+{: .language-bash}
+
+Then import bio-cwl-tools with this command:
 ~~~
 git submodule add https://github.com/common-workflow-library/bio-cwl-tools.git
 ~~~
