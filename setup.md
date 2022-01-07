@@ -71,7 +71,7 @@ git submodule add https://github.com/common-workflow-library/bio-cwl-tools.git
 {: .language-bash}
 
 ### Downloading sample and reference data
-Move inside the `novice-tutorial-exercises` directory and download the data:
+Create a new directory inside the `novice-tutorial-exercises` directory and download the data:
 ~~~
 mkdir rnaseq
 cd rnaseq
