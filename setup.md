@@ -24,7 +24,7 @@ In this tutorial the latest version of `cwltool` is needed. To ensure this, a vi
 
 ~~~
 python3 -m venv env			# Create a virtual environment named 'env' in the current directory
-source env/bin/activate		# Activate the 'env' environment
+source env/bin/activate			# Activate the 'env' environment
 ~~~
 {: .language-bash}
 
