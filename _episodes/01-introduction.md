@@ -19,7 +19,7 @@ Computational workflows are widely used for data analysis, enabling rapid innova
 _Workflow thinking_ is a form of "conceptualizing processes as recipes and protocols, structured as dataflow graphs with computational steps,
 and subsequently developing tools and approaches for formalizing, analyzing and communicating these process descriptions" ([Gryk & Ludascher, 2017](https://doi.org/10.1353/lib.2017.0018)).
 
-However as the rise in popularity of workflows has been matched by a rise in the number of dispirit workflow managers that are available,
+However as the rise in popularity of workflows has been matched by a rise in the number of disparate workflow managers that are available,
 each with their own standards for describing the tools and workflows, reducing portability and interoperability of these workflows.
 
 CWL is a free and open standard for describing command-line tool based workflows[^1].
