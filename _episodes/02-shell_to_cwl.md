@@ -164,14 +164,14 @@ inputs:
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-	in:
-	  reads_file: rna_reads_human
+    in:
+      reads_file: rna_reads_human
     out: [html_file]
 
 outputs: 
   qc_html:
     type: File
-	outputSource: quality_control/html_file
+      outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
