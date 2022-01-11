@@ -10,7 +10,10 @@ questions:
 objectives:
 - "First learning objective. (FIXME)"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "CWL is a standard for describing workflows based on command-line tools"
+- "CWL workflows are written in a subset of YAML"
+- "A CWL workflow is more portable than a shell script"
+- "CWL supports software containers, supporting reproducibility on different machines"
 ---
 
 # Common Workflow Language
