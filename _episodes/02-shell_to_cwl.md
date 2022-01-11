@@ -60,8 +60,8 @@ baseCommand: echo
 inputs:
   message_text:
     type: string
-	inputBinding:
-	  position: 1
+    inputBinding:
+      position: 1
 
 outputs: []
 ~~~
