@@ -248,13 +248,30 @@ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
+~~~
+...
+Analysis complete for Mov10_oe_1.subset.fq
+INFO [job quality_control] Max memory used: 193MiB
+INFO [job quality_control] completed success
+INFO [step quality_control] completed success
+INFO [workflow ] completed success
+{
+    "qc_html": {
+        "location": "file://.../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html",
+        "basename": "Mov10_oe_1.subset_fastqc.html",
+        "class": "File",
+        "checksum": "sha1$46417ab64dd657ec50d86f7d23b2859bee74199f",
+        "size": 383589,
+        "path": ".../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html"
+    }
+}
+INFO Final process status is success
+~~~
+{: .output}
+
 ### Exercise
 Needs some exercises
 
 
-
 {% include links.md %}
-
-
-
 
