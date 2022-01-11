@@ -8,7 +8,7 @@ questions:
 - "How do CWL workflows compare to shell workflows?"
 - "What are the advantages of using CWL workflows?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Understand why you might use CWL instead of a shell script"
 keypoints:
 - "CWL is a standard for describing workflows based on command-line tools"
 - "CWL workflows are written in a subset of YAML"
