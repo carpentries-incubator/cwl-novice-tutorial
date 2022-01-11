@@ -105,8 +105,8 @@ The next line, `baseCommand`, contains the command that will be run (`echo`).
 inputs:
   message_text:
     type: string
-	inputBinding:
-	  position: 1
+    inputBinding:
+    position: 1
 ~~~
 {: .language-yaml}
 
