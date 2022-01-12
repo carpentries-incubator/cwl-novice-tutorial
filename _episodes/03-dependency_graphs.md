@@ -119,11 +119,11 @@ ref_genome:
 
 
 > ## Iterative working
-> Working on a workflow is often not something that happens all at once. 
-> Sometimes you already have a shell script ready that can be converted to a CWL workflow. 
+> Working on a workflow is often not something that happens all at once.
+> Sometimes you already have a shell script ready that can be converted to a CWL workflow.
 > Other times it is similar to this tutorial, you start with a single-step workflow and extend it to a multi-step workflow.
 > This is all iterative working, a continuous work in progress.
-{: . callout}
+{: .callout}
 
 ## Visualising a workflow
 
