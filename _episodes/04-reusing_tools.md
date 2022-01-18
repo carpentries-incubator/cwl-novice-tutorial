@@ -134,7 +134,7 @@ rna_reads_human:
   format: http://edamontology.org/format_1930
 ref_genome:
   class: Directory
-  location: hg19-chr1-STAR-index
+  location: rnaseq/hg19-chr1-STAR-index
 annotations:
   class: File
   location: rnaseq/reference_data/chr1-hg19_genes.gtf
