@@ -16,7 +16,7 @@ keypoints:
 # Common Workflow Language
 
 Computational workflows are widely used for data analysis, enabling rapid innovation and decision making.
-_Workflow thinking_ is a form of "conceptualizing processes as recipes and protocols, structured as dataflow graphs with computational steps,
+_Workflow thinking_ is a form of "conceptualizing processes as recipes and protocols, structured as workflow or dataflow graphs with computational steps,
 and subsequently developing tools and approaches for formalizing, analyzing and communicating these process descriptions" ([Gryk & Ludascher, 2017](https://doi.org/10.1353/lib.2017.0018)).
 
 However as the rise in popularity of workflows has been matched by a rise in the number of disparate workflow managers that are available,
