@@ -49,7 +49,7 @@ for the tutorial material
 > tasks on a remote machine (by `ssh` connection)
 > and in a cluster (high performance computing) environment.
 >
-> You should also be familiar with the [subset of YAML][yaml-for-cwl] used in CWL.
+> CWL is based upon YAML. At any time, if you find yourself being confused by the YAML syntax, considering reviewing this guide on the [subset of YAML][yaml-for-cwl] used in CWL.
 >
 > If you have previously written a workflow description,
 > in CWL or another langauge,
