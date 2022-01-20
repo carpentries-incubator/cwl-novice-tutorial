@@ -49,6 +49,8 @@ for the tutorial material
 > tasks on a remote machine (by `ssh` connection)
 > and in a cluster (high performance computing) environment.
 >
+> CWL is based upon YAML. At any time, if you find yourself being confused by the YAML syntax, considering reviewing this guide on the [subset of YAML][yaml-for-cwl] used in CWL.
+>
 > If you have previously written a workflow description,
 > in CWL or another langauge,
 > you may want to look instead at the [User Guide][cwl-user-guide].
@@ -129,4 +131,5 @@ After following one of these tutorials, learners will be able to:
 
 [swc]: https://software-carpentry.org/
 [swc-shell]: https://swcarpentry.github.io/shell-novice/
+[yaml-for-cwl]: https://www.commonwl.org/user_guide/yaml/
 {% include links.md %}

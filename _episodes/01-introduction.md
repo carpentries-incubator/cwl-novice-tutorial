@@ -34,7 +34,7 @@ Although these scripts might provide a direct means of accessing the tools, writ
 Shell scripts are not easily portable, and so researchers can easily end up spending more time maintaining the scripts than carrying out their research.
 The aim of CWL is to reduce that barrier of usage of these tools to researchers.
 
-CWL workflows are written in a subset of YAML, with a syntax that does not restrict the amount of detail provided for a tool or workflow.
+CWL workflows are written in a subset of [YAML], with a syntax that does not restrict the amount of detail provided for a tool or workflow.
 The execution model is explicit, all required elements of a tool's runtime environment must be specified by the CWL tool-description author.
 On top of these basic requirements they can also add hints or requirements to the tool-description, helping to guide users (and workflow engines) on what resources are needed for a tool.
 
@@ -63,3 +63,4 @@ The different tools necessary for this analysis are already available. In this t
 {% include links.md %}
 
 [^1]: M. R. Crusoe, S. Abeln, A. Iosup, P. Amstutz, J. Chilton, N. Tijanić, H. Ménager, S. Soiland-Reyes, B. Gavrilović, C. Goble, The CWL Community (2021): Methods Included: Standardizing Computational Reuse and Portability with the Common Workflow Language. Communication of the ACM. https://doi.org/10.1145/3486897
+[YAML]: http://www.commonwl.org/user_guide/yaml/
