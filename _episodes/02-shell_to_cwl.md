@@ -33,7 +33,7 @@ requirements for running that workflow. All CWL documents should start with two 
 
 ~~~
 cwlVersion: v1.2
-class: 
+class:
 ~~~
 {: .language-yaml}
 
@@ -60,8 +60,8 @@ baseCommand: echo
 inputs:
   message_text:
     type: string
-	inputBinding:
-	  position: 1
+    inputBinding:
+      position: 1
 
 outputs: []
 ~~~
@@ -93,25 +93,25 @@ INFO Final process status is success
 ~~~
 {: .output}
 
-The output displayed above shows that the program has run succesfully and its output, `Hello world!`. 
+The output displayed above shows that the program has run succesfully and its output, `Hello world!`.
 
 Let's take a look at the `echo.cwl` script in more detail.
 
-As explained above, the first 2 lines are always the same, the CWL version and the class of the script are defined. 
+As explained above, the first 2 lines are always the same, the CWL version and the class of the script are defined.
 In this example the class is `CommandLineTool`, in particular the `echo` command.
-The next line, `baseCommand`, contains the command that will be run (`echo`). 
+The next line, `baseCommand`, contains the command that will be run (`echo`).
 
 ~~~
 inputs:
   message_text:
     type: string
-	inputBinding:
-	  position: 1
+    inputBinding:
+    position: 1
 ~~~
 {: .language-yaml}
 
-This block of code contains the `inputs` section of the tool description. This section provides all the inputs that are needed for running this specific tool. 
-To run this example we will need to provide a string which will be included on the command line. Each of the inputs has a name, to help us tell them apart; this first input has the name : `message_text`. 
+This block of code contains the `inputs` section of the tool description. This section provides all the inputs that are needed for running this specific tool.
+To run this example we will need to provide a string which will be included on the command line. Each of the inputs has a name, to help us tell them apart; this first input has the name : `message_text`.
 The field `inputBinding` is one way to specify how the input should appear on the command line.
 Here the `position` field indicates at which position the input will be on the command line; in this case the `message_text` value will be the first thing added to the command line (after the `baseCommand`, `echo`).
 
@@ -120,11 +120,11 @@ outputs: []
 ~~~
 {: .language-yaml}
 Lastly the `outputs` of the tool description. This example doesn't have a formal output.
-The text is printed directly in the terminal. So an empty YAML list (`[]`) is used as the output. 
+The text is printed directly in the terminal. So an empty YAML list (`[]`) is used as the output.
 
 > ## Script order
-> To make the script more readable the `input` field is put in front of the `output` field. 
-> However CWL syntax requires only that each field is properly defined, it does not require them to be in a particular order. 
+> To make the script more readable the `input` field is put in front of the `output` field.
+> However CWL syntax requires only that each field is properly defined, it does not require them to be in a particular order.
 {: .callout}
 
 
@@ -135,7 +135,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 > > ## Solution
 > >
 > > To change the text on the command line, you only have to change the text in the `hello_world.yml` file.
-> > 
+> >
 > > For example:
 > > ~~~
 > > message_text: Good job!
@@ -147,7 +147,7 @@ The text is printed directly in the terminal. So an empty YAML list (`[]`) is us
 
 ## CWL single step workflow
 
-The RNA-seq data from the introduction episode will be used for the first CWL workflow. 
+The RNA-seq data from the introduction episode will be used for the first CWL workflow.
 The first step of RNA-sequencing analysis is a quality control of the RNA reads using the `fastqc` tool.
 This tool is already available to use so there is no need to write a new CWL tool description.
 
@@ -160,23 +160,23 @@ class: Workflow
 
 inputs:
   rna_reads_human: File
-  
+
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-	in:
-	  reads_file: rna_reads_human
+    in:
+      reads_file: rna_reads_human
     out: [html_file]
 
-outputs: 
+outputs:
   qc_html:
     type: File
-	outputSource: quality_control/html_file
+      outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
-In a __workflow__ the `steps` field must always be present. The workflow tasks or steps that you want to run are listed in this field. 
-At the moment the workflow only contains one step: `quality_control`. In the next episodes more steps will be added to the workflow. 
+In a __workflow__ the `steps` field must always be present. The workflow tasks or steps that you want to run are listed in this field.
+At the moment the workflow only contains one step: `quality_control`. In the next episodes more steps will be added to the workflow.
 
 Let's take a closer look at the workflow. First the `inputs` field will be explained.
 
@@ -186,45 +186,45 @@ inputs:
 ~~~
 {: .language-yaml}
 
-Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. In this example the fastq file consists of human RNA reads. 
-So we call the variable `rna_reads_human` and it has `File` as its type. 
+Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. In this example the fastq file consists of human RNA reads.
+So we call the variable `rna_reads_human` and it has `File` as its type.
 To make this workflow interpretable for other researchers, self-explanatory and sensible variable names are used.
 
 > ## Input and output names
 > It is very important to give inputs and outputs a sensible name. Try not to use variable names like `inputA` or `inputB` because others might not understand what is meant by it.
 {: .callout}
 
-The next part of the script is the `steps` field. 
+The next part of the script is the `steps` field.
 
 ~~~
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
-	in:
-	  reads_file: rna_reads_human
+    in:
+      reads_file: rna_reads_human
     out: [html_file]
 ~~~
 {: .language-yaml}
 
-Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field. 
-The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool. 
-The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`. 
+Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
+The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool.
+The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`.
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.
 
 The last part of the script is the `output` field.
 ~~~
-outputs: 
+outputs:
   qc_html:
     type: File
 	outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
-Each output in the `outputs` field needs its own name. In this example the output is called `qc_html`. 
-Inside `qc_html` the type of output is defined. The output of the `quality_control` step is a file, so the `qc_html` type is `File`. 
+Each output in the `outputs` field needs its own name. In this example the output is called `qc_html`.
+Inside `qc_html` the type of output is defined. The output of the `quality_control` step is a file, so the `qc_html` type is `File`.
 The `outputSource` field refers to where the output is located, in this example it came from the step `quality_control` and it is called `html_file`.
 
-When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section. 
+When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section.
 The input file is called `workflow_input.yml`
 
 __workflow_input.yml__
@@ -236,7 +236,7 @@ rna_reads_human:
 ~~~
 {: .language-yaml}
 
-In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided. 
+In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided.
 The workflow takes `rna_reads_human` as an input parameter, so we use the same variable name in the input file.
 When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The `location` field contains the location of the input file.
 In this example the last line is needed to provide a format for the fastq file.
@@ -248,13 +248,30 @@ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
+~~~
+...
+Analysis complete for Mov10_oe_1.subset.fq
+INFO [job quality_control] Max memory used: 193MiB
+INFO [job quality_control] completed success
+INFO [step quality_control] completed success
+INFO [workflow ] completed success
+{
+    "qc_html": {
+        "location": "file://.../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html",
+        "basename": "Mov10_oe_1.subset_fastqc.html",
+        "class": "File",
+        "checksum": "sha1$46417ab64dd657ec50d86f7d23b2859bee74199f",
+        "size": 383589,
+        "path": ".../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html"
+    }
+}
+INFO Final process status is success
+~~~
+{: .output}
+
 ### Exercise
 Needs some exercises
 
 
-
 {% include links.md %}
-
-
-
 
