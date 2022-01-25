@@ -4,10 +4,6 @@ root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
 
-<!-- this is an html comment -->
-
-{% comment %} This is a comment in Liquid {% endcomment %}
-
 ### For Contributors
 
 Use the _Episodes_ menu above to browse through the pages for
@@ -20,15 +16,6 @@ You may find it helpful during lesson/exercise design to
 refer to [these draft concept maps](https://docs.google.com/presentation/d/1aVdK8LHkgtESBunCQ-p7XmEl8NB9XbgDsH67X0_2HWg/edit#slide=id.g72208cbc10_0_264)
 for the tutorial material
 
-> ## Example rendered exercise
->
-> This is the body of the challenge.
->
-> > ## Solution
-> >
-> > This is the body of the solution.
-> {: .solution}
-{: .challenge}
 
 > ## Prerequisites
 >
