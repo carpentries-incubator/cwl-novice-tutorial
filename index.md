@@ -4,40 +4,26 @@ root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
 
-<!-- this is an html comment -->
-
-{% comment %} This is a comment in Liquid {% endcomment %}
-
 ### For Contributors
 
 Use the _Episodes_ menu above to browse through the pages for
 indivual blocks of learning objectives.
 These pages can be used for designing challenges/exercises
 for the tutorial,
-as described in detail on [this Issue](https://github.com/common-workflow-lab/cwl-novice-tutorial/issues/7).
+as described in detail on [this Issue](https://github.com/carpentires-incubator/cwl-novice-tutorial/issues/7).
 
 You may find it helpful during lesson/exercise design to
 refer to [these draft concept maps](https://docs.google.com/presentation/d/1aVdK8LHkgtESBunCQ-p7XmEl8NB9XbgDsH67X0_2HWg/edit#slide=id.g72208cbc10_0_264)
 for the tutorial material
 
-> ## Example rendered exercise
->
-> This is the body of the challenge.
->
-> > ## Solution
-> >
-> > This is the body of the solution.
-> {: .solution}
-{: .challenge}
-
 > ## Prerequisites
->
+> 
 > This tutorial guides you through the the fundamentals of
 > designing and building an analysis workflow.
 > It assumes no previous knowledge or experience of workflows
 > or Common Workflow Language (CWL),
 > but does assume some experience with the Unix command line.
->
+> 
 > Before following this tutorial,
 > you should be comfortable working in a Unix command line environment
 > and familiar with fundamental commands (`cd`, `mv`, `mkdir`, etc),
@@ -48,9 +34,9 @@ for the tutorial material
 > You might also have some experience with running
 > tasks on a remote machine (by `ssh` connection)
 > and in a cluster (high performance computing) environment.
->
+> 
 > CWL is based upon YAML. At any time, if you find yourself being confused by the YAML syntax, considering reviewing this guide on the [subset of YAML][yaml-for-cwl] used in CWL.
->
+> 
 > If you have previously written a workflow description,
 > in CWL or another langauge,
 > you may want to look instead at the [User Guide][cwl-user-guide].
@@ -87,8 +73,7 @@ of the tutorial,
 and be used to guide the creation of exercises and content of those episodes.
 
 The chunks get a bit less well-defined towards the end.
-See [this page][objective-notes] for the original notes these objectives are based on,
-created during the March 2020 lesson development sprint.
+
 
 After following one of these tutorials, learners will be able to:
 
@@ -119,7 +104,7 @@ After following one of these tutorials, learners will be able to:
   - generate Graphviz diagram using cwltool
   - exercise with the printout of a simple workflow; draw arrows on code; hand draw a graph on another sheet of paper
 - __recognize and fix simple bugs in their workflow code__ (lesson-level objective)
-    - interpret commonly encountered error messages
+  - interpret commonly encountered error messages
 - __document their workflows to increase reusability__
   - explain the importance of documenting a workflow
   - use description fields to document purpose, intent, and other factors at multiple levels within their workflow
@@ -132,4 +117,5 @@ After following one of these tutorials, learners will be able to:
 [swc]: https://software-carpentry.org/
 [swc-shell]: https://swcarpentry.github.io/shell-novice/
 [yaml-for-cwl]: https://www.commonwl.org/user_guide/yaml/
+
 {% include links.md %}

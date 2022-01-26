@@ -3,26 +3,19 @@ title: "Resources for Reusing Tools and Scripts"
 teaching: 0
 exercises: 0
 questions:
-- "How to find other tools/solutions for awkward problems?"
+- "How to find other solutions/CWL recipes for awkward problems?"
 objectives:
-- "tools objectives:"
 - "know good resources for finding solutions to common problems"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-
-> ## Learning objectives
-> By the end of this episode,
-> learners should __be aware of where they can look for CWL recipes and more help for common, but awkward, tasks__.
-{: .callout}
-
 
 ## Pre-written tool descriptions
 When you start a CWL workflow, it is recommended to check if there is already a CWL document available for the tools you want to use.
 [Bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools) is a library of CWL documents for biology/life-sciences related tools.
 
 The CWL documents of the previous steps were already provided for you, however, you can also find them in this library.
-In this episode you will use the bio-cwl-tools library to add the last step to the workflow. 
+In this episode you will use the bio-cwl-tools library to add the last step to the workflow.
 
 ## Adding new step in workflow
 The last step of our workflow is counting the RNA-seq reads for which we will use the [`featureCounts`](https://bio.tools/featurecounts) tool.
@@ -41,7 +34,7 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 {% include links.md %}
 
 After finding the `featureCounts` tool, we need to download the tool to the directory in which our workflow is located.
-To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file. 
+To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file.
 The screenshot below shows where you can find this button.
 
 ![]({{page.root}}/fig/GitHub_featureCounts.png)
@@ -55,21 +48,21 @@ wget [URL]
 {: .language-bash}
 
 > ## Exercise
-> Use either of the two approaches above to download the `featureCounts` tool and add the `featureCounts` tool to the workflow. 
-> Similar to the `STAR` tool, this tool also needs more RAM than the default. To run the tool a minimum of 500 MiB of RAM is needed. 
+> Use either of the two approaches above to download the `featureCounts` tool and add the `featureCounts` tool to the workflow.
+> Similar to the `STAR` tool, this tool also needs more RAM than the default. To run the tool a minimum of 500 MiB of RAM is needed.
 > Use a `requirements` entry with `ResourceRequirement` to allocate a `ramMin` of 500.
 > Use the inputs and output of the previous exercise to connect this step to previous steps.
 >
 > > ## Solution
-> > 
+> >
 > > ~~~
 > > clwVersion: v1.2
 > > class: Workflow
-> > 
+> >
 > > inputs:
 > >   rna_reads_human: File
 > >   ref_genome: Directory
-> >   annotations: File   
+> >   annotations: File
 > >
 > > steps:
 > >   quality_control:
@@ -77,7 +70,7 @@ wget [URL]
 > >     in:
 > >       reads_file: rna_reads_human
 > >     out: [html_file]
-> > 
+> >
 > >   mapping_reads:
 > >     requirements:
 > >       ResourceRequirement:
@@ -91,13 +84,13 @@ wget [URL]
 > >       SortedByCoordinate: {default: true}
 > >       OutSAMunmapped: {default: Within}
 > >     out: [alignment]
-> > 
+> >
 > >   index_alignment:
 > >     run: bio-cwl-tools/samtools/samtools_index.cwl
 > >     in:
 > >       bam_sorted: mapping_reads/alignment
 > >     out: [bam_sorted_indexed]
-> > 
+> >
 > >   count_reads:
 > >     requirements:
 > >       ResourceRequirement:
@@ -107,8 +100,8 @@ wget [URL]
 > >       mapped_reads: index_alignment/bam_sorted_indexed
 > >       annotations: annotations
 > >     out: [featurecounts]
-> > 
-> > outputs: 
+> >
+> > outputs:
 > >   qc_html:
 > >     type: File
 > >     outputSource: quality_control/html_file
@@ -123,7 +116,7 @@ wget [URL]
 > {: .solution}
 {: .challenge}
 
-The workflow is complete and we only need to complete the YAML input file. 
+The workflow is complete and we only need to complete the YAML input file.
 The last entry in the input file is the `annotations` file.
 
 __workflow_input.yml__

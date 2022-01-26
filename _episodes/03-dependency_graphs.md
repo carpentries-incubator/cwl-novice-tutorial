@@ -13,16 +13,10 @@ objectives:
 - "generate Graphviz diagram using cwltool"
 - "exercise with the printout of a simple workflow; draw arrows on code; hand draw a graph on another sheet of paper"
 - "recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once"
+- "understand the flow of data between tools"
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-> ## Learning objectives
->By the end of this episode, learners should be able to __understand the flow of data between tools__ 
-> and __explain that a workflow is a dependency graph__
->and __sketch their workflow, both by hand, and with an automated visualizer__
->and __recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once__.
-{: .callout}
-
 
 ## Multi-Step Workflow
 In the previous episode a single step workflow was shown. To make a multi-step workflow, you add more entries to the `steps` field.
@@ -66,7 +60,7 @@ steps:
       bam_sorted: mapping_reads/alignment
     out: [bam_sorted_indexed]
 
-outputs: 
+outputs:
   qc_html:
     type: File
     outputSource: quality_control/html_file
@@ -77,9 +71,9 @@ outputs:
 {: .language-yaml}
 
 The workflow file shows the first 3 steps of the RNA-seq analysis: `quality_control`, `mapping_reads` and `index_alignment`.
-The `index_alignment` step uses the `alignment` output of the `mapping_reads` step. 
+The `index_alignment` step uses the `alignment` output of the `mapping_reads` step.
 You do this by referencing the output of the `mapping_reads` step in the `in` field of the `index_alignment` step.
-This is similar to referencing the outputs of the different steps in the `outputs` section. 
+This is similar to referencing the outputs of the different steps in the `outputs` section.
 
 The `mapping_reads` step needs some extra information beyond the inputs from the other steps, which is done by providing `default` values. If you want, you can read the `bio-cwl-tools/STAR/STAR-Align.cwl` file to see how these extra inputs are transformed into command line options to the `STAR` program.
 This information is provided in the `in` field.
@@ -106,11 +100,11 @@ ref_genome:
 >
 > Draw the connecting arrows in the following graph of our workflow. Also, provide the outputs/inputs of the different steps.
 > You can use for example Paint or print out the graph.
-> 
+>
 > ![]({{page.root}}/fig/Ep3_empty_graph.png){: height="300px"}
-> 
+>
 > > ## Solution
-> > 
+> >
 > > To find out how the inputs and the steps are connected to each other, you look at the `in` field of the different steps.
 > >
 > > ![]({{page.root}}/fig/Ep3_graph_answer.png){: height="300px"}
@@ -149,7 +143,7 @@ The graph of the RNA-seq workflow looks a follows:
 
 ![]({{page.root}}/fig/Ep3_graph_answer.png){: height="400px"}
 
-It is also possible to generate the graph in the command line. `cwltool` has a function that makes a graph. 
+It is also possible to generate the graph in the command line. `cwltool` has a function that makes a graph.
 The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the command to generate a Scalable Vector Graphic (SVG) file:
 
 ~~~
@@ -160,7 +154,7 @@ cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
 The resulting SVG file displays the same graph as the one in the cwlviewer. The SVG file can be opened in any web browser and in [Inkscape](https://inkscape.org/), for example.
 
 ### Visualisation in VSCode
-[__Benten__](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) is an extension in Visual Studio Code (VSCode) that among other things visualises 
+[__Benten__](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) is an extension in Visual Studio Code (VSCode) that among other things visualises
 a workflow in a graph. When Benten is installed in VSCode, the tool can be used to visualise the workflow.
 In the top-right corner of the VSCode window the CWL viewer can be opened, see the screenshot below.
 

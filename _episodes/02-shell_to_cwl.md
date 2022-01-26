@@ -19,14 +19,6 @@ keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
 
-> ## learning objectives
-> By the end of this episode,
-> learners should be able to
-> __explain how a workflow document describes the input and output of a workflow__
-> and __describe all the requirements for running a tool__
-> and __define the files that will be included as output of a workflow__.
-{: .callout}
-
 CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
 explains the parts of YAML used in CWL. A CWL document contains the workflow and the
 requirements for running that workflow. All CWL documents should start with two lines of code:
