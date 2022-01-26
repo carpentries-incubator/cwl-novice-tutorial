@@ -6,25 +6,14 @@ questions:
 - "How to document your workflow?"
 - "How to cite research software in your workflow?"
 objectives:
-- "Documentation Objectives:"
 - "explain the importance of documenting a workflow"
 - "use description fields to document purpose, intent, and other factors at multiple levels within their workflow"
 - "recognise when it is appropriate to include this documentation"
-- "Citation Objectives:"
 - "explain the importance of correctly citing research software"
 - "give credit for all the tools used in their workflow(s)"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Documenting workflows increases their reusability"
 ---
-By the end of this episode,
-learners should be able to
-__document their workflows to increase reusability__ and __explain the importance of correctly citing research software__.
-
-**TODO (CITE): define some specific objectives to capture the skills being taught in this section.**
-
-See [this page](https://www.commonwl.org/v1.1/CommandLineTool.html#SoftwarePackage).
-
-
 
 ## Finding an identifier for the tool
 
