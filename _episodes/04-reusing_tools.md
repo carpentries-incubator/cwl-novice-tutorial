@@ -33,23 +33,15 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 {: .challenge}
 {% include links.md %}
 
-After finding the `featureCounts` tool, we need to download the tool to the directory in which our workflow is located.
-To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file.
-The screenshot below shows where you can find this button.
+We need a local copy of `featureCounts` in order to use it in our workflow.
+We already imported this as a git submodule during setup,
+so the tool should be located at `bio-cwl-tools/subreads/featureCounts.cwl`.
 
-![]({{page.root}}/fig/GitHub_featureCounts.png)
-
-There are two approaches to download the CWL document.
-1. Copy the script to a new file in an editor, for example VSCode, and save the document in your directory.
-2. Use the `wget` command in the command line. You need to copy the URL of the raw file and use this command:
-```
-wget [URL]
-```
-{: .language-bash}
 
 > ## Exercise
-> Use either of the two approaches above to download the `featureCounts` tool and add the `featureCounts` tool to the workflow.
-> Similar to the `STAR` tool, this tool also needs more RAM than the default. To run the tool a minimum of 500 MiB of RAM is needed.
+> Add the `featureCounts` tool to the workflow.
+> Similar to the `STAR` tool, this tool also needs more RAM than the default.
+> To run the tool a minimum of 500 MiB of RAM is needed.
 > Use a `requirements` entry with `ResourceRequirement` to allocate a `ramMin` of 500.
 > Use the inputs and output of the previous exercise to connect this step to previous steps.
 >
