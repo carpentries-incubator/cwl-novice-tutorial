@@ -12,7 +12,7 @@ keypoints:
 
 ## Pre-written tool descriptions
 When you start a CWL workflow, it is recommended to check if there is already a CWL document available for the tools you want to use.
-[Bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools) is a library of CWL documents for biology/life-sciences related tools.
+[Bio-cwl-tools][bio-cwl-tools] is a library of CWL documents for biology/life-sciences related tools.
 
 The CWL documents of the previous steps were already provided for you, however, you can also find them in this library.
 In this episode you will use the bio-cwl-tools library to add the last step to the workflow.
@@ -22,34 +22,26 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 
 > ## Exercise
 >
-> Find the `featureCounts` tool in the [bio-cwl-tools library](https://github.com/common-workflow-library/bio-cwl-tools).
+> Find the `featureCounts` tool in the [bio-cwl-tools library][bio-cwl-tools].
 > Have a look at the CWL document. Which inputs does this tool need? And what are the outputs of this tool?
 >
 > > ## Solution
-> > The `featureCounts` CWL document can be found at https://github.com/common-workflow-library/bio-cwl-tools/blob/release/subread/featureCounts.cwl ; it has 2 inputs: `annotations` (line 6) and `mapped_reads`, both files. These inputs can be found on lines 6 and 9.
+> > The `featureCounts` CWL document can be found in the [GitHub repo][featurecounts-cwl]; it has 2 inputs: `annotations` (line 6) and `mapped_reads`, both files. These inputs can be found on lines 6 and 9.
 > > The output of this tool is a file called `featurecounts` (line 21).
 > >
 > {: .solution}
 {: .challenge}
 {% include links.md %}
 
-After finding the `featureCounts` tool, we need to download the tool to the directory in which our workflow is located.
-To download the tool, we go to the `featureCounts.cwl` GitHub page and open the raw file.
-The screenshot below shows where you can find this button.
+We need a local copy of `featureCounts` in order to use it in our workflow.
+We already imported this as a git submodule during setup,
+so the tool should be located at `bio-cwl-tools/subreads/featureCounts.cwl`.
 
-![]({{page.root}}/fig/GitHub_featureCounts.png)
-
-There are two approaches to download the CWL document.
-1. Copy the script to a new file in an editor, for example VSCode, and save the document in your directory.
-2. Use the `wget` command in the command line. You need to copy the URL of the raw file and use this command:
-```
-wget [URL]
-```
-{: .language-bash}
 
 > ## Exercise
-> Use either of the two approaches above to download the `featureCounts` tool and add the `featureCounts` tool to the workflow.
-> Similar to the `STAR` tool, this tool also needs more RAM than the default. To run the tool a minimum of 500 MiB of RAM is needed.
+> Add the `featureCounts` tool to the workflow.
+> Similar to the `STAR` tool, this tool also needs more RAM than the default.
+> To run the tool a minimum of 500 MiB of RAM is needed.
 > Use a `requirements` entry with `ResourceRequirement` to allocate a `ramMin` of 500.
 > Use the inputs and output of the previous exercise to connect this step to previous steps.
 >
@@ -140,4 +132,8 @@ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
+[bio-cwl-tools]: https://github.com/common-workflow-library/bio-cwl-tools
+[featurecounts-cwl]: https://github.com/common-workflow-library/bio-cwl-tools/blob/release/subread/featureCounts.cwl
+
 {% include links.md %}
+
