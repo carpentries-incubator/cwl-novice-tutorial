@@ -16,12 +16,6 @@ keypoints:
 - "'Wiring' errors won't necessarily yield an error message"
 ---
 
-> ## Learning objectives
->
-> By the end of this episode, learners should be able to
-> __recognize and fix simple bugs in their workflow code__.
-{: .callout}
-
 When working on a CWL workflow, you will probably encounter errors. There are many different errors possible.
 It is always very important to check the error message in the terminal, because it will give you information on the error.
 This error message will give you the type of error as well as the line of code that contains the error.
