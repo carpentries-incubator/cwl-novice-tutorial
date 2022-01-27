@@ -15,7 +15,9 @@ objectives:
 - "recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once"
 - "understand the flow of data between tools"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "A multi-step workflow has multiple entries under the `steps` section"
+- "Workflow development can be an iterative process"
+- "A CWL workflow can be represented as a dependency graph, either to explain your workflow or as a planning tool"
 ---
 
 ## Multi-Step Workflow

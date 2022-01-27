@@ -3,12 +3,17 @@ title: "Debugging Workflows"
 teaching: 0
 exercises: 0
 questions:
-- "introduce within above lessons?"
+- "How can I check my CWL file for errors?"
+- "How can I get more information to help with solving an error?"
+- "What are some common error messages when using CWL?"
 objectives:
-- "interpret commonly encountered error messages"
-- "solve these common issues"
+- "Check a CWL file for errors"
+- "Output debugging information"
+- "Interpret and fix commonly encountered error messages"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Run the workflow with the `--validate` option to check for errors"
+- "The `--debug` option will output more information"
+- "'Wiring' errors won't necessarily yield an error message"
 ---
 
 > ## Learning objectives
