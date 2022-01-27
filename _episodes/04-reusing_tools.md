@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "How to find other solutions/CWL recipes for awkward problems?"
 objectives:
-- "know good resources for finding solutions to common problems"
+- "Know good resources for finding solutions to common problems"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "[bio-cwl-tools][bio-cwl-tools] is a library of CWL documents for biology/life-sciences related tools"
 ---
 
 ## Pre-written tool descriptions

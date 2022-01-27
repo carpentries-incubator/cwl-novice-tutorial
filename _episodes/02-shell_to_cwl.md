@@ -16,7 +16,10 @@ objectives:
 - "use STDIN and STDOUT as input and output"
 - "capture output written to a specific directory, the working directory, or the same directory where input is located"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "A tool description describes the interface to a command line tool."
+- "A workflow describes which command line tools to use in one or more steps."
+- "A tool descriptor is defined using the `ComandLineTool` class."
+- "FIXME: How can we use a tool descriptor in a single step workflow?"
 ---
 
 CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
@@ -198,7 +201,7 @@ steps:
 ~~~
 {: .language-yaml}
 
-Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
+Every step of a workflow needs a name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool.
 The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`.
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.

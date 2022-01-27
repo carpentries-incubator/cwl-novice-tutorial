@@ -15,7 +15,9 @@ objectives:
 - "recognise that workflow development can be iterative i.e. that it doesn't have to happen all at once"
 - "understand the flow of data between tools"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "A multi-step workflow has multiple entries under the `steps` section"
+- "Workflow development can be an iterative process"
+- "A CWL workflow can be represented as a dependency graph, either to explain your workflow or as a planning tool"
 ---
 
 ## Multi-Step Workflow
@@ -127,7 +129,7 @@ and
 2. The workflow definition has no cycles.
 A CWL workflow is a dependency graph. Each input for a step in the workflow depends on either a workflow-level input or a particular output from another step.
 
-To visualise a workflow, a graph can be used. This can be done before a CWL script is written to visualise how the different steps connect to eachother.
+To visualise a workflow, a graph can be used. This can be done before a CWL script is written to visualise how the different steps connect to each other.
 It is also possible to make a graph after the CWL script has been written. This graph can be generated using online tools or the build-in function in `cwltool`.
 When a graph is generated, it can be used to visualise the steps taken and could make it easier to explain a workflow to other researchers.
 
