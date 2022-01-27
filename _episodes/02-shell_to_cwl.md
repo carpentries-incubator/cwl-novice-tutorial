@@ -201,7 +201,7 @@ steps:
 ~~~
 {: .language-yaml}
 
-Every step of a workflow needs an name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
+Every step of a workflow needs a name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool.
 The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`.
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.

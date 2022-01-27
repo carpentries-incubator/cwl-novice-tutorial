@@ -127,7 +127,7 @@ and
 2. The workflow definition has no cycles.
 A CWL workflow is a dependency graph. Each input for a step in the workflow depends on either a workflow-level input or a particular output from another step.
 
-To visualise a workflow, a graph can be used. This can be done before a CWL script is written to visualise how the different steps connect to eachother.
+To visualise a workflow, a graph can be used. This can be done before a CWL script is written to visualise how the different steps connect to each other.
 It is also possible to make a graph after the CWL script has been written. This graph can be generated using online tools or the build-in function in `cwltool`.
 When a graph is generated, it can be used to visualise the steps taken and could make it easier to explain a workflow to other researchers.
 
