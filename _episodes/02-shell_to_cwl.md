@@ -150,7 +150,7 @@ This is the workflow file (`rna_seq_workflow.cwl`).
 
 __rna_seq_workflow.cwl__
 ~~~
-clwVersion: v1.2
+cwlVersion: v1.2
 class: Workflow
 
 inputs:
@@ -166,7 +166,7 @@ steps:
 outputs:
   qc_html:
     type: File
-      outputSource: quality_control/html_file
+    outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
@@ -211,7 +211,7 @@ The last part of the script is the `output` field.
 outputs:
   qc_html:
     type: File
-	outputSource: quality_control/html_file
+    outputSource: quality_control/html_file
 ~~~
 {: .language-yaml}
 
