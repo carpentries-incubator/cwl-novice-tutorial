@@ -48,7 +48,7 @@ so the tool should be located at `bio-cwl-tools/subreads/featureCounts.cwl`.
 > > ## Solution
 > >
 > > ~~~
-> > clwVersion: v1.2
+> > cwlVersion: v1.2
 > > class: Workflow
 > >
 > > inputs:
