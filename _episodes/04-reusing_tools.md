@@ -123,6 +123,7 @@ ref_genome:
 annotations:
   class: File
   location: rnaseq/reference_data/chr1-hg19_genes.gtf
+  format: http://edamontology.org/format_2306
 ~~~
 {: .language-yaml}
 
