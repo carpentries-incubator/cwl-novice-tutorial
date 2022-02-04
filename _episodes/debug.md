@@ -108,8 +108,9 @@ Some very common YAML errors are:
   {: .language-bash}
 
   ~~~
-  ERROR I'm sorry, I couldn't load this CWL file, try again with --debug for more information.
-  The error was: 'NoneType' object has no attribute 'name'
+ERROR Tool definition failed validation:
+while scanning for the next token
+tabs_rna_seq_workflow.cwl:6:1:   found character '\t' that cannot start any token
   ~~~
   {: .error}
 
