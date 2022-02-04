@@ -35,7 +35,7 @@ The last step of our workflow is counting the RNA-seq reads for which we will us
 
 We need a local copy of `featureCounts` in order to use it in our workflow.
 We already imported this as a git submodule during setup,
-so the tool should be located at `bio-cwl-tools/subreads/featureCounts.cwl`.
+so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 
 
 > ## Exercise
@@ -87,7 +87,7 @@ so the tool should be located at `bio-cwl-tools/subreads/featureCounts.cwl`.
 > >     requirements:
 > >       ResourceRequirement:
 > >         ramMin: 500
-> >     run: bio-cwl-tools/subreads/featureCounts.cwl
+> >     run: bio-cwl-tools/subread/featureCounts.cwl
 > >     in:
 > >       mapped_reads: index_alignment/bam_sorted_indexed
 > >       annotations: annotations
