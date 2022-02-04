@@ -171,7 +171,7 @@ Some very common YAML errors are:
       outputSource: index_alignment/bam_sorted_indexed
     featurecounts:
       type: File
-      outputSource: count_reads/featurecount
+      outputSource: count_reads/featurecounts
   ~~~
   {: .language-yaml}
 
