@@ -41,7 +41,6 @@ First of all, errors in the YAML syntax. When writing a piece of code, it is ver
 Some very common YAML errors are:
 
 - Using tabs instead of spaces. In YAML files indentations are made using spaces, not tabs.
-  Errors caused by tabs will show `'NoneType' object has no attribute 'name'`.
   Please download and run [this example][tab-error] which includes a tab character.
 
   ~~~
