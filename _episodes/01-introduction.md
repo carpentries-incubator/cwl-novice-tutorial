@@ -9,7 +9,7 @@ questions:
 - "How do CWL workflows compare to shell workflows?"
 - "What are the advantages of using CWL workflows?"
 objectives:
-- "Recognise the advantages of using a workflow"
+- "Recognise the advantages of using a computational workflow"
 - "Understand why you might use CWL instead of a shell script"
 keypoints:
 - "CWL is a standard for describing workflows based on command-line tools"
@@ -26,7 +26,7 @@ Distinct from general business workflows, computational workflows have their pri
 The workflow managers which are designed for such computational workflows should aid their users with this focus.
 The helpful properties that an ideal computational workflow would possess, to make this possible, are summarised below.
 
-![Summary of handy properties of computational workflows. Categories of properties covered are: composition and abstraction; sharing and adaptability; automation; reporting and accreditation; scalability and infrastructure access; and portability.]({{page.root}}/fig/PropsComputeWF.png){: height="400px"}
+![Summary of handy properties of computational workflows. Categories of properties covered are: composition and abstraction; sharing and adaptability; automation; reporting and accreditation; scalability and infrastructure access; and portability.]({{page.root}}/fig/PropsComputeWF.png){: height="400px"; max-width: 100vw}
 Handy properties for Computational Workflows[^2]
 
 Computational workflows, and their managers, should abstracting away complexities of the underlying computational environment.
