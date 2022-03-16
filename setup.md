@@ -76,13 +76,50 @@ sudo apt install graphviz
 
 <article role="tabpanel" class="tab-pane" id="macos">
 FIXME: install docker
+
 FIXME: install cwltool
+
 FIXME: install graphviz
 </article>
 </div>
 </div>
 
+### Confirm the software is installed correctly
+To confirm docker is installed, run the following command to display the version number:
+~~~
+$ docker -v
+~~~
+{: .language-bash}
 
+You should see something similar to the output shown below.
+~~~
+Docker version 20.10.7, build 20.10.7-0ubuntu5~18.04.3
+~~~
+{: .output}
+
+To confirm cwltool is installed, run the following command to display the version number:
+~~~
+cwltool --version
+~~~
+{: .language-bash}
+
+You should see something similar to the output shown below.
+~~~
+/usr/bin/cwltool 1.0.20180302231433
+~~~
+{: .output}
+
+To confirm graphviz is installed, run the following command to display the version number:
+~~~
+$ dot -V
+~~~
+{: .language-bash}
+
+You should see something similar to the output shown below.
+~~~
+dot - graphviz version 2.40.1 (20161225.0304)
+~~~
+{: .output}
 
 
 ## Files
