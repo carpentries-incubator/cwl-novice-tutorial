@@ -14,8 +14,8 @@ Open VSCode and search for [Benten](https://marketplace.visualstudio.com/items?i
 
 The VSCode Benten extension will require the Benten server to be installed too. It will prompt you to do this the first time you activate the extension.
 
-### Software installation
-This tutorial requires three pieces of software to be installed: Docker, cwltool, and graphviz.
+### Docker, cwltool, and graphviz
+This tutorial requires three pieces of software to run and visualize the workflows: Docker, cwltool, and graphviz.
 Please follow instructions for your OS by clicking on the relevant tab below.
 
 {::options parse_block_html="true" /}
