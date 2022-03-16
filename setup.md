@@ -20,7 +20,8 @@ Follow [these steps](https://github.com/common-workflow-language/cwltool#ms-wind
 2. Then got to https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl to install the "Remote - WSL" extension for VS Code by clicking the  `Install` button or by following the directions.
 3. After installation choose "Open a Remote - WSL Window" and then "New WSL Window". Your VS Code window should now say "WSL: Debian" in green at the lower left corner. 
 4. Choose "Clone Git Repository and paste in `https://github.com/common-workflow-lab/cwl-novice-tutorial-data.git` and accept the default destination: your home directory in `WSL : Debian`.
-5. Chose `Terminal` → `New Terminal`. Execute `sudo  apt-get update && sudo apt-get install -y python3-venv wget` in the terminal and then continue with the `Linux` instructions below.
+5. Enable the Benten CWL extension in this "WSL : Debian" window: press `Ctrl+Shift+X" to open the "Extensions" and click the "Install in WSL: Debian" button.
+6. Chose `Terminal` → `New Terminal`. Execute `sudo  apt-get update && sudo apt-get install -y python3-venv wget` in the terminal and then continue with the `Linux` instructions below.
 
 __Linux users__ already have a Linux terminal and can start with following the steps below.
 
