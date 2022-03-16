@@ -45,6 +45,8 @@ Follow the steps below, taken from the [offical setup guide][cwl-windows-install
 <article role="tabpanel" class="tab-pane" id="linux">
 __Linux users__ already have a Bash terminal and can start with following the steps below.
 
+FIXME: Install docker
+
 In this tutorial the latest version of `cwltool` is needed. To ensure this, a virtual environment using `pip` and `venv` is used.
 
 ~~~
@@ -73,7 +75,9 @@ sudo apt install graphviz
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
-
+FIXME: install docker
+FIXME: install cwltool
+FIXME: install graphviz
 </article>
 </div>
 </div>
