@@ -45,41 +45,54 @@ Follow the steps below, taken from the [offical setup guide][cwl-windows-install
 <article role="tabpanel" class="tab-pane" id="linux">
 __Linux users__ already have a Bash terminal and can start with following the steps below.
 
-FIXME: Install docker
+1. [Install docker][install-docker-linux]
+2. [Enable docker usage as a non-root user][docker-postinstall-linux]
+3. Install the latest version of cwltool. To ensure this, a virtual environment using `pip` and `venv` is used.
+    ~~~
+    python3 -m venv env			# Create a virtual environment named 'env' in the current directory
+    source env/bin/activate			# Activate the 'env' environment
+    ~~~
+    {: .language-bash}
 
-In this tutorial the latest version of `cwltool` is needed. To ensure this, a virtual environment using `pip` and `venv` is used.
+    The virtual environment needs to be activated every time you start the terminal using the `source env/bin/activate` command.
 
-~~~
-python3 -m venv env			# Create a virtual environment named 'env' in the current directory
-source env/bin/activate			# Activate the 'env' environment
-~~~
-{: .language-bash}
+    Next, install cwltool.
 
-The virtual environment needs to be activated every time you start the terminal using the `source env/bin/activate` command.
+    ~~~
+    pip install cwltool
+    ~~~
+    {: .language-bash}
 
-Next, install `cwltool`.
-
-~~~
-pip install cwltool
-~~~
-{: .language-bash}
-
-
-For the visualisation of the workflow, please install graphviz:
-
-~~~
-sudo apt install graphviz
-~~~
-{: .language-bash}
+4.  For the visualisation of the workflow, please install graphviz:
+    ~~~
+    sudo apt install graphviz
+    ~~~
+    {: .language-bash}
 
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
-FIXME: install docker
+**Mac users** already have a Terminal program and should follow the steps below:
+1. [Install docker][install-docker-macos]
+2. [Install miniconda][miniconda-macos]
+3. Create a virtual environment using conda
+    ~~~
+    $ conda create --name cwltutorial
+    ~~~
+    {: .language-bash}
+4. Activate the virtual environment
+    ~~~
+    $ conda activate cwltutorial
+    ~~~
+    {: .language-bash}
+5. Install cwltool and graphviz using conda
+    ~~~
+    $ conda install -c bioconda cwltool
+    $ conda install -c anaconda graphviz
+    ~~~
+    {: .language-bash}
 
-FIXME: install cwltool
-
-FIXME: install graphviz
+The virtual environment needs to be activated every time you start the terminal using `conda activate cwltutorial`.
 </article>
 </div>
 </div>
@@ -194,3 +207,7 @@ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 [install-wsl2-and-docker]: https://docs.docker.com/docker-for-windows/wsl/#prerequisites
 [install-debian]: https://www.microsoft.com/en-us/p/debian/9msvkqc78pk6
 [docker-screenshot]: https://docs.docker.com/desktop/windows/images/wsl2-choose-distro.png
+[install-docker-macos]: https://docs.docker.com/desktop/mac/install/
+[miniconda-macos]: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html
+[install-docker-linux]: https://docs.docker.com/engine/install/
+[docker-postinstall-linux]: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
