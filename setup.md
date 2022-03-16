@@ -8,16 +8,20 @@ These lessons are best followed using VSCode, and the Benten extension (which is
 
 ### VSCode and Benten installation
 
-Download and install [VSCode](https://code.visualstudio.com/).
+1. Download and install [VSCode](https://code.visualstudio.com/).
 
-Open VSCode and search for [Benten](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) in the marketplace. The name of the client extension is Rabix/benten. Follow the usual method to install the extension.
-
-The VSCode Benten extension will require the Benten server to be installed too. It will prompt you to do this the first time you activate the extension.
+2. Open https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl and click the `Install` button or follow the dirctions. The VSCode Benten extension will require the Benten server to be installed too. It will prompt you to do this the first time you activate the extension.
 
 ### CWL installation
 
-__Windows users__ first need to install the "Windows Subsystem for Linux 2" (WSL2) and the Docker Desktop before installing the `cwltool`.
-Follow [these steps](https://github.com/common-workflow-language/cwltool#ms-windows-users). At step 6 follow the `venv` method below, explained below.
+__Windows users__
+1. Install the "Windows Subsystem for Linux 2" (WSL2) and the Docker Desktop before installing the `cwltool`. 
+Follow [these steps](https://github.com/common-workflow-language/cwltool#ms-windows-users) until step 6.
+2. Then got to https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl to install the "Remote - WSL" extension for VS Code by clicking the  `Install` button or by following the directions.
+3. After installation choose "Open a Remote - WSL Window" and then "New WSL Window". Your VS Code window should now say "WSL: Debian" in green at the lower left corner. 
+4. Choose "Clone Git Repository and paste in `https://github.com/common-workflow-lab/cwl-novice-tutorial-data.git` and accept the default destination: your home directory in `WSL : Debian`.
+5. Chose `Terminal` → `New Terminal`. Execute `sudo  apt-get update && sudo apt-get install -y python3-venv` in the terminal and then continue with the `Linux` instructions below.
+
 __Linux users__ already have a Linux terminal and can start with following the steps below.
 
 In this tutorial the latest version of `cwltool` is needed. To ensure this, a virtual environment is using `pip` and `venv` is used.
@@ -41,7 +45,7 @@ pip install cwltool
 For the visualisation of the workflow, please install graphviz:
 
 ~~~
-sudo apt install graphviz
+sudo apt-get install -y graphviz
 ~~~
 {: .language-bash}
 
