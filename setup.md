@@ -6,7 +6,7 @@ title: Setup
 
 These lessons are best followed using VSCode, and the Benten extension (which is a language server for CWL). We will also be using the CWL reference runner. Instructions for installing these are given below.
 
-### VSCode and Benten installation
+### VSCode and Benten
 
 1. Download and install [VSCode](https://code.visualstudio.com/).
 
