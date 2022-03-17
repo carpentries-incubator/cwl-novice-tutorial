@@ -6,51 +6,173 @@ title: Setup
 
 These lessons are best followed using VSCode, and the Benten extension (which is a language server for CWL). We will also be using the CWL reference runner. Instructions for installing these are given below.
 
-### VSCode and Benten installation
+### VSCode and Benten
 
-Download and install [VSCode](https://code.visualstudio.com/).
+1. Download and install [VSCode](https://code.visualstudio.com/).
 
-Open VSCode and search for [Benten](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) in the marketplace. The name of the client extension is Rabix/benten. Follow the usual method to install the extension.
+2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
+   The VSCode Benten extension will require the Benten server to be installed too.
+   It will prompt you to do this the first time you activate the extension.
 
-The VSCode Benten extension will require the Benten server to be installed too. It will prompt you to do this the first time you activate the extension.
 
-### CWL installation
+### Docker, cwltool, and graphviz
+This tutorial requires three pieces of software to run and visualize the workflows: Docker, cwltool, and graphviz.
+Please follow instructions for your OS by clicking on the relevant tab below.
 
+{::options parse_block_html="true" /}
+<div>
+<ul class="nav nav-tabs nav-justified" role="tablist">
+<li role="presentation" class="active"><a data-os="windows" href="#windows" aria-controls="Windows"
+role="tab" data-toggle="tab">Windows</a></li>
+<li role="presentation"><a data-os="macos" href="#macos" aria-controls="macOS" role="tab"
+data-toggle="tab">macOS</a></li>
+<li role="presentation"><a data-os="linux" href="#linux" aria-controls="Linux" role="tab"
+data-toggle="tab">Linux</a></li>
+</ul>
+
+<div class="tab-content">
+<article role="tabpanel" class="tab-pane active" id="windows">
 __Windows users__ first need to install the "Windows Subsystem for Linux 2" (WSL2) and the Docker Desktop before installing the `cwltool`.
-Follow [these steps](https://github.com/common-workflow-language/cwltool#ms-windows-users). At step 6 follow the `venv` method below, explained below.
-__Linux users__ already have a Linux terminal and can start with following the steps below.
+Follow the steps below, taken from the [offical setup guide][cwl-windows-install]:
+1. Install [Windows Subsystem for Linux 2 (WSL2), and Docker Desktop][install-wsl2-and-docker]
+2. Install [Debian from the Microsoft Store][install-debian]
+3. Set Debian as your default WSL 2 distro: `wsl --set-default debian`
+4. Return to the Docker Desktop, choose [Settings → Resources → WSL Integration][docker-screenshot] and under "Enable integration with additional distros" select "Debian"
+5. Reboot
+6. Launch Debian
+7. Open [Remote - WSL][remote-wsl-extension] to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
+8. After installation choose "Open a Remote - WSL Window" and then "New WSL Window". Your VS Code window should now say "WSL: Debian" in green at the lower left corner.
+9. Enable the Benten CWL extension in this "WSL : Debian" window: press `Ctrl+Shift+X" to open the "Extensions" and click the "Install in WSL: Debian" button.
+10. Choose `Terminal` → `New Terminal`. Execute `sudo  apt-get update && sudo apt-get install -y python3-venv wget` in the terminal
+11. Install cwltool using the instructions under the 'Linux' tab
+</article>
 
-In this tutorial the latest version of `cwltool` is needed. To ensure this, a virtual environment is using `pip` and `venv` is used.
+<article role="tabpanel" class="tab-pane" id="linux">
+__Linux users__ already have a Bash terminal and can start with following the steps below.
 
+1. [Install docker][install-docker-linux]
+2. [Enable docker usage as a non-root user][docker-postinstall-linux]
+3. Install the latest version of cwltool. To ensure this, a virtual environment using `pip` and `venv` is used.
+    ~~~
+    python3 -m venv env			# Create a virtual environment named 'env' in the current directory
+    source env/bin/activate			# Activate the 'env' environment
+    ~~~
+    {: .language-bash}
+
+    The virtual environment needs to be activated every time you start the terminal using the `source env/bin/activate` command.
+
+    Next, install cwltool.
+
+    ~~~
+    pip install cwltool
+    ~~~
+    {: .language-bash}
+
+4.  For the visualisation of the workflow, please install graphviz:
+    ~~~
+    sudo apt-get install -y graphviz
+    ~~~
+    {: .language-bash}
+
+</article>
+
+<article role="tabpanel" class="tab-pane" id="macos">
+**Mac users** already have a Terminal program and should follow the steps below:
+1. [Install docker][install-docker-macos]
+2. [Install miniconda][miniconda-macos]
+3. Create a virtual environment using conda
+    ~~~
+    $ conda create --name cwltutorial
+    ~~~
+    {: .language-bash}
+4. Activate the virtual environment
+    ~~~
+    $ conda activate cwltutorial
+    ~~~
+    {: .language-bash}
+5. Install cwltool and graphviz using conda
+    ~~~
+    $ conda install -c bioconda cwltool
+    $ conda install -c anaconda graphviz
+    ~~~
+    {: .language-bash}
+
+The virtual environment needs to be activated every time you start the terminal using `conda activate cwltutorial`.
+</article>
+</div>
+</div>
+
+### Confirm the software is installed correctly
+To confirm docker is installed, run the following command to display the version number:
 ~~~
-python3 -m venv env			# Create a virtual environment named 'env' in the current directory
-source env/bin/activate			# Activate the 'env' environment
+$ docker version
 ~~~
 {: .language-bash}
 
-The virtual environment needs to be activated every time you start the terminal using the `source env/bin/activate` command.
-
-Next, install `cwltool`.
-
+You should see something similar to the output shown below.
 ~~~
-pip install cwltool
+Client: Docker Engine - Community
+ Version:           20.10.13
+ API version:       1.41
+ Go version:        go1.16.15
+ Git commit:        a224086
+ Built:             Thu Mar 10 14:08:15 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.13
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.16.15
+  Git commit:       906f57f
+  Built:            Thu Mar 10 14:06:05 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.5.10
+  GitCommit:        2a1d4dbdb2a1030dc5b01e96fb110a9d9f150ecc
+ runc:
+  Version:          1.0.3
+  GitCommit:        v1.0.3-0-gf46b6ba
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+~~~
+{: .output}
+
+To confirm cwltool is installed, run the following command to display the version number:
+~~~
+cwltool --version
 ~~~
 {: .language-bash}
 
-
-For the visualisation of the workflow, please install graphviz:
-
+You should see something similar to the output shown below.
 ~~~
-sudo apt install graphviz
+/home/learner/env/bin/cwltool 3.1.20220312132609
+~~~
+{: .output}
+
+To confirm graphviz is installed, run the following command to display the version number:
+~~~
+$ dot -V
 ~~~
 {: .language-bash}
+
+You should see something similar to the output shown below.
+~~~
+dot - graphviz version 2.40.1 (20161225.0304)
+~~~
+{: .output}
+
 
 ## Files
 
 You will need to install some example files for this lesson. In this tutorial we will use RNA sequencing data.
 
 ### Setting up a practice repository
-For this tutorial some existing tools are needed to build the workflow. These existing tools will be imported via GitHub. 
+For this tutorial some existing tools are needed to build the workflow. These existing tools will be imported via GitHub.
 First we need to create an empty git repository for all our files. To do this, use this command:
 ~~~
 git init novice-tutorial-exercises
@@ -91,7 +213,7 @@ wget --mirror --no-parent --no-host --cut-dirs=1 https://download.jutro.arvadosa
 ~~~
 {: .language-bash}
 
-#### Generating 
+#### Generating
 Create `chr1-star-index.yaml` in the the `novice-tutorial-exercises` directory:
 ~~~
 InputFiles:
@@ -113,3 +235,13 @@ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 {: .language-bash}
 
 {% include links.md %}
+[cwl-windows-install]: https://github.com/common-workflow-language/cwltool#ms-windows-users
+[install-wsl2-and-docker]: https://docs.docker.com/docker-for-windows/wsl/#prerequisites
+[install-debian]: https://www.microsoft.com/en-us/p/debian/9msvkqc78pk6
+[docker-screenshot]: https://docs.docker.com/desktop/windows/images/wsl2-choose-distro.png
+[install-docker-macos]: https://docs.docker.com/desktop/mac/install/
+[miniconda-macos]: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html
+[install-docker-linux]: https://docs.docker.com/engine/install/
+[docker-postinstall-linux]: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+[Benten]: https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl
+[remote-wsl-extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
