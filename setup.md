@@ -8,11 +8,12 @@ These lessons are best followed using VSCode, and the Benten extension (which is
 
 ### VSCode and Benten installation
 
-Download and install [VSCode](https://code.visualstudio.com/).
+1. Download and install [VSCode](https://code.visualstudio.com/).
 
-Open VSCode and search for [Benten](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl) in the marketplace. The name of the client extension is Rabix/benten. Follow the usual method to install the extension.
+2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
+   The VSCode Benten extension will require the Benten server to be installed too.
+   It will prompt you to do this the first time you activate the extension.
 
-The VSCode Benten extension will require the Benten server to be installed too. It will prompt you to do this the first time you activate the extension.
 
 ### Docker, cwltool, and graphviz
 This tutorial requires three pieces of software to run and visualize the workflows: Docker, cwltool, and graphviz.
@@ -211,3 +212,4 @@ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 [miniconda-macos]: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html
 [install-docker-linux]: https://docs.docker.com/engine/install/
 [docker-postinstall-linux]: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+[Benten]: https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl
