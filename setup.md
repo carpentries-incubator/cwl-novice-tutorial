@@ -40,7 +40,11 @@ Follow the steps below, taken from the [offical setup guide][cwl-windows-install
 4. Return to the Docker Desktop, choose [Settings → Resources → WSL Integration][docker-screenshot] and under "Enable integration with additional distros" select "Debian"
 5. Reboot
 6. Launch Debian
-7. Install cwltool using the instructions under the 'Linux' tab
+7. Open [Remote - WSL][remote-wsl-extension] to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
+8. After installation choose "Open a Remote - WSL Window" and then "New WSL Window". Your VS Code window should now say "WSL: Debian" in green at the lower left corner.
+9. Enable the Benten CWL extension in this "WSL : Debian" window: press `Ctrl+Shift+X" to open the "Extensions" and click the "Install in WSL: Debian" button.
+10. Choose `Terminal` → `New Terminal`. Execute `sudo  apt-get update && sudo apt-get install -y python3-venv wget` in the terminal
+11. Install cwltool using the instructions under the 'Linux' tab
 </article>
 
 <article role="tabpanel" class="tab-pane" id="linux">
@@ -66,7 +70,7 @@ __Linux users__ already have a Bash terminal and can start with following the st
 
 4.  For the visualisation of the workflow, please install graphviz:
     ~~~
-    sudo apt install graphviz
+    sudo apt-get install -y graphviz
     ~~~
     {: .language-bash}
 
@@ -101,13 +105,40 @@ The virtual environment needs to be activated every time you start the terminal 
 ### Confirm the software is installed correctly
 To confirm docker is installed, run the following command to display the version number:
 ~~~
-$ docker -v
+$ docker version
 ~~~
 {: .language-bash}
 
 You should see something similar to the output shown below.
 ~~~
-Docker version 20.10.7, build 20.10.7-0ubuntu5~18.04.3
+Client: Docker Engine - Community
+ Version:           20.10.13
+ API version:       1.41
+ Go version:        go1.16.15
+ Git commit:        a224086
+ Built:             Thu Mar 10 14:08:15 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.13
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.16.15
+  Git commit:       906f57f
+  Built:            Thu Mar 10 14:06:05 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.5.10
+  GitCommit:        2a1d4dbdb2a1030dc5b01e96fb110a9d9f150ecc
+ runc:
+  Version:          1.0.3
+  GitCommit:        v1.0.3-0-gf46b6ba
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ~~~
 {: .output}
 
@@ -119,7 +150,7 @@ cwltool --version
 
 You should see something similar to the output shown below.
 ~~~
-/usr/bin/cwltool 1.0.20180302231433
+/home/learner/env/bin/cwltool 3.1.20220312132609
 ~~~
 {: .output}
 
@@ -213,3 +244,4 @@ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 [install-docker-linux]: https://docs.docker.com/engine/install/
 [docker-postinstall-linux]: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
 [Benten]: https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl
+[remote-wsl-extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
