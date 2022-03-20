@@ -31,41 +31,52 @@ data-toggle="tab">Linux</a></li>
 
 ### Docker, cwltool, and graphviz
 
-3. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
-   1. First complete all of the [WSL 2 "Prerequisites"][docker-desktop-wsl2-prereqs].
-   2. Then install [Debian from the Microsoft Store][install-debian].
-   3. Open the "Debian" app and setup your Debian user and password when prompted.
+1. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
+   1. Confirm that you are running Windows 10, version 2004 or higher (Build 19041 and higher) or Windows 11.
 
-      You can now close the "Debian" window.
-   4. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
-      and run the following command to set Debian as your default WSL 2 distro:
+      > ## Note
+      > To check your Windows version and build number, press the Windows logo key + <kbd>R</kbd>, type winver, select OK.
+        You can update to the latest Windows version by selecting "Start" > "Settings" > "Windows Update" > "Check for updates".
+      {: .callout }
+   2. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
+      and paste the following command followed by <kbd>Enter</kbd> to install WSL 2:
 
-      `wsl --set-default debian`
-   5. Then continue to [download Docker Desktop][download-docker-desktop] and run the installer.
-   6. Run Docker Desktop, from the top menu choose ["Settings" > "Resources" > "WSL Integration"][docker-screenshot]
-      and under "Enable integration with additional distros" select "Debian"
-4. Configure VS Code
+      `wsl --install`
+   3. Reboot your computer. Ubuntu will set itself up after the reboot. Wait for it to ask for a
+      UNIX username and password. After you provide that information the Ubuntu window can be
+      closed.
+   4. Then continue to [download Docker Desktop][download-docker-desktop] and run the installer.
+      1. Reboot after installing Docker Desktop.
+      2. Run Docker Desktop
+      3. Accept the terms and conditions, if prompted
+      4. Wait for Docker Desktop to finish starting
+      5. Skip the tutorial, if prompted
+      6. From the top menu choose ["Settings" > "Resources" > "WSL Integration"][docker-screenshot]
+      7. Under "Enable integration with additional distros" select "Ubuntu"
+      8. Close the Docker Desktop window
+2. Configure VS Code
    1. Open [this link][remote-wsl-extension] to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
    2. After installation, in VS Code choose "Open a Remote - WSL Window" and then "New WSL Window".
 
       If you don't see those option, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> and then type
       "WSL" and they should appear at the top of the screen.
-   3. There should now be a second VS Code window that has "WSL: Debian" in green at the lower left corner.
+   3. There should now be a second VS Code window that has "WSL: Ubuntu" in green at the lower left corner.
       You can close the original VS Code window.
-   4. Enable the Benten CWL extension in this "WSL : Debian" window
-      * press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
-      * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Debian" button.
-5. Open a terminal
-   * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Debian" VS Code window.
+   4. To enable the Benten CWL extension in this "WSL : Ubuntu" window:
+      * Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
+      * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Ubuntu" button.
+3. Open a terminal
+   * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Ubuntu" VS Code window.
    * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget`
    * Paste it into the terminal window
-   * Press <kbd>Return</kbd> to run it.
+   * Press <kbd>Return</kbd> to run it. You will need to use the UNIX password you set earlier.
+
    > ## Note!
    > All references to a "terminal" for the rest of this tutorial are to this terminal window inside
-   > the "WSL : Debian" Visual Studio Code windowd, and not Powershell, the Windows Command Prompt,
-   > nor the "Debian" app.
+   > the "WSL : Ubuntu" Visual Studio Code window, and not Powershell, the Windows Command Prompt,
+   > nor the "Ubuntu" app.
    {: .callout}
-6. Install the latest version of cwltool.
+4. Install the latest version of cwltool.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
       ~~~
       python3 -m venv env       # Create a virtual environment named 'env' in the current directory
@@ -84,7 +95,7 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-7.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
+5.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
     ~~~
     sudo apt-get install -y graphviz
     ~~~
@@ -101,9 +112,9 @@ data-toggle="tab">Linux</a></li>
 
 ### Docker, cwltool, and graphviz
 
-3. [Install docker][install-docker-linux]
-4. [Enable docker usage as a non-root user][docker-postinstall-linux]
-5. Install the latest version of cwltool.
+1. [Install docker][install-docker-linux]
+2. [Enable docker usage as a non-root user][docker-postinstall-linux]
+3. Install the latest version of cwltool.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
       ~~~
       python3 -m venv env       # Create a virtual environment named 'env' in the current directory
@@ -122,7 +133,7 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-6.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
+4.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
     ~~~
     sudo apt-get install -y graphviz
     ~~~
@@ -137,19 +148,19 @@ data-toggle="tab">Linux</a></li>
 2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
 
 ### Docker, cwltool, and graphviz
-3. [Install docker][install-docker-macos]
-4. [Install miniconda][miniconda-macos]
-5. Create a virtual environment using conda
+1. [Install docker][install-docker-macos]
+2. [Install miniconda][miniconda-macos]
+3. Create a virtual environment using conda
     ~~~
     conda create --name cwltutorial
     ~~~
     {: .language-bash}
-6. Activate the virtual environment
+4. Activate the virtual environment
     ~~~
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-7. Install cwltool and graphviz using conda
+5. Install cwltool and graphviz using conda
     ~~~
     conda install -c bioconda cwltool
     conda install -c anaconda graphviz
@@ -213,7 +224,7 @@ cwltool --version
 
 You should see something similar to the output shown below.
 ~~~
-/home/learner/env/bin/cwltool 3.1.20220312132609
+/home/learner/env/bin/cwltool 3.1.20220224085855
 ~~~
 {: .output}
 
@@ -225,7 +236,7 @@ dot -V
 
 You should see something similar to the output shown below.
 ~~~
-dot - graphviz version 2.40.1 (20161225.0304)
+dot - graphviz version 2.43.0 (0)
 ~~~
 {: .output}
 
