@@ -32,30 +32,39 @@ data-toggle="tab">Linux</a></li>
 ### Docker, cwltool, and graphviz
 
 3. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
-   1. You **must** complete the [WSL 2 "Prerequisites"][docker-desktop-wsl2-prereqs] section first!
+   1. First complete all of the [WSL 2 "Prerequisites"][docker-desktop-wsl2-prereqs].
    2. Then install [Debian from the Microsoft Store][install-debian].
    3. Open the "Debian" app and setup your Debian user and password when prompted.
+
       You can now close the "Debian" window.
    4. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
-      and run the following command to set Debian as your default WSL 2 distro: `wsl --set-default debian`
+      and run the following command to set Debian as your default WSL 2 distro:
+
+      `wsl --set-default debian`
    5. Then continue to [download Docker Desktop][download-docker-desktop] and run the installer.
    6. Run Docker Desktop, from the top menu choose ["Settings" > "Resources" > "WSL Integration"][docker-screenshot]
       and under "Enable integration with additional distros" select "Debian"
 4. Configure VS Code
    1. Open [this link][remote-wsl-extension] to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
    2. After installation, in VS Code choose "Open a Remote - WSL Window" and then "New WSL Window".
+
       If you don't see those option, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> and then type
       "WSL" and they should appear at the top of the screen.
    3. There should now be a second VS Code window that has "WSL: Debian" in green at the lower left corner.
       You can close the original VS Code window.
-   4. Enable the Benten CWL extension in this "WSL : Debian" window: press
-      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
-      Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Debian" button.
-5. Open a terminal by choosing choose "Terminal" > "New Terminal" from the menu in the "WSL : Debian" VS Code window.
-   Copy the follwoing `sudo apt-get update && sudo apt-get install -y python3-venv wget`,
-   paste it into the terminal window, and then press <kbd>Return</kbd> to run it.
-   All references to a "terminal" for the rest of this tutorial are to this terminal window inside the "WSL : Debian" Visual Studio Code window.
-   application, and not Powershell, the Windows Command Prompt, nor the "Debian" app.
+   4. Enable the Benten CWL extension in this "WSL : Debian" window
+      * press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
+      * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Debian" button.
+5. Open a terminal
+   * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Debian" VS Code window.
+   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget`
+   * Paste it into the terminal window
+   * Press <kbd>Return</kbd> to run it.
+   > ## Note!
+   > All references to a "terminal" for the rest of this tutorial are to this terminal window inside
+   > the "WSL : Debian" Visual Studio Code windowd, and not Powershell, the Windows Command Prompt,
+   > nor the "Debian" app.
+   {: .callout}
 6. Install the latest version of cwltool.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
       ~~~
