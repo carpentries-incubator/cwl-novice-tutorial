@@ -22,16 +22,12 @@ data-toggle="tab">Linux</a></li>
 
 <div class="tab-content">
 <article role="tabpanel" class="tab-pane active" id="windows">
-### VSCode and Benten
 
-1. Download and install [VSCode](https://code.visualstudio.com/).
+1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
 
-2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
+2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
 
-
-### Docker, cwltool, and graphviz
-
-1. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
+3. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
    1. Confirm that you are running Windows 10, version 2004 or higher (Build 19041 and higher) or Windows 11.
 
       > ## Note
@@ -42,20 +38,21 @@ data-toggle="tab">Linux</a></li>
       and paste the following command followed by <kbd>Enter</kbd> to install WSL 2:
 
       `wsl --install`
-   3. Reboot your computer. Ubuntu will set itself up after the reboot. Wait for it to ask for a
-      UNIX username and password. After you provide that information the Ubuntu window can be
-      closed.
-   4. Then continue to [download Docker Desktop][download-docker-desktop] and run the installer.
+   3. Reboot your computer. Ubuntu will set itself up after the reboot. Wait for Ubuntu to ask for a
+      UNIX username and password. After you provide that information and the command prompt appears,
+      then the Ubuntu window can be closed.
+   4. Then continue to [download Docker Desktop](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){:target="_blank"}{:rel="noopener noreferrer"} and run the installer.
       1. Reboot after installing Docker Desktop.
       2. Run Docker Desktop
       3. Accept the terms and conditions, if prompted
       4. Wait for Docker Desktop to finish starting
       5. Skip the tutorial, if prompted
-      6. From the top menu choose ["Settings" > "Resources" > "WSL Integration"][docker-screenshot]
+      6. From the top menu choose "Settings" > "Resources" > "WSL Integration"
       7. Under "Enable integration with additional distros" select "Ubuntu"
       8. Close the Docker Desktop window
-2. Configure VS Code
-   1. Open [this link][remote-wsl-extension] to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
+4. Configure VS Code
+   1. Open [this link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ws){:target="_blank"}{:rel="noopener noreferrer"}
+      to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
    2. After installation, in VS Code choose "Open a Remote - WSL Window" and then "New WSL Window".
 
       If you don't see those option, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> and then type
@@ -65,9 +62,9 @@ data-toggle="tab">Linux</a></li>
    4. To enable the Benten CWL extension in this "WSL : Ubuntu" window:
       * Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
       * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Ubuntu" button.
-3. Open a terminal
+5. Open a terminal and install tutorial prerequisites
    * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Ubuntu" VS Code window.
-   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget`
+   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget graphviz`
    * Paste it into the terminal window
    * Press <kbd>Return</kbd> to run it. You will need to use the UNIX password you set earlier.
 
@@ -76,7 +73,7 @@ data-toggle="tab">Linux</a></li>
    > the "WSL : Ubuntu" Visual Studio Code window, and not Powershell, the Windows Command Prompt,
    > nor the "Ubuntu" app.
    {: .callout}
-4. Install the latest version of cwltool.
+6. Install the latest version of cwltool.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
       ~~~
       python3 -m venv env       # Create a virtual environment named 'env' in the current directory
@@ -95,26 +92,15 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-5.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
-    ~~~
-    sudo apt-get install -y graphviz
-    ~~~
-    {: .language-bash}
 </article>
 
 <article role="tabpanel" class="tab-pane" id="linux">
-### VSCode and Benten
 
-1. Download and install [VSCode](https://code.visualstudio.com/).
-
-2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
-
-
-### Docker, cwltool, and graphviz
-
-1. [Install docker][install-docker-linux]
-2. [Enable docker usage as a non-root user][docker-postinstall-linux]
-3. Install the latest version of cwltool.
+1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
+2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
+3. [Install docker](https://docs.docker.com/engine/install/){:target="_blank"}{:rel="noopener noreferrer"}
+4. [Enable docker usage as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user){:target="_blank"}{:rel="noopener noreferrer"}
+5. Install the latest version of `cwltool`.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
       ~~~
       python3 -m venv env       # Create a virtual environment named 'env' in the current directory
@@ -133,34 +119,34 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-4.  Later we will make visualisations of our workflows. To suport that we need to install graphviz:
+6.  Later we will make visualisations of our workflows. To support that we need to install graphviz.
+    Here is the command for Debian-based Linux systems:
     ~~~
     sudo apt-get install -y graphviz
     ~~~
     {: .language-bash}
+
+    For other Linux systems, check <https://graphviz.org/download/#linux>
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
 ### VSCode and Benten
 
-1. Download and install [VSCode](https://code.visualstudio.com/).
-
-2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
-
-### Docker, cwltool, and graphviz
-1. [Install docker][install-docker-macos]
-2. [Install miniconda][miniconda-macos]
-3. Create a virtual environment using conda
+1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
+2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
+3. [Install docker](https://docs.docker.com/desktop/mac/install){:target="_blank"}{:rel="noopener noreferrer"}
+4. [Install miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html){:target="_blank"}{:rel="noopener noreferrer"}
+5. Create a virtual environment using conda
     ~~~
     conda create --name cwltutorial
     ~~~
     {: .language-bash}
-4. Activate the virtual environment
+6. Activate the virtual environment
     ~~~
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-5. Install cwltool and graphviz using conda
+7. Install cwltool and graphviz using conda
     ~~~
     conda install -c bioconda cwltool
     conda install -c anaconda graphviz
@@ -216,7 +202,7 @@ Server: Docker Engine - Community
 ~~~
 {: .output}
 
-To confirm cwltool is installed, run the following command to display the version number:
+To confirm `cwltool` is installed, run the following command to display the version number:
 ~~~
 cwltool --version
 ~~~
@@ -228,7 +214,7 @@ You should see something similar to the output shown below.
 ~~~
 {: .output}
 
-To confirm graphviz is installed, run the following command to display the version number:
+To confirm `graphviz` is installed, run the following command to display the version number:
 ~~~
 dot -V
 ~~~
@@ -309,14 +295,3 @@ cwltool bio-cwl-tools/STAR/STAR-Index.cwl chr1-star-index.yaml
 {: .language-bash}
 
 {% include links.md %}
-[cwl-windows-install]: https://github.com/common-workflow-language/cwltool#ms-windows-users
-[docker-desktop-wsl2-prereqs]: https://docs.docker.com/desktop/windows/wsl/#prerequisites
-[download-docker-desktop]: https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
-[install-debian]: https://www.microsoft.com/en-us/p/debian/9msvkqc78pk6
-[docker-screenshot]: https://docs.docker.com/desktop/windows/images/wsl2-choose-distro.png
-[install-docker-macos]: https://docs.docker.com/desktop/mac/install/
-[miniconda-macos]: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html
-[install-docker-linux]: https://docs.docker.com/engine/install/
-[docker-postinstall-linux]: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
-[Benten]: https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl
-[remote-wsl-extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
