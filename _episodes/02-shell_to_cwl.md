@@ -101,7 +101,7 @@ inputs:
   message_text:
     type: string
     inputBinding:
-    position: 1
+       position: 1
 ~~~
 {: .language-yaml}
 
