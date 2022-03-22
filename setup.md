@@ -130,7 +130,6 @@ data-toggle="tab">Linux</a></li>
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
-### VSCode and Benten
 
 1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
 2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
