@@ -26,8 +26,16 @@ Distinct from general business workflows, computational workflows have their pri
 The workflow managers which are designed for such computational workflows should aid their users with this focus.
 The helpful properties that an ideal computational workflow would possess, to make this possible, are summarised below.
 
-![Summary of handy properties of computational workflows. Categories of properties covered are: composition and abstraction; sharing and adaptability; automation; reporting and accreditation; scalability and infrastructure access; and portability.]({{page.root}}/fig/PropsComputeWF.png){: height="400px"; max-width: 100vw}
-Handy properties for Computational Workflows[^2]
+**Handy Properties of Computational Workflows**[^2]
+
+| ![]({{page.root}}/fig/PropsCompute01.png) | **Composition & Abstraction**  <br><br>  Using the best code written by 3rd parties <br> Handle heterogeneity <br> Shield Complexity & incompatibility <br> Sharable reusable, re-mixable methods |
+| ![]({{page.root}}/fig/PropsCompute02.png){: height="5px"; max-width: 2vw} | **Sharing & Adaptability** <br><br> Shared method, publishable know-how <br> BYOD / parameters <br> Different implementations <br> Changes in execution infrastructure |
+| ![]({{page.root}}/fig/PropsCompute03.png){: height="5px"; max-width: 2vw} | **Automation** <br><br>  Repetitive reproducible pipelines <br> Simulation sweeps <br> Manage data and control flow <br> Optimised monitoring & recovery <br> Automated deployment |
+| ![]({{page.root}}/fig/PropsCompute04.png){: height="5px"; max-width: 2vw} | **Reporting & Accreditation** <br><br>  Provenance logging & data lineage <br> Auto-documentation <br> Result comparison |
+| ![]({{page.root}}/fig/PropsCompute05.png){: height="5px"; max-width: 2vw} | **Scalability & Infrastructure Access** <br><br> Accessing infrastructures, datasets and tools <br> Optimised computation and data handling <br> Parallelisation <br> Secure sensitive data access & management <br> Interoperating datasets & permission handling |
+| ![]({{page.root}}/fig/PropsCompute06.png){: height="5px"; max-width: 2vw} | **Portability** <br><br> Dependency handling <br> Containerisation & packaging <br> Moving between on premise & cloud|
+
+
 
 Computational workflows, and their managers, should abstracting away complexities of the underlying computational environment.
 Doing so enables the use of heterogeneous tools provided by multiple third parties, as well as the scalability and portability of the workflows, so users can make use of the resources available to them.
