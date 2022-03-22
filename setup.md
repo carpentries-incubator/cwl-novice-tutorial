@@ -30,7 +30,7 @@ data-toggle="tab">Linux</a></li>
 3. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
    1. Confirm that you are running Windows 10, version 2004 or higher (Build 19041 and higher) or Windows 11.
 
-      > ## Note
+      > ## Check your Windows version
       > To check your Windows version and build number, press the Windows logo key + <kbd>R</kbd>, type winver, select OK.
         You can update to the latest Windows version by selecting "Start" > "Settings" > "Windows Update" > "Check for updates".
       {: .callout }
@@ -68,7 +68,7 @@ data-toggle="tab">Linux</a></li>
    * Paste it into the terminal window
    * Press <kbd>Return</kbd> to run it. You will need to use the UNIX password you set earlier.
 
-   > ## Note!
+   > ## What is the "terminal"?
    > All references to a "terminal" for the rest of this tutorial are to this terminal window inside
    > the "WSL : Ubuntu" Visual Studio Code window, and not Powershell, the Windows Command Prompt,
    > nor the "Ubuntu" app.
@@ -83,7 +83,7 @@ data-toggle="tab">Linux</a></li>
 
       You will know that this worked as the terminal prompt will now have `(env)` at the beginning.
 
-      > ## Note!
+      > ## Reactivating the python virtual environment
       > Every time you launch VS Code or launch a new terminal, you must run `source env/bin/activate`
       > to re-enable access to this Python Virtual Environment.
       {: .callout}
@@ -110,7 +110,7 @@ data-toggle="tab">Linux</a></li>
 
       You will know that this worked as the terminal prompt will now have `(env)` at the beginning.
 
-      > ## Note!
+      > ## Reactivating the python virtual environment
       > Every time you launch VS Code or launch a new terminal, you must run `source env/bin/activate`
       > to re-enable access to this Python Virtual Environment.
       {: .callout}
@@ -130,7 +130,6 @@ data-toggle="tab">Linux</a></li>
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
-### VSCode and Benten
 
 1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
 2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
@@ -153,7 +152,7 @@ data-toggle="tab">Linux</a></li>
     ~~~
     {: .language-bash}
 
-> ## Note!
+> ## Reactivating the python virtual environment
 > The virtual environment needs to be activated every time you start a terminal using
 `conda activate cwltutorial`.
 {: .callout}
