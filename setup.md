@@ -53,7 +53,7 @@ data-toggle="tab">Linux</a></li>
       7. Under "Enable integration with additional distros" select "Ubuntu"
       8. Close the Docker Desktop window
 4. Configure VS Code
-   1. Open [this link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ws){:target="_blank"}{:rel="noopener noreferrer"}
+   1. Open [this link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl){:target="_blank"}{:rel="noopener noreferrer"}
       to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
    2. After installation, in VS Code choose "Open a Remote - WSL Window" and then "New WSL Window".
 
@@ -139,7 +139,6 @@ data-toggle="tab">Linux</a></li>
 4. [Install miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html){:target="_blank"}{:rel="noopener noreferrer"}
 5. Tell conda about which channels (sources) we will use
     ~~~
-    conda config --add channels bioconda
     conda config --add channels conda-forge
     ~~~
     {: .language-bash}
@@ -155,8 +154,7 @@ data-toggle="tab">Linux</a></li>
     {: .language-bash}
 8. Install cwltool and graphviz using conda
     ~~~
-    conda install -c bioconda cwltool
-    conda install -c anaconda graphviz
+    conda install cwltool graphviz wget git
     ~~~
     {: .language-bash}
 
