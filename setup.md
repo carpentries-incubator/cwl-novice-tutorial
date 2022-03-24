@@ -276,7 +276,10 @@ gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
 
 ### Generating STAR index
 To run the STAR tool, index files generated from the reference files are needed.
-This is a large directory (3.3 GB), so we will generate the file locally.
+
+This is a large directory (3.3 GB): you can download the directory at
+<https://drive.google.com/drive/folders/1twx9m5KZ96WvBoXUaeR0X3FVpuRqJ37_?usp=sharing>
+or you can generate it yourself:
 
 Create `dm6-star-index.yaml` in the the `novice-tutorial-exercises` directory:
 ~~~
