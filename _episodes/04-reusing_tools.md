@@ -54,10 +54,10 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > > inputs:
 > >   rna_reads_forward:
 > >     type: File
-> >     format: http://edamontology.org/format_1930  # FASTQ
+> >     format: https://edamontology.org/format_1930  # FASTQ
 > >   rna_reads_reverse:
 > >     type: File
-> >     format: http://edamontology.org/format_1930  # FASTQ
+> >     format: https://edamontology.org/format_1930  # FASTQ
 > >   ref_genome: Directory
 > >   gene_model: File
 > >
@@ -136,18 +136,18 @@ __workflow_input.yml__
 rna_reads_forward:
   class: File
   location: rnaseq/GSM461177_1_subsampled.fastqsanger
-  format: http://edamontology.org/format_1930  # FASTQ
+  format: https://edamontology.org/format_1930  # FASTQ
 rna_reads_reverse:
   class: File
   location: rnaseq/GSM461177_2_subsampled.fastqsanger
-  format: http://edamontology.org/format_1930  # FASTQ
+  format: https://edamontology.org/format_1930  # FASTQ
 ref_genome:
   class: Directory
   location: rnaseq/dm6-STAR-index
 gene_model:
   class: File
   location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
-  format: http://edamontology.org/format_2306
+  format: https://edamontology.org/format_2306
 ~~~
 {: .language-yaml}
 
