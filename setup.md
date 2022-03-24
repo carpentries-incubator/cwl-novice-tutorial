@@ -135,17 +135,23 @@ data-toggle="tab">Linux</a></li>
 2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
 3. [Install docker](https://docs.docker.com/desktop/mac/install){:target="_blank"}{:rel="noopener noreferrer"}
 4. [Install miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html){:target="_blank"}{:rel="noopener noreferrer"}
-5. Create a virtual environment using conda
+5. Tell conda about which channels (sources) we will use
+    ~~~
+    conda config --add channels bioconda
+    conda config --add channels conda-forge
+    ~~~
+    {: .language-bash}
+6. Create a virtual environment using conda
     ~~~
     conda create --name cwltutorial
     ~~~
     {: .language-bash}
-6. Activate the virtual environment
+7. Activate the virtual environment
     ~~~
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-7. Install cwltool and graphviz using conda
+8. Install cwltool and graphviz using conda
     ~~~
     conda install -c bioconda cwltool
     conda install -c anaconda graphviz
