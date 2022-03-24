@@ -7,7 +7,9 @@ title: Setup
 These lessons assume that you are using the freely available Visual Studio Code application with the
 Benten extension along with the CWL reference runner (`cwltool`).
 
-Please follow the instructions for your computer's operating system by clicking on the relevant tab below.
+This tutorial requires three pieces of software to run and visualize the workflows: Docker, cwltool, and graphviz.
+
+Please follow instructions for your OS by clicking on the relevant tab below.
 
 {::options parse_block_html="true" /}
 <div>
@@ -230,5 +232,73 @@ You should see something similar to the output shown below.
 dot - graphviz version 2.43.0 (0)
 ~~~
 {: .output}
+
+
+## Files
+
+You will need to install some example files for this lesson. In this tutorial we will use RNA sequencing data.
+
+### Setting up a practice repository
+For this tutorial some existing tools are needed to build the workflow. These existing tools will be imported via GitHub.
+First we need to create an empty git repository for all our files. To do this, use this command:
+~~~
+git init novice-tutorial-exercises
+~~~
+{: .language-bash}
+
+Next, we need to move into our empty git repo:
+
+~~~
+cd novice-tutorial-exercises
+~~~
+{: .language-bash}
+
+Then import bio-cwl-tools with this command:
+~~~
+git submodule add https://github.com/common-workflow-library/bio-cwl-tools.git
+~~~
+{: .language-bash}
+
+### Downloading sample and reference data
+Create a new directory inside the `novice-tutorial-exercises` directory and download the data:
+~~~
+mkdir rnaseq
+cd rnaseq
+wget https://zenodo.org/record/4541751/files/GSM461177_1_subsampled.fastqsanger
+wget https://zenodo.org/record/4541751/files/GSM461177_2_subsampled.fastqsanger
+wget https://zenodo.org/record/4541751/files/GSM461180_1_subsampled.fastqsanger
+wget https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
+wget https://zenodo.org/record/4541751/files/Drosophila_melanogaster.BDGP6.87.gtf
+wget https://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz
+gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
+~~~
+{: .language-bash}
+
+### Generating STAR index
+To run the STAR tool, index files generated from the reference files are needed.
+
+This is a large directory (3.3 GB): you can download the directory at
+<https://drive.google.com/drive/folders/1twx9m5KZ96WvBoXUaeR0X3FVpuRqJ37_?usp=sharing>
+or you can generate it yourself:
+
+Create `dm6-star-index.yaml` in the the `novice-tutorial-exercises` directory:
+~~~
+InputFiles:
+  - class: File
+    location: rnaseq/dm6.fa
+    format: http://edamontology.org/format_1929  # FASTA
+IndexName: 'dm6-STAR-index'
+Overhang: 36
+Gtf:
+  class: File
+  location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
+~~~
+{: .language-yaml}
+
+Generate the index files with `cwltool`:
+~~~
+cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
+~~~
+{: .language-bash}
 
 {% include links.md %}

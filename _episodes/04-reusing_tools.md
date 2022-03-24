@@ -52,16 +52,36 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > > class: Workflow
 > >
 > > inputs:
-> >   rna_reads_human: File
+> >   rna_reads_forward:
+> >     type: File
+> >     format: http://edamontology.org/format_1930  # FASTQ
+> >   rna_reads_reverse:
+> >     type: File
+> >     format: http://edamontology.org/format_1930  # FASTQ
 > >   ref_genome: Directory
-> >   annotations: File
+> >   gene_model: File
 > >
 > > steps:
-> >   quality_control:
+> >   quality_control_forward:
 > >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 > >     in:
-> >       reads_file: rna_reads_human
+> >       reads_file: rna_reads_forward
 > >     out: [html_file]
+> >
+> >   quality_control_reverse:
+> >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
+> >     in:
+> >       reads_file: rna_reads_reverse
+> >     out: [html_file]
+> >
+> >   trim_low_quality_bases:
+> >     run: bio-cwl-tools/cutadapt/cutadapt-paired.cwl
+> >     in:
+> >       reads_1: rna_reads_forward
+> >       reads_2: rna_reads_reverse
+> >       minimum_length: { default: 20 }
+> >       quality_cutoff: { default: 20 }
+> >     out: [ trimmed_reads_1, trimmed_reads_2, report ]
 > >
 > >   mapping_reads:
 > >     requirements:
@@ -71,10 +91,13 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > >     in:
 > >       RunThreadN: {default: 4}
 > >       GenomeDir: ref_genome
-> >       ForwardReads: rna_reads_human
+> >       ForwardReads: trim_low_quality_bases/trimmed_reads_1
+> >       ReverseReads: trim_low_quality_bases/trimmed_reads_2
 > >       OutSAMtype: {default: BAM}
 > >       SortedByCoordinate: {default: true}
 > >       OutSAMunmapped: {default: Within}
+> >       Overhang: { default: 36 }  # the length of the reads - 1
+> >       Gtf: gene_model
 > >     out: [alignment]
 > >
 > >   index_alignment:
@@ -90,13 +113,10 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > >     run: bio-cwl-tools/subread/featureCounts.cwl
 > >     in:
 > >       mapped_reads: index_alignment/bam_sorted_indexed
-> >       annotations: annotations
+> >       annotations: gene_model
 > >     out: [featurecounts]
 > >
 > > outputs:
-> >   qc_html:
-> >     type: File
-> >     outputSource: quality_control/html_file
 > >   bam_sorted_indexed:
 > >     type: File
 > >     outputSource: index_alignment/bam_sorted_indexed
@@ -113,16 +133,20 @@ The last entry in the input file is the `annotations` file.
 
 __workflow_input.yml__
 ~~~
-rna_reads_human:
+rna_reads_forward:
   class: File
-  location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
-  format: http://edamontology.org/format_1930
+  location: rnaseq/GSM461177_1_subsampled.fastqsanger
+  format: http://edamontology.org/format_1930  # FASTQ
+rna_reads_reverse:
+  class: File
+  location: rnaseq/GSM461177_2_subsampled.fastqsanger
+  format: http://edamontology.org/format_1930  # FASTQ
 ref_genome:
   class: Directory
-  location: rnaseq/hg19-chr1-STAR-index
-annotations:
+  location: rnaseq/dm6-STAR-index
+gene_model:
   class: File
-  location: rnaseq/reference_data/chr1-hg19_genes.gtf
+  location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
   format: http://edamontology.org/format_2306
 ~~~
 {: .language-yaml}

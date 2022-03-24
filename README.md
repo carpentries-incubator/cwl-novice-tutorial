@@ -24,9 +24,12 @@ by Scott Chacon.
 Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%20issue-gold.svg). This indicates that the mantainers will welcome a pull request fixing this issue.
 
 
+Thanks to https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html
+for inspiration.
+
 ## Maintainer(s)
 
-Current maintainers of this lesson are 
+Current maintainers of this lesson are
 
 * FIXME
 * FIXME
