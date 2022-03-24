@@ -7,17 +7,8 @@ title: Setup
 These lessons assume that you are using the freely available Visual Studio Code application with the
 Benten extension along with the CWL reference runner (`cwltool`).
 
-### VSCode and Benten
-
-1. Download and install [VSCode](https://code.visualstudio.com/).
-
-2. [Open Benten in the marketplace][Benten] and click the `Install` button or follow the directions.
-   The VSCode Benten extension will require the Benten server to be installed too.
-   It will prompt you to do this the first time you activate the extension.
-
-
-### Docker, cwltool, and graphviz
 This tutorial requires three pieces of software to run and visualize the workflows: Docker, cwltool, and graphviz.
+
 Please follow instructions for your OS by clicking on the relevant tab below.
 
 {::options parse_block_html="true" /}
