@@ -154,17 +154,17 @@ cwlVersion: v1.2
 class: Workflow
 
 inputs:
-  rna_reads_human: File
+  rna_reads_fruitfly: File
 
 steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
     in:
-      reads_file: rna_reads_human
+      reads_file: rna_reads_fruitfly
     out: [html_file]
 
 outputs:
-  qc_html:
+  quality_report:
     type: File
     outputSource: quality_control/html_file
 ~~~
@@ -177,12 +177,12 @@ Let's take a closer look at the workflow. First the `inputs` field will be expla
 
 ~~~
 inputs:
-  rna_reads_human: File
+  rna_reads_fruitfly: File
 ~~~
 {: .language-yaml}
 
-Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. In this example the fastq file consists of human RNA reads.
-So we call the variable `rna_reads_human` and it has `File` as its type.
+Looking at the CWL script of the `fastqc` tool, it needs a fastq file as its input. In this example the fastq file consists of *Drosophila melanogaster* RNA reads.
+So we call the variable `rna_reads_fruitfly` and it has `File` as its type.
 To make this workflow interpretable for other researchers, self-explanatory and sensible variable names are used.
 
 > ## Input and output names
@@ -196,20 +196,20 @@ steps:
   quality_control:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
     in:
-      reads_file: rna_reads_human
+      reads_file: rna_reads_fruitfly
     out: [html_file]
 ~~~
 {: .language-yaml}
 
 Every step of a workflow needs a name, the first step of the workflow is called `quality_control`. Each step needs a `run` field, an `in` field and an `out` field.
 The `run` field contains the location of the CWL file of the tool to be run. The `in` field connects the `inputs` field to the `fastqc` tool.
-The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_human`.
+The `fastqc` tool has an input parameter called `reads_file`, so it needs to connect the `reads_file` to `rna_reads_fruitfly`.
 Lastly, the `out` field is a list of output parameters from the tool to be used. In this example, the `fastqc` tool produces an output file called `html_file`.
 
 The last part of the script is the `output` field.
 ~~~
 outputs:
-  qc_html:
+  quality_report:
     type: File
     outputSource: quality_control/html_file
 ~~~
@@ -224,16 +224,18 @@ The input file is called `workflow_input.yml`
 
 __workflow_input.yml__
 ~~~
-rna_reads_human:
+rna_reads_fruitfly:
   class: File
-  location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
-  format: http://edamontology.org/format_1930
+  location: GSM461177_2_subsampled.fastqsanger
+  format: http://edamontology.org/format_1930  # FASTA
 ~~~
 {: .language-yaml}
 
 In the input file the values for the inputs that are declared in the `inputs` section of the workflow are provided.
-The workflow takes `rna_reads_human` as an input parameter, so we use the same variable name in the input file.
-When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`. The `location` field contains the location of the input file.
+The workflow takes `rna_reads_fruitfly` as an input parameter, so we use the same variable name in the input file.
+When setting inputs, the class of the object needs to be defined, for example `class: File` or `class: Directory`.
+The `location` field contains the location of the input file, in this case it is a local path, but
+we could have directly used the original url `location: https://zenodo.org/record/4541751/files/GSM461177_2_subsampled.fastqsanger`
 In this example the last line is needed to provide a format for the fastq file.
 
 Now you can run the workflow using the following command:
@@ -245,19 +247,19 @@ cwltool rna_seq_workflow.cwl workflow_input.yml
 
 ~~~
 ...
-Analysis complete for Mov10_oe_1.subset.fq
-INFO [job quality_control] Max memory used: 193MiB
+Analysis complete for GSM461177_2_subsampled.fastqsanger
+INFO [job quality_control] Max memory used: 179MiB
 INFO [job quality_control] completed success
 INFO [step quality_control] completed success
 INFO [workflow ] completed success
 {
-    "qc_html": {
-        "location": "file://.../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html",
-        "basename": "Mov10_oe_1.subset_fastqc.html",
+    "quality_report": {
+        "location": "file:///.../GSM461177_2_subsampled.fastqsanger_fastqc.html",
+        "basename": "GSM461177_2_subsampled.fastqsanger_fastqc.html",
         "class": "File",
-        "checksum": "sha1$46417ab64dd657ec50d86f7d23b2859bee74199f",
-        "size": 383589,
-        "path": ".../novice-tutorial-exercises/Mov10_oe_1.subset_fastqc.html"
+        "checksum": "sha1$e820c530b91a3087ae4c53a6f9fbd35ab069095c",
+        "size": 378324,
+        "path": "/.../GSM461177_2_subsampled.fastqsanger_fastqc.html"
     }
 }
 INFO Final process status is success
@@ -266,6 +268,8 @@ INFO Final process status is success
 
 ### Exercise
 Needs some exercises
+
+- Ask the students to get some information from each report generated for the different data files we've downloaded. This will involve them making simple changes to the yaml configuration file.
 
 
 {% include links.md %}

@@ -23,8 +23,8 @@ keypoints:
 ## Multi-Step Workflow
 In the previous episode a single step workflow was shown. To make a multi-step workflow, you add more entries to the `steps` field.
 In this episode, the workflow is extended with the next two steps of the RNA-sequencing analysis.
-The next two steps are alignment of the reads and indexing the alignments.
-We will be using the [`STAR`](https://bio.tools/star) and [`samtools`](https://bio.tools/samtools) tools for these tasks.
+The next two steps are triming the reads and alignment of the trimmed reads.
+We will be using the [`cutadapt`](https://bio.tools/cutadapt)  and [`STAR`](https://bio.tools/star) tools for these tasks.
 
 __rna_seq_workflow.cwl__
 ~~~
@@ -32,15 +32,36 @@ cwlVersion: v1.2
 class: Workflow
 
 inputs:
-  rna_reads_human: File
+  rna_reads_forward:
+    type: File
+    format: http://edamontology.org/format_1930  # FASTQ
+  rna_reads_reverse:
+    type: File
+    format: http://edamontology.org/format_1930  # FASTQ
   ref_genome: Directory
+  gene_model: File
 
 steps:
-  quality_control:
+  quality_control_forward:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
     in:
-      reads_file: rna_reads_human
+      reads_file: rna_reads_forward
     out: [html_file]
+
+  quality_control_reverse:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+    in:
+      reads_file: rna_reads_reverse
+    out: [html_file]
+
+  trim_low_quality_bases:
+    run: bio-cwl-tools/cutadapt/cutadapt-paired.cwl
+    in:
+      reads_1: rna_reads_forward
+      reads_2: rna_reads_reverse
+      minimum_length: { default: 20 }
+      quality_cutoff: { default: 20 }
+    out: [ trimmed_reads_1, trimmed_reads_2, report ]
 
   mapping_reads:
     requirements:
@@ -50,25 +71,22 @@ steps:
     in:
       RunThreadN: {default: 4}
       GenomeDir: ref_genome
-      ForwardReads: rna_reads_human
+      ForwardReads: trim_low_quality_bases/trimmed_reads_1
+      ReverseReads: trim_low_quality_bases/trimmed_reads_2
       OutSAMtype: {default: BAM}
       SortedByCoordinate: {default: true}
       OutSAMunmapped: {default: Within}
+      Overhang: { default: 36 }  # the length of the reads - 1
+      Gtf: gene_model
     out: [alignment]
 
-  index_alignment:
-    run: bio-cwl-tools/samtools/samtools_index.cwl
-    in:
-      bam_sorted: mapping_reads/alignment
-    out: [bam_sorted_indexed]
 
 outputs:
-  qc_html:
-    type: File
-    outputSource: quality_control/html_file
-  bam_sorted_indexed:
-    type: File
-    outputSource: index_alignment/bam_sorted_indexed
+  alignments:
+    type:
+      - File
+      - File[]
+    outputSource: mapping_reads/alignment
 ~~~
 {: .language-yaml}
 
@@ -88,13 +106,20 @@ This `ref_genome` is added in the `inputs` field of the workflow and in the YAML
 
 __workflow_input.yml__
 ~~~
-rna_reads_human:
+rna_reads_forward:
   class: File
-  location: rnaseq/raw_fastq/Mov10_oe_1.subset.fq
-  format: http://edamontology.org/format_1930
+  location: rnaseq/GSM461177_1_subsampled.fastqsanger
+  format: http://edamontology.org/format_1930  # FASTQ
+rna_reads_reverse:
+  class: File
+  location: rnaseq/GSM461177_2_subsampled.fastqsanger
+  format: http://edamontology.org/format_1930  # FASTQ
 ref_genome:
   class: Directory
-  location: hg19-chr1-STAR-index
+  location: rnaseq/dm6-STAR-index
+gene_model:
+  class: File
+  location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
 ~~~
 {: .language-yaml}
 
