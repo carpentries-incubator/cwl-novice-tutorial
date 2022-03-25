@@ -302,14 +302,14 @@ It should take 10-15 minutes for the index to be generated.
 
 > # Docker Requirements
 > To generate the index files you will need to allocate docker at least 9Gb of RAM. 
-> This can be done through the `Prefences`->`Resources` menu.  
+> This can be done through the `Preferences`->`Resources` menu.  
 >
 > If you do not allocate enough RAM the tool will not crash, but the process will stick
 > on the following step:
 > ```
 > ... sorting Suffix Array chunks and saving them to disk...
 > ```
-> If this step does not finished within 10 minutes then it is likely the process has failed,
+> If this step does not finish within 10 minutes then it is likely the process has failed,
 > and should be cancelled.
 {: .callout}
 
