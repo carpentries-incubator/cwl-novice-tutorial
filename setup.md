@@ -298,5 +298,19 @@ Generate the index files with `cwltool`:
 cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
 ~~~
 {: .language-bash}
+It should take 10-15 minutes for the index to be generated.
+
+> ## Docker Requirements
+> To generate the index files you will need to allocate docker at least 9Gb of RAM. 
+> This can be done through the `Preferences`->`Resources` menu.  
+>
+> If you do not allocate enough RAM the tool will not crash, but the process will stick
+> on the following step:
+> ```
+> ... sorting Suffix Array chunks and saving them to disk...
+> ```
+> If this step does not finish within 10 minutes then it is likely the process has failed,
+> and should be cancelled.
+{: .callout}
 
 {% include links.md %}
