@@ -301,8 +301,20 @@ cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
 It should take 10-15 minutes for the index to be generated.
 
 > ## Docker Requirements
-> To generate the index files you will need to allocate docker at least 9Gb of RAM. 
-> This can be done through the `Preferences`->`Resources` menu.  
+> To generate the index files you will need at least 9 GB of RAM. 
+> MacOS users can configure  Docker Desktop to allocate more memory from the menu "Preferences" and then selecting "Resources".
+> Windows users can configure WSL 2 to allocate more memory :
+> ```
+> # turn off all wsl instances such as docker-desktop
+> wsl --shutdown
+>
+> notepad "$env:USERPROFILE/.wslconfig"
+> ```
+> In `.wslconfig` add the following
+> ```
+> [wsl2]
+> memory=9GB
+> ```
 >
 > If you do not allocate enough RAM the tool will not crash, but the process will stick
 > on the following step:
