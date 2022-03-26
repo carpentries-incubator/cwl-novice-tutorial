@@ -272,14 +272,16 @@ gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
 ~~~
 {: .language-bash}
 
-### Generating STAR index
-To run the STAR tool, index files generated from the reference files are needed.
-
-This is a large directory (3.3 GB): you can download the directory at
+###  STAR Genome index
+To run the STAR aligner tool, index files generated from the reference genome are needed.
+  
+At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
+  
+If your computer doesn't have that much memory, then you can download the directory at
 <https://drive.google.com/drive/folders/1twx9m5KZ96WvBoXUaeR0X3FVpuRqJ37_?usp=sharing>
-or you can generate it yourself:
-
-Create `dm6-star-index.yaml` in the the `novice-tutorial-exercises` directory:
+  
+To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
+in the the `novice-tutorial-exercises` directory with the following contents:
 ~~~
 InputFiles:
   - class: File
@@ -293,17 +295,31 @@ Gtf:
 ~~~
 {: .language-yaml}
 
-Generate the index files with `cwltool`:
+Next use the CWL reference runner `cwltool` that you installed above and the CWL description
+for the indexing mode of the STAR aligner that was downloaded in the `bio-cwl-tools` directory
+to index the genome and place the result in the `rnaseq` directory alongside the other files:
 ~~~
 cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
 ~~~
 {: .language-bash}
 It should take 10-15 minutes for the index to be generated.
 
-> ## Docker Requirements
-> To generate the index files you will need at least 9 GB of RAM. 
-> MacOS users can configure  Docker Desktop to allocate more memory from the menu "Preferences" and then selecting "Resources".
-> Windows users can configure WSL 2 to allocate more memory :
+> ## STAR Index Memory Requirements
+> To generate the genome index you will need at least 9 GB of RAM.
+>
+> If you do not allocate enough RAM the tool will not crash, but the process will stick
+> on the following step:
+> ```
+> ... sorting Suffix Array chunks and saving them to disk...
+> ```
+> If this step does not finish within 10 minutes then it is likely the process has failed,
+> and should be cancelled.
+>
+> MacOS users can configure  Docker Desktop to allocate more memory
+> from the menu "Preferences" and then selecting "Resources".
+>
+> Windows users can configure WSL 2 to allocate more memory by opening the PowerShell
+> and entering the following:
 > ```
 > # turn off all wsl instances such as docker-desktop
 > wsl --shutdown
@@ -316,13 +332,8 @@ It should take 10-15 minutes for the index to be generated.
 > memory=9GB
 > ```
 >
-> If you do not allocate enough RAM the tool will not crash, but the process will stick
-> on the following step:
-> ```
-> ... sorting Suffix Array chunks and saving them to disk...
-> ```
-> If this step does not finish within 10 minutes then it is likely the process has failed,
-> and should be cancelled.
+> Save the file and right-click the Docker icon in the notifications area (or System tray)
+> and then click "Restart Docker…"
 {: .callout}
 
 {% include links.md %}
