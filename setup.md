@@ -278,7 +278,11 @@ To run the STAR aligner tool, index files generated from the reference genome ar
 At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
   
 If your computer doesn't have that much memory, then you can download the directory at
-<https://drive.google.com/drive/folders/1twx9m5KZ96WvBoXUaeR0X3FVpuRqJ37_?usp=sharing>
+by running the following in the `rnaseq` directory:
+ ~~~
+ wget https://dataverse.nl/api/access/datafile/266295 -O - | tar xJv
+ ~~~
+ {: .language-bash}
   
 To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
 in the the `novice-tutorial-exercises` directory with the following contents:
