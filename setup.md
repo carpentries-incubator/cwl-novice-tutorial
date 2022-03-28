@@ -66,7 +66,7 @@ data-toggle="tab">Linux</a></li>
       * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Ubuntu" button.
 5. Open a terminal and install tutorial prerequisites
    * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Ubuntu" VS Code window.
-   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget graphviz`
+   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget graphviz nodejs`
    * Paste it into the terminal window
    * Press <kbd>Return</kbd> to run it. You will need to use the UNIX password you set earlier.
 
@@ -121,14 +121,15 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-6.  Later we will make visualisations of our workflows. To support that we need to install graphviz.
-    Here is the command for Debian-based Linux systems:
-    ~~~
-    sudo apt-get install -y graphviz
-    ~~~
-    {: .language-bash}
+6.  Later we will make visualisations of our workflows. To support that we need to install `graphviz`.
+  
+       Here is the command for Debian-based Linux systems to install `graphviz` and other helpful programs:
+       ~~~
+       sudo apt-get install -y graphviz wget git nodejs
+       ~~~
+       {: .language-bash}
 
-    For other Linux systems, check <https://graphviz.org/download/#linux>
+      For other Linux systems, check <https://graphviz.org/download/#linux>
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
@@ -152,9 +153,9 @@ data-toggle="tab">Linux</a></li>
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-8. Install cwltool and graphviz using conda
+8. Install the CWL reference runner (`cwltool`), a some helper programs using conda
     ~~~
-    conda install cwltool graphviz wget git
+    conda install cwltool graphviz wget git nodejs
     ~~~
     {: .language-bash}
 
