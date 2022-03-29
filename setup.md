@@ -66,7 +66,7 @@ data-toggle="tab">Linux</a></li>
       * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Ubuntu" button.
 5. Open a terminal and install tutorial prerequisites
    * Choose "Terminal" > "New Terminal" from the menu in the "WSL : Ubuntu" VS Code window.
-   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget graphviz`
+   * Copy the following `sudo apt-get update && sudo apt-get install -y python3-venv wget graphviz nodejs`
    * Paste it into the terminal window
    * Press <kbd>Return</kbd> to run it. You will need to use the UNIX password you set earlier.
 
@@ -121,14 +121,15 @@ data-toggle="tab">Linux</a></li>
        pip install cwltool
        ~~~
        {: .language-bash}
-6.  Later we will make visualisations of our workflows. To support that we need to install graphviz.
-    Here is the command for Debian-based Linux systems:
-    ~~~
-    sudo apt-get install -y graphviz
-    ~~~
-    {: .language-bash}
+6.  Later we will make visualisations of our workflows. To support that we need to install `graphviz`.
+  
+       Here is the command for Debian-based Linux systems to install `graphviz` and other helpful programs:
+       ~~~
+       sudo apt-get install -y graphviz wget git nodejs
+       ~~~
+       {: .language-bash}
 
-    For other Linux systems, check <https://graphviz.org/download/#linux>
+      For other Linux systems, check <https://graphviz.org/download/#linux>
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
@@ -152,9 +153,9 @@ data-toggle="tab">Linux</a></li>
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-8. Install cwltool and graphviz using conda
+8. Install the CWL reference runner (`cwltool`), and some helper programs using conda
     ~~~
-    conda install cwltool graphviz wget git
+    conda install cwltool graphviz wget git nodejs
     ~~~
     {: .language-bash}
 
@@ -272,14 +273,20 @@ gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
 ~~~
 {: .language-bash}
 
-### Generating STAR index
-To run the STAR tool, index files generated from the reference files are needed.
-
-This is a large directory (3.3 GB): you can download the directory at
-<https://drive.google.com/drive/folders/1twx9m5KZ96WvBoXUaeR0X3FVpuRqJ37_?usp=sharing>
-or you can generate it yourself:
-
-Create `dm6-star-index.yaml` in the the `novice-tutorial-exercises` directory:
+###  STAR Genome index
+To run the STAR aligner tool, index files generated from the reference genome are needed.
+  
+At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
+  
+If your computer doesn't have that much memory, then you can download the directory at
+by running the following in the `rnaseq` directory:
+ ~~~
+ wget https://dataverse.nl/api/access/datafile/266295 -O - | tar xJv
+ ~~~
+ {: .language-bash}
+  
+To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
+in the the `novice-tutorial-exercises` directory with the following contents:
 ~~~
 InputFiles:
   - class: File
@@ -293,16 +300,17 @@ Gtf:
 ~~~
 {: .language-yaml}
 
-Generate the index files with `cwltool`:
+Next use the CWL reference runner `cwltool` that you installed above and the CWL description
+for the indexing mode of the STAR aligner that was downloaded in the `bio-cwl-tools` directory
+to index the genome and place the result in the `rnaseq` directory alongside the other files:
 ~~~
 cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
 ~~~
 {: .language-bash}
 It should take 10-15 minutes for the index to be generated.
 
-> ## Docker Requirements
-> To generate the index files you will need to allocate docker at least 9Gb of RAM. 
-> This can be done through the `Preferences`->`Resources` menu.  
+> ## STAR Index Memory Requirements
+> To generate the genome index you will need at least 9 GB of RAM.
 >
 > If you do not allocate enough RAM the tool will not crash, but the process will stick
 > on the following step:
@@ -311,6 +319,26 @@ It should take 10-15 minutes for the index to be generated.
 > ```
 > If this step does not finish within 10 minutes then it is likely the process has failed,
 > and should be cancelled.
+>
+> MacOS users can configure  Docker Desktop to allocate more memory
+> from the menu "Preferences" and then selecting "Resources".
+>
+> Windows users can configure WSL 2 to allocate more memory by opening the PowerShell
+> and entering the following:
+> ```
+> # turn off all wsl instances such as docker-desktop
+> wsl --shutdown
+>
+> notepad "$env:USERPROFILE/.wslconfig"
+> ```
+> In `.wslconfig` add the following
+> ```
+> [wsl2]
+> memory=9GB
+> ```
+>
+> Save the file and right-click the Docker icon in the notifications area (or System tray)
+> and then click "Restart Docker…"
 {: .callout}
 
 {% include links.md %}
