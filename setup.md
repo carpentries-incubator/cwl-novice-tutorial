@@ -153,7 +153,7 @@ data-toggle="tab">Linux</a></li>
     conda activate cwltutorial
     ~~~
     {: .language-bash}
-8. Install the CWL reference runner (`cwltool`), a some helper programs using conda
+8. Install the CWL reference runner (`cwltool`), and some helper programs using conda
     ~~~
     conda install cwltool graphviz wget git nodejs
     ~~~
