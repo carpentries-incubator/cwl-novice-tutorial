@@ -122,7 +122,7 @@ data-toggle="tab">Linux</a></li>
        ~~~
        {: .language-bash}
 6.  Later we will make visualisations of our workflows. To support that we need to install `graphviz`.
-  
+
        Here is the command for Debian-based Linux systems to install `graphviz` and other helpful programs:
        ~~~
        sudo apt-get install -y graphviz wget git nodejs
@@ -235,7 +235,7 @@ dot - graphviz version 2.43.0 (0)
 
 ## Files
 
-You will need to install some example files for this lesson. In this tutorial we will use RNA sequencing data.
+You will need to download some example files for this lesson. In this tutorial we will use RNA sequencing data.
 
 ### Setting up a practice repository
 For this tutorial some existing tools are needed to build the workflow. These existing tools will be imported via GitHub.
@@ -275,16 +275,16 @@ gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
 
 ###  STAR Genome index
 To run the STAR aligner tool, index files generated from the reference genome are needed.
-  
+
 At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
-  
+
 If your computer doesn't have that much memory, then you can download the directory at
 by running the following in the `rnaseq` directory:
  ~~~
  wget https://dataverse.nl/api/access/datafile/266295 -O - | tar xJv
  ~~~
  {: .language-bash}
-  
+
 To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
 in the the `novice-tutorial-exercises` directory with the following contents:
 ~~~
