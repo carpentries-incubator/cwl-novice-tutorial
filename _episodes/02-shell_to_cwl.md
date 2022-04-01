@@ -226,7 +226,7 @@ __workflow_input.yml__
 ~~~
 rna_reads_fruitfly:
   class: File
-  location: GSM461177_2_subsampled.fastqsanger
+  location: rnaseq/GSM461177_2_subsampled.fastqsanger
   format: http://edamontology.org/format_1930  # FASTA
 ~~~
 {: .language-yaml}
