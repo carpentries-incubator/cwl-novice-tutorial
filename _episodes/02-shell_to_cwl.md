@@ -41,6 +41,13 @@ tool descriptions into a workflow. In this lesson the differences between these 
 how to pass data to and from command-line tools and specify working environments for these, and finally
 how to use a tool description within a workflow.
 
+You should follow the examples in this lesson from your `novice-tutorial-exercises` directory.
+
+~~~
+$ cd novice-tutorial-exercises
+~~~
+{: .language-bash}
+
 ## Our first CWL script
 
 To demonstrate the basic requirements for a tool descriptor a CWL description for the popular "Hello world!" demonstration will be examined.
