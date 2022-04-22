@@ -7,7 +7,7 @@ questions:
 objectives:
 - "Know good resources for finding solutions to common problems"
 keypoints:
-- "[bio-cwl-tools][bio-cwl-tools] is a library of CWL documents for biology/life-sciences related tools"
+- "[bio-cwl-tools](https://github.com/common-workflow-library/bio-cwl-tools) is a library of CWL documents for biology/life-sciences related tools"
 ---
 
 ## Pre-written tool descriptions
