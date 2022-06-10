@@ -275,39 +275,45 @@ gunzip dm6.fa.gz  # STAR index requires an uncompressed reference genome
 
 ###  STAR Genome index
 To run the STAR aligner tool, index files generated from the reference genome are needed.
+The index files can be downloaded, or generated yourself from the unindexed reference genome.
+These two options are detailed below -- choose the one most appropriate to your set-up.
 
-At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
+1. Download the index
 
-If your computer doesn't have that much memory, then you can download the directory
-by running the following in the `rnaseq` directory:
- ~~~
- wget https://dataverse.nl/api/access/datafile/266295 -O - | tar xJv
- ~~~
- {: .language-bash}
+   At least 9 GB of memory is required to generate the index, which will occupy 3.3GB of disk.
 
-To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
-in the the `novice-tutorial-exercises` directory with the following contents:
-~~~
-InputFiles:
-  - class: File
-    location: rnaseq/dm6.fa
-    format: http://edamontology.org/format_1929  # FASTA
-IndexName: 'dm6-STAR-index'
-Overhang: 36
-Gtf:
-  class: File
-  location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
-~~~
-{: .language-yaml}
+   If your computer doesn't have that much memory, then you can download the directory
+   by running the following in the `rnaseq` directory:
+   ~~~
+   wget https://dataverse.nl/api/access/datafile/266295 -O - | tar xJv
+   ~~~
+   {: .language-bash}
 
-Next use the CWL reference runner `cwltool` that you installed above and the CWL description
-for the indexing mode of the STAR aligner that was downloaded in the `bio-cwl-tools` directory
-to index the genome and place the result in the `rnaseq` directory alongside the other files:
-~~~
-cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
-~~~
-{: .language-bash}
-It should take 10-15 minutes for the index to be generated.
+2. Generate the index yourself
+
+   To generate the genome index yourself: create a new file named `dm6-star-index.yaml`
+   in the the `novice-tutorial-exercises` directory with the following contents:
+   ~~~
+   InputFiles:
+     - class: File
+       location: rnaseq/dm6.fa
+       format: http://edamontology.org/format_1929  # FASTA
+   IndexName: 'dm6-STAR-index'
+   Overhang: 36
+   Gtf:
+     class: File
+     location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
+   ~~~
+   {: .language-yaml}
+
+   Next use the CWL reference runner `cwltool` that you installed above and the CWL description
+   for the indexing mode of the STAR aligner that was downloaded in the `bio-cwl-tools` directory
+   to index the genome and place the result in the `rnaseq` directory alongside the other files:
+   ~~~
+   cwltool --outdir rnaseq/ bio-cwl-tools/STAR/STAR-Index.cwl dm6-star-index.yaml
+   ~~~
+   {: .language-bash}
+   It should take 10-15 minutes for the index to be generated.
 
 > ## STAR Index Memory Requirements
 > To generate the genome index you will need at least 9 GB of RAM.
