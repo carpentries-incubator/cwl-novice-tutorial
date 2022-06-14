@@ -23,7 +23,7 @@ Some of these errors will be explained in this episode.
 
 As a first step to check if your CWL script contains any errors, you can run the workflow with the `--validate` flag.
 ~~~
-cwltool --validate CWL_SCRIPT.cwl
+$ cwltool --validate CWL_SCRIPT.cwl
 ~~~
 {: .language-bash}
 
@@ -31,7 +31,7 @@ It is possible that the script is validated, however, it still gets an error.
 If you encounter an error, the best practice is to run the workflow with the `--debug` flag.
 This will provide you with extensive information on the error you encounter.
 ~~~
-cwltool --debug CWL_SCRIPT.cwl
+$ cwltool --debug CWL_SCRIPT.cwl
 ~~~
 {: .language-bash}
 

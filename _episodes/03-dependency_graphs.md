@@ -174,7 +174,7 @@ It is also possible to generate the graph in the command line. `cwltool` has a f
 The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the command to generate a Scalable Vector Graphic (SVG) file:
 
 ~~~
-cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
+$ cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
 ~~~
 {: .language-bash}
 

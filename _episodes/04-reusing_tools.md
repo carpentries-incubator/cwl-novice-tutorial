@@ -153,7 +153,7 @@ gene_model:
 
 You have finished the workflow and the input file and now you can run the whole workflow.
 ~~~
-cwltool rna_seq_workflow.cwl workflow_input.yml
+$ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 

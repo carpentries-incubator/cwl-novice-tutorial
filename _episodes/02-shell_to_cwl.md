@@ -80,7 +80,7 @@ message_text: Hello world!
 We will use the reference CWL runner, `cwltool` to run this CWL document (the `.cwl` workflow file) along with the `.yml` input file.
 
 ~~~
-cwltool echo.cwl hello_world.yml
+$ cwltool echo.cwl hello_world.yml
 ~~~
 {: .language-bash}
 
@@ -248,7 +248,7 @@ In this example the last line is needed to provide a format for the fastq file.
 Now you can run the workflow using the following command:
 
 ~~~
-cwltool rna_seq_workflow.cwl workflow_input.yml
+$ cwltool rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
