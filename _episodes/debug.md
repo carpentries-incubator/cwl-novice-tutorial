@@ -194,7 +194,6 @@ Some very common YAML errors are:
       type: File
       outputSource: count_reads/featurecounts
   ~~~
-  {: .language-bash}
 
   ~~~
   $ cwltool rna_seq_workflow.cwl workflow_input.yml
