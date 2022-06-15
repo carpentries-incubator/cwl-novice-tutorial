@@ -131,7 +131,7 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 The workflow is complete and we only need to complete the YAML input file.
 The last entry in the input file is the `annotations` file.
 
-__workflow_input.yml__
+__workflow_input3.yml__
 ~~~
 rna_reads_forward:
   class: File
@@ -153,7 +153,7 @@ gene_model:
 
 You have finished the workflow and the input file and now you can run the whole workflow.
 ~~~
-cwltool rna_seq_workflow.cwl workflow_input.yml
+cwltool rna_seq_workflow2.cwl workflow_input3.yml
 ~~~
 {: .language-bash}
 
