@@ -297,7 +297,7 @@ These two options are detailed below -- choose the one most appropriate to your 
    InputFiles:
      - class: File
        location: rnaseq/dm6.fa
-       format: http://edamontology.org/format_1929  # FASTA
+       format: https://edamontology.org/format_1929  # FASTA
    IndexName: 'dm6-STAR-index'
    Overhang: 36
    Gtf:
