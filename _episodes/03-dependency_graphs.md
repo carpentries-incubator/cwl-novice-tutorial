@@ -26,7 +26,7 @@ In this episode, the workflow is extended with the next two steps of the RNA-seq
 The next two steps are triming the reads and alignment of the trimmed reads.
 We will be using the [`cutadapt`](https://bio.tools/cutadapt)  and [`STAR`](https://bio.tools/star) tools for these tasks.
 
-__rna_seq_workflow.cwl__
+__rna_seq_workflow2.cwl__
 ~~~
 cwlVersion: v1.2
 class: Workflow
@@ -102,9 +102,9 @@ To run the tool better, it needs more RAM than the default. So there is a `requi
 
 The newly added `mapping_reads` step also need an input not provided by any of our other steps, therefore an additional workflow-level input is added: a directory that contains the reference genome necessary for the mapping.
 
-This `ref_genome` is added in the `inputs` field of the workflow and in the YAML input file, `workflow_input.yml`.
+This `ref_genome` is added in the `inputs` field of the workflow and in the YAML input file, `workflow_input2.yml`.
 
-__workflow_input.yml__
+__workflow_input2.yml__
 ~~~
 rna_reads_forward:
   class: File
@@ -174,7 +174,7 @@ It is also possible to generate the graph in the command line. `cwltool` has a f
 The `--print-dot` option will print a file suitable for Graphviz `dot` program. This is the command to generate a Scalable Vector Graphic (SVG) file:
 
 ~~~
-cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
+cwltool --print-dot rna_seq_workflow2.cwl | dot -Tsvg > workflow_graph.svg
 ~~~
 {: .language-bash}
 
