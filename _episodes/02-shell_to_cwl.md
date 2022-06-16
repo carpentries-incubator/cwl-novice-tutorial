@@ -1,5 +1,5 @@
 ---
-title: "CWL and Shell Tools"
+title: "2. CWL and Shell Tools"
 teaching: 0
 exercises: 0
 questions:
