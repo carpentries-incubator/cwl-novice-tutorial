@@ -1,5 +1,5 @@
 ---
-title: "Resources for Reusing Tools and Scripts"
+title: "4. Resources for Reusing Tools and Scripts"
 teaching: 0
 exercises: 0
 questions:
