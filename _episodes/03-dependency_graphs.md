@@ -1,5 +1,5 @@
 ---
-title: "Developing Multi-Step Workflows"
+title: "3. Developing Multi-Step Workflows"
 teaching: 0
 exercises: 0
 questions:
