@@ -1,5 +1,5 @@
 ---
-title: "More information"
+title: "6. More information"
 ---
 
 If you want to know more about CWL script and workflows, you can look at one of these websites:
