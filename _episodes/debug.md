@@ -1,5 +1,5 @@
 ---
-title: "Debugging Workflows"
+title: "5. Debugging Workflows"
 teaching: 0
 exercises: 0
 questions:
