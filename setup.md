@@ -137,10 +137,10 @@ data-toggle="tab">Linux</a></li>
 > this service you will need to take the following steps, to ensure docker will work properly.
 > ~~~
 > mkdir ~/tmp
-> export TMPDIR="~/tmp"
+> export TMPDIR=~/tmp
 > ~~~
 > {: .language-bash}
-> Each time you open a new terminal you will have to enter the `export TMPDIR="~/tmp"` command, 
+> Each time you open a new terminal you will have to enter the `export TMPDIR=~/tmp` command, 
 > or you can add it to your `~/.profile` or `~/.bashrc` file.
 {: .callout}
 
