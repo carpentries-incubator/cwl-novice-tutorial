@@ -130,6 +130,17 @@ data-toggle="tab">Linux</a></li>
        {: .language-bash}
 
       For other Linux systems, check <https://graphviz.org/download/#linux>
+> ## Extra action if you install Docker using Snap
+> [Snap](https://snapcraft.io/) is an app management system for linux - which is popular on 
+> Ubuntu and other systems. Docker is available via Snap - if you have installed it using 
+> this service you will need to take the following steps, to ensure docker will work properly.
+> ~~~
+> mkdir ~/tmp
+> export TMPDIR="~/tmp"
+> ~~~
+> {: .language-bash}
+> Each time you open a new terminal you will have to enter the `export TMPDIR="~/tmp"` command, 
+> or you can add it to your `~/.profile` or `~/.bashrc` file.
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
