@@ -141,6 +141,7 @@ data-toggle="tab">Linux</a></li>
 > {: .language-bash}
 > Each time you open a new terminal you will have to enter the `export TMPDIR="~/tmp"` command, 
 > or you can add it to your `~/.profile` or `~/.bashrc` file.
+{: .callout}
 </article>
 
 <article role="tabpanel" class="tab-pane" id="macos">
