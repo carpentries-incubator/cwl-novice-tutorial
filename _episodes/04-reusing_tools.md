@@ -135,7 +135,8 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 {: .challenge}
 
 The workflow is complete and we only need to complete the YAML input file.
-The last entry in the input file is the `annotations` file.
+Please copy the `workflow_input_2.yml` file to `workflow_input_3.yml`, and
+add the last entry in the input file, which is the `fruitfly_gene_model` file.
 
 __workflow_input_3.yml__
 ~~~
