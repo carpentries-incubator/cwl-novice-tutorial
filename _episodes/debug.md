@@ -44,68 +44,68 @@ Some very common YAML errors are:
 Using tabs instead of spaces. In YAML files indentations are made using spaces, not tabs.
   Please download and run [this example][tab-error] which includes a tab character.
 
-  ~~~
-  $ cwltool tab-error.cwl workflow_input.yml
-  ~~~
-  {: .language-bash}
+~~~
+$ cwltool tab-error.cwl workflow_input.yml
+~~~
+{: .language-bash}
 
-  ~~~
-  ERROR Tool definition failed validation:
-  while scanning for the next token
-  file:///tab-error.cwl:5:1:   found character '\t' that cannot start any token
-  ~~~
-  {: .error}
+~~~
+ERROR Tool definition failed validation:
+while scanning for the next token
+file:///tab-error.cwl:5:1:   found character '\t' that cannot start any token
+~~~
+{: .error}
 
 #### Field Name Typos
 
 Typos in field names. It is very easy to forget for example the capital letters in field names.
   Errors with typos in field names will show `invalid field`.
 
-  __rna_seq_workflow_fieldname_fail.cwl__
-  ~~~
-  cwlVersion: v1.2
-  class: Workflow
+__rna_seq_workflow_fieldname_fail.cwl__
+~~~
+cwlVersion: v1.2
+class: Workflow
 
-  inputs:
-    rna_reads_fruitfly: File
-    ref_fruitfly_genome: Directory
+inputs:
+  rna_reads_fruitfly: File
+  ref_fruitfly_genome: Directory
 
-  steps:
-    quality_control:
-      run: bio-cwl-tools/fastqc/fastqc_2.cwl
-      in:
-        reads_file: rna_reads_fruitfly
-      out: [html_file]
+steps:
+  quality_control:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+    in:
+      reads_file: rna_reads_fruitfly
+    out: [html_file]
 
-    mapping_reads:
-      requirements:
-        ResourceRequirement:
-          ramMin: 5120
-      run: bio-cwl-tools/STAR/STAR-Align.cwl
-      in:
-        RunThreadN: {default: 4}
-        GenomeDir: ref_fruitfly_genome
-        ForwardReads: rna_reads_fruitfly
-        OutSAMtype: {default: BAM}
-        SortedByCoordinate: {default: true}
-        OutSAMunmapped: {default: Within}
-      out: [alignment]
+  mapping_reads:
+    requirements:
+      ResourceRequirement:
+        ramMin: 5120
+    run: bio-cwl-tools/STAR/STAR-Align.cwl
+    in:
+      RunThreadN: {default: 4}
+      GenomeDir: ref_fruitfly_genome
+      ForwardReads: rna_reads_fruitfly
+      OutSAMtype: {default: BAM}
+      SortedByCoordinate: {default: true}
+      OutSAMunmapped: {default: Within}
+    out: [alignment]
 
-    index_alignment:
-      run: bio-cwl-tools/samtools/samtools_index.cwl
-      in:
-        bam_sorted: mapping_reads/alignment
-      out: [bam_sorted_indexed]
+  index_alignment:
+    run: bio-cwl-tools/samtools/samtools_index.cwl
+    in:
+      bam_sorted: mapping_reads/alignment
+    out: [bam_sorted_indexed]
 
-  outputs:
-    qc_html:
-      type: File
-      outputsource: quality_control/html_file
-    bam_sorted_indexed:
-      type: File
-      outputSource: index_alignment/bam_sorted_indexed
-  ~~~
-  {: .language-yaml}
+outputs:
+  qc_html:
+    type: File
+    outputsource: quality_control/html_file
+  bam_sorted_indexed:
+    type: File
+    outputSource: index_alignment/bam_sorted_indexed
+~~~
+{: .language-yaml}
 
 __workflow_input_debug.yml__
 ~~~
@@ -120,90 +120,91 @@ ref_fruitfly_genome:
 {: .language-yaml}
 
 
-  ~~~
-  $ cwltool rna_seq_workflow_fieldname_fail.cwl workflow_input_debug.yml
-  ~~~
-  {: .language-bash}
+~~~
+$ cwltool rna_seq_workflow_fieldname_fail.cwl workflow_input_debug.yml
+~~~
+{: .language-bash}
 
-  ~~~
-  ERROR Tool definition failed validation:
-  rna_seq_workflow_fieldname_fail.cwl:1:1:   Object `rna_seq_workflow_fieldname_fail.cwl` is not valid because
-                               tried `Workflow` but
-  rna_seq_workflow_fieldname_fail.cwl:46:1:     the `outputs` field is not valid because
-  rna_seq_workflow_fieldname_fail.cwl:47:3:       item is invalid because
-  rna_seq_workflow_fieldname_fail.cwl:49:5:         invalid field `outputsource`, expected one of: 'label',
-                                     'secondaryFiles', 'streamable', 'doc', 'id', 'format', 'outputSource',
-                                     'linkMerge', 'pickValue', 'type'
-  ~~~
-  {: .error}
+~~~
+ERROR Tool definition failed validation:
+rna_seq_workflow_fieldname_fail.cwl:1:1:   Object `rna_seq_workflow_fieldname_fail.cwl` is not valid because
+                             tried `Workflow` but
+rna_seq_workflow_fieldname_fail.cwl:46:1:     the `outputs` field is not valid because
+rna_seq_workflow_fieldname_fail.cwl:47:3:       item is invalid because
+rna_seq_workflow_fieldname_fail.cwl:49:5:         invalid field `outputsource`, expected one of: 'label',
+                                   'secondaryFiles', 'streamable', 'doc', 'id', 'format', 'outputSource',
+                                   'linkMerge', 'pickValue', 'type'
+~~~
+{: .error}
 
 #### Variable Name Typos
  Typos in variable names. Similar to typos in field names, it is easy to make a mistake in referencing to a variable.
   These errors will show `Field references unknown identifier.`
 
-  __rna_seq_workflow_varname_fail.cwl__
-  ~~~
-  cwlVersion: v1.2
-  class: Workflow
 
-  inputs:
-    rna_reads_fruitfly: File
-    ref_fruitfly_genome: Directory
+__rna_seq_workflow_varname_fail.cwl__
+~~~
+cwlVersion: v1.2
+class: Workflow
 
-  steps:
-    quality_control:
-      run: bio-cwl-tools/fastqc/fastqc_2.cwl
-      in:
-        reads_file: rna_reads_fruitfly
-      out: [html_file]
+inputs:
+  rna_reads_fruitfly: File
+  ref_fruitfly_genome: Directory
 
-    mapping_reads:
-      requirements:
-        ResourceRequirement:
-          ramMin: 5120
-      run: bio-cwl-tools/STAR/STAR-Align.cwl
-      in:
-        RunThreadN: {default: 4}
-        GenomeDir: ref_fruitfly_genome
-        ForwardReads: rna_reads_fruitfly
-        OutSAMtype: {default: BAM}
-        SortedByCoordinate: {default: true}
-        OutSAMunmapped: {default: Within}
-      out: [alignment]
+steps:
+  quality_control:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+    in:
+      reads_file: rna_reads_fruitfly
+    out: [html_file]
 
-    index_alignment:
-      run: bio-cwl-tools/samtools/samtools_index.cwl
-      in:
-        bam_sorted: mapping_reads/alignments
-      out: [bam_sorted_indexed]
+  mapping_reads:
+    requirements:
+      ResourceRequirement:
+        ramMin: 5120
+    run: bio-cwl-tools/STAR/STAR-Align.cwl
+    in:
+      RunThreadN: {default: 4}
+      GenomeDir: ref_fruitfly_genome
+      ForwardReads: rna_reads_fruitfly
+      OutSAMtype: {default: BAM}
+      SortedByCoordinate: {default: true}
+      OutSAMunmapped: {default: Within}
+    out: [alignment]
 
-  outputs:
-    qc_html:
-      type: File
-      outputSource: quality_control/html_file
-    bam_sorted_indexed:
-      type: File
-      outputSource: index_alignment/bam_sorted_indexed
-  ~~~
-  {: .language-yaml}
+  index_alignment:
+    run: bio-cwl-tools/samtools/samtools_index.cwl
+    in:
+      bam_sorted: mapping_reads/alignments
+    out: [bam_sorted_indexed]
 
-  ~~~
-  $ cwltool rna_seq_workflow_varname_fail.cwl workflow_input_debug.yml
-  ~~~
-  {: .language-bash}
+outputs:
+  qc_html:
+    type: File
+    outputSource: quality_control/html_file
+  bam_sorted_indexed:
+    type: File
+    outputSource: index_alignment/bam_sorted_indexed
+~~~
+{: .language-yaml}
 
-  ~~~
-  ERROR Tool definition failed validation:
-  rna_seq_workflow_varname_fail.cwl:9:1:  checking field `steps`
-  rna_seq_workflow_varname_fail.cwl:30:3:   checking object `rna_seq_workflow_varname_fail.cwl#index_alignment`
-  rna_seq_workflow_varname_fail.cwl:32:5:     checking field `in`
-  rna_seq_workflow_varname_fail.cwl:33:7:       checking object `rna_seq_workflow_varname_fail.cwl#index_alignment/bam_sorted`
-                                     Field `source` references unknown identifier
-                                     `mapping_reads/alignments`, tried
-                                     file:///.../rna_seq_workflow_varname_fail.cwl#mapping_reads/alignments
+~~~
+$ cwltool rna_seq_workflow_varname_fail.cwl workflow_input_debug.yml
+~~~
+{: .language-bash}
 
-  ~~~
-  {: .error}
+~~~
+ERROR Tool definition failed validation:
+rna_seq_workflow_varname_fail.cwl:9:1:  checking field `steps`
+rna_seq_workflow_varname_fail.cwl:30:3:   checking object `rna_seq_workflow_varname_fail.cwl#index_alignment`
+rna_seq_workflow_varname_fail.cwl:32:5:     checking field `in`
+rna_seq_workflow_varname_fail.cwl:33:7:       checking object `rna_seq_workflow_varname_fail.cwl#index_alignment/bam_sorted`
+                                   Field `source` references unknown identifier
+                                   `mapping_reads/alignments`, tried
+                                   file:///.../rna_seq_workflow_varname_fail.cwl#mapping_reads/alignments
+
+~~~
+{: .error}
 
 ### Wiring error
 Wiring errors often occur when you forget to add an output from a workflow's step to the `outputs` section.
@@ -283,51 +284,51 @@ rna_seq_workflow_type_fail.cwl:12:7:   with sink 'reads_file' of type ["File"]
 Some files need a specific format that needs to be specified in the YAML inputs file, for example the fastq file in the RNA-seq analysis.
 When you don't specify a format, an error will occur. You can for example use the [EDAM](https://www.ebi.ac.uk/ols/ontologies/edam) ontology.
 
-  __rna_seq_workflow_debug.cwl__
-  ~~~
-  cwlVersion: v1.2
-  class: Workflow
+__rna_seq_workflow_debug.cwl__
+~~~
+cwlVersion: v1.2
+class: Workflow
 
-  inputs:
-    rna_reads_fruitfly: File
-    ref_fruitfly_genome: Directory
+inputs:
+  rna_reads_fruitfly: File
+  ref_fruitfly_genome: Directory
 
-  steps:
-    quality_control:
-      run: bio-cwl-tools/fastqc/fastqc_2.cwl
-      in:
-        reads_file: rna_reads_fruitfly
-      out: [html_file]
+steps:
+  quality_control:
+    run: bio-cwl-tools/fastqc/fastqc_2.cwl
+    in:
+      reads_file: rna_reads_fruitfly
+    out: [html_file]
 
-    mapping_reads:
-      requirements:
-        ResourceRequirement:
-          ramMin: 5120
-      run: bio-cwl-tools/STAR/STAR-Align.cwl
-      in:
-        RunThreadN: {default: 4}
-        GenomeDir: ref_fruitfly_genome
-        ForwardReads: rna_reads_fruitfly
-        OutSAMtype: {default: BAM}
-        SortedByCoordinate: {default: true}
-        OutSAMunmapped: {default: Within}
-      out: [alignment]
+  mapping_reads:
+    requirements:
+      ResourceRequirement:
+        ramMin: 5120
+    run: bio-cwl-tools/STAR/STAR-Align.cwl
+    in:
+      RunThreadN: {default: 4}
+      GenomeDir: ref_fruitfly_genome
+      ForwardReads: rna_reads_fruitfly
+      OutSAMtype: {default: BAM}
+      SortedByCoordinate: {default: true}
+      OutSAMunmapped: {default: Within}
+    out: [alignment]
 
-    index_alignment:
-      run: bio-cwl-tools/samtools/samtools_index.cwl
-      in:
-        bam_sorted: mapping_reads/alignment
-      out: [bam_sorted_indexed]
+  index_alignment:
+    run: bio-cwl-tools/samtools/samtools_index.cwl
+    in:
+      bam_sorted: mapping_reads/alignment
+    out: [bam_sorted_indexed]
 
-  outputs:
-    qc_html:
-      type: File
-      outputSource: quality_control/html_file
-    bam_sorted_indexed:
-      type: File
-      outputSource: index_alignment/bam_sorted_indexed
-  ~~~
-  {: .language-yaml}
+outputs:
+  qc_html:
+    type: File
+    outputSource: quality_control/html_file
+  bam_sorted_indexed:
+    type: File
+    outputSource: index_alignment/bam_sorted_indexed
+~~~
+{: .language-yaml}
 
 
 __workflow_input_undefined.yml__
