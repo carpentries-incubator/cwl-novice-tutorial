@@ -34,7 +34,7 @@ the separate forward and reverse RNA reads. Likewise, the `rna_reads_fruitfly` i
 `rna_reads_fruitfly_forward`, and an `rna_reads_fruitfly_reverse` input is added.
 
 
-__rna_seq_workflow.cwl__
+__rna_seq_workflow_2.cwl__
 ~~~
 cwlVersion: v1.2
 class: Workflow
@@ -46,8 +46,8 @@ inputs:
   rna_reads_fruitfly_reverse:
     type: File
     format: https://edamontology.org/format_1930  # FASTQ
-  ref_genome: Directory
-  gene_model: File
+  ref_fruitfly_genome: Directory
+  fruitfly_gene_model: File
 
 steps:
   quality_control_forward:
@@ -78,14 +78,14 @@ steps:
     run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}
-      GenomeDir: ref_genome
+      GenomeDir: ref_fruitfly_genome
       ForwardReads: trim_low_quality_bases/trimmed_reads_1
       ReverseReads: trim_low_quality_bases/trimmed_reads_2
       OutSAMtype: {default: BAM}
       SortedByCoordinate: {default: true}
       OutSAMunmapped: {default: Within}
       Overhang: { default: 36 }  # the length of the reads - 1
-      Gtf: gene_model
+      Gtf: fruitfly_gene_model
     out: [alignment]
 
   index_alignment:
@@ -126,10 +126,10 @@ The newly added `mapping_reads` step also need an input not provided by any of o
 therefore an additional workflow-level input is added: a directory that contains the reference genome
 necessary for the mapping.
 
-This `ref_genome` is added in the `inputs` field of the workflow and in the YAML input file,
-`workflow_input.yml`.
+This `ref_fruitfly_genome` is added in the `inputs` field of the workflow and in the YAML input file,
+`workflow_input_2.yml`.
 
-__workflow_input.yml__
+__workflow_input_2.yml__
 ~~~
 rna_reads_fruitfly_forward:
   class: File
@@ -139,10 +139,10 @@ rna_reads_fruitfly_reverse:
   class: File
   location: rnaseq/GSM461177_2_subsampled.fastqsanger
   format: https://edamontology.org/format_1930  # FASTQ
-ref_genome:
+ref_fruitfly_genome:
   class: Directory
   location: rnaseq/dm6-STAR-index
-gene_model:
+fruitfly_gene_model:
   class: File
   location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
 ~~~
@@ -209,7 +209,7 @@ graph. The `--print-dot` option will print a file suitable for Graphviz `dot` pr
 command to generate a Scalable Vector Graphic (SVG) file:
 
 ~~~
-cwltool --print-dot rna_seq_workflow.cwl | dot -Tsvg > workflow_graph.svg
+cwltool --print-dot rna_seq_workflow_2.cwl | dot -Tsvg > workflow_graph_2.svg
 ~~~
 {: .language-bash}
 

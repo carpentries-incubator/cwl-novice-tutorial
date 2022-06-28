@@ -52,33 +52,33 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > > class: Workflow
 > >
 > > inputs:
-> >   rna_reads_forward:
+> >   rna_reads_fruitfly_forward:
 > >     type: File
 > >     format: https://edamontology.org/format_1930  # FASTQ
-> >   rna_reads_reverse:
+> >   rna_reads_fruitfly_reverse:
 > >     type: File
 > >     format: https://edamontology.org/format_1930  # FASTQ
-> >   ref_genome: Directory
-> >   gene_model: File
+> >   ref_fruitfly_genome: Directory
+> >   fruitfly_gene_model: File
 > >
 > > steps:
 > >   quality_control_forward:
 > >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 > >     in:
-> >       reads_file: rna_reads_forward
+> >       reads_file: rna_reads_fruitfly_forward
 > >     out: [html_file]
 > >
 > >   quality_control_reverse:
 > >     run: bio-cwl-tools/fastqc/fastqc_2.cwl
 > >     in:
-> >       reads_file: rna_reads_reverse
+> >       reads_file: rna_reads_fruitfly_reverse
 > >     out: [html_file]
 > >
 > >   trim_low_quality_bases:
 > >     run: bio-cwl-tools/cutadapt/cutadapt-paired.cwl
 > >     in:
-> >       reads_1: rna_reads_forward
-> >       reads_2: rna_reads_reverse
+> >       reads_1: rna_reads_fruitfly_forward
+> >       reads_2: rna_reads_fruitfly_reverse
 > >       minimum_length: { default: 20 }
 > >       quality_cutoff: { default: 20 }
 > >     out: [ trimmed_reads_1, trimmed_reads_2, report ]
@@ -90,14 +90,14 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > >     run: bio-cwl-tools/STAR/STAR-Align.cwl
 > >     in:
 > >       RunThreadN: {default: 4}
-> >       GenomeDir: ref_genome
+> >       GenomeDir: ref_fruitfly_genome
 > >       ForwardReads: trim_low_quality_bases/trimmed_reads_1
 > >       ReverseReads: trim_low_quality_bases/trimmed_reads_2
 > >       OutSAMtype: {default: BAM}
 > >       SortedByCoordinate: {default: true}
 > >       OutSAMunmapped: {default: Within}
 > >       Overhang: { default: 36 }  # the length of the reads - 1
-> >       Gtf: gene_model
+> >       Gtf: fruitfly_gene_model
 > >     out: [alignment]
 > >
 > >   index_alignment:
@@ -117,6 +117,12 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > >     out: [featurecounts]
 > >
 > > outputs:
+> >   quality_report_forward:
+> >     type: File
+> >     outputSource: quality_control_forward/html_file
+> >   quality_report_reverse:
+> >     type: File
+> >     outputSource: quality_control_reverse/html_file
 > >   bam_sorted_indexed:
 > >     type: File
 > >     outputSource: index_alignment/bam_sorted_indexed
@@ -131,20 +137,20 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 The workflow is complete and we only need to complete the YAML input file.
 The last entry in the input file is the `annotations` file.
 
-__workflow_input.yml__
+__workflow_input_2.yml__
 ~~~
-rna_reads_forward:
+rna_reads_fruitfly_forward:
   class: File
   location: rnaseq/GSM461177_1_subsampled.fastqsanger
   format: https://edamontology.org/format_1930  # FASTQ
-rna_reads_reverse:
+rna_reads_fruitfly_reverse:
   class: File
   location: rnaseq/GSM461177_2_subsampled.fastqsanger
   format: https://edamontology.org/format_1930  # FASTQ
-ref_genome:
+ref_fruitfly_genome:
   class: Directory
   location: rnaseq/dm6-STAR-index
-gene_model:
+fruitfly_gene_model:
   class: File
   location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
   format: https://edamontology.org/format_2306
@@ -153,7 +159,7 @@ gene_model:
 
 You have finished the workflow and the input file and now you can run the whole workflow.
 ~~~
-cwltool --cachedir cache rna_seq_workflow.cwl workflow_input.yml
+cwltool --cachedir cache rna_seq_workflow_2.cwl workflow_input_2.yml
 ~~~
 {: .language-bash}
 
