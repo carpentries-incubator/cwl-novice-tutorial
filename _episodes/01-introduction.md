@@ -57,7 +57,7 @@ being FAIR (Findable, Accessible, Interoperable, and Reusable)[^3].
 
 However as the rise in popularity of workflows has been matched by a rise in the number of
 disparate workflow managers that are available,
-each with their own standards for describing the tools and workflows, reducing portability
+each with their own syntax or methods for describing the tools and workflows, reducing portability
 and interoperability of these workflows.
 The Common Workflow Language (CWL) standard has been developed to address these problems,
 and to serve the general computational workflow needs described above.
@@ -95,8 +95,8 @@ to be run on your local machine, or in a HPC or cloud environment, with minimal 
 
 In this tutorial a bio-informatics RNA-sequencing analysis is used as an example. However,
 there is no specific knowledge needed for this tutorial.
-RNA-sequencing is a technique which examines the quantity and sequences of RNA in a sample
-using next-generation sequencing.
+RNA-sequencing is a technique which examines the quantity and sequences of
+[RNA](https://en.wikipedia.org/wiki/RNA) in a sample using next-generation sequencing.
 The RNA reads are analyzed to measure the relative numbers of different RNA molecules in
 the sample. This analysis is differential gene expression.
 
