@@ -16,7 +16,7 @@ After following one of these tutorials, learners will be able to:
 - Know that all output files must be explicitly captured and how to do so
     - How to capture the output files
     - need to specify the files which you want to capture from the tools
-    - bulk caputre the output for debug purpose.
+    - bulk capture the output for debug purpose.
         - which file is actually needed.
     - output files in the specific directory or working directory
     - output files in the same directory which has input files
@@ -76,7 +76,7 @@ After following one of these tutorials, learners will be able to:
         - disadvantage:
             - explodes the complexity of a CWL tool wrapper
             - having to deal with escapes and so on
-    - distribute as seperate package via pip / cran / ...
+    - distribute as separate package via pip / cran / ...
 - Be able to graph/visualize their workflow, both by hand, and with an automated visualizer
     - use cwlviewer online
     - generate Graphviz diagram using cwltool
