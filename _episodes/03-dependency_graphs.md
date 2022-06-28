@@ -66,7 +66,7 @@ steps:
   mapping_reads:
     requirements:
       ResourceRequirement:
-        ramMin: 9000
+        ramMin: 5120
     run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}
@@ -106,7 +106,7 @@ This information is provided in the `in` field.
 
 To run the tool better, it needs more RAM than the default. So there is a `requirements` entry inside
 the `mapping_reads` step definition with a `ResourceRequirement` to allocate a minimum of
-9000 MiB of RAM.
+5120 MiB (5 GiB) of RAM.
 
 The newly added `mapping_reads` step also need an input not provided by any of our other steps,
 therefore an additional workflow-level input is added: a directory that contains the reference genome
