@@ -16,7 +16,7 @@ steps:
 mapping_reads:
   requirements:
     ResourceRequirement:
-    ramMin: 9000
+    ramMin: 5120
   run: bio-cwl-tools/STAR/STAR-Align.cwl
     in:
       RunThreadN: {default: 4}
