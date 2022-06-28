@@ -153,9 +153,9 @@ The RNA-seq data from the introduction episode will be used for the first CWL wo
 The first step of RNA-sequencing analysis is a quality control of the RNA reads using the `fastqc` tool.
 This tool is already available to use so there is no need to write a new CWL tool description.
 
-This is the workflow file (`rna_seq_workflow.cwl`).
+This is the workflow file (`rna_seq_workflow_1.cwl`).
 
-__rna_seq_workflow.cwl__
+__rna_seq_workflow_1.cwl__
 ~~~
 cwlVersion: v1.2
 class: Workflow
@@ -227,9 +227,9 @@ Inside `qc_html` the type of output is defined. The output of the `quality_contr
 The `outputSource` field refers to where the output is located, in this example it came from the step `quality_control` and it is called `html_file`.
 
 When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section.
-The input file is called `workflow_input.yml`
+The input file is called `workflow_input_1.yml`
 
-__workflow_input.yml__
+__workflow_input_1.yml__
 ~~~
 rna_reads_fruitfly:
   class: File
@@ -248,7 +248,7 @@ In this example the last line is needed to provide a format for the fastq file.
 Now you can run the workflow using the following command:
 
 ~~~
-cwltool --cachedir cache rna_seq_workflow.cwl workflow_input.yml
+cwltool --cachedir cache rna_seq_workflow_1.cwl workflow_input_1.yml
 ~~~
 {: .language-bash}
 
@@ -274,10 +274,10 @@ INFO Final process status is success
 {: .output}
 
 > ## Cache Directory
-> To save intermediate results for re-use later we use `--cachedir cache`; where `cache` is the directory 
+> To save intermediate results for re-use later we use `--cachedir cache`; where `cache` is the directory
 > for storing the cache (it can be given any name, here we are just using `cache` for simplicity). You can safely
 > delete the `cache` directory anytime, if you need to reclaim the disk space.
-{: .callout} 
+{: .callout}
 
 
 ### Exercise
