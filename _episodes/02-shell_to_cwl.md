@@ -248,7 +248,7 @@ In this example the last line is needed to provide a format for the fastq file.
 Now you can run the workflow using the following command:
 
 ~~~
-cwltool rna_seq_workflow.cwl workflow_input.yml
+cwltool --cachedir cache rna_seq_workflow.cwl workflow_input.yml
 ~~~
 {: .language-bash}
 
@@ -272,6 +272,13 @@ INFO [workflow ] completed success
 INFO Final process status is success
 ~~~
 {: .output}
+
+> ## Cache Directory
+> To save intermediate results for re-use later we use `--cachedir cache`; where `cache` is the directory 
+> for storing the cache (it can be given any name, here we are just using `cache` for simplicity). You can safely
+> delete the `cache` directory anytime, if you need to reclaim the disk space.
+{: .callout} 
+
 
 ### Exercise
 Needs some exercises
