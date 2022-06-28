@@ -275,7 +275,7 @@ INFO Final process status is success
 
 > ## Cache Directory
 > To save intermediate results for re-use later we use `--cachedir cache`; where `cache` is the directory 
-> for storing the cache, it can be given any name, we just use `cache` for simplicity here. You can safely
+> for storing the cache (it can be given any name, here we are just using `cache` for simplicity). You can safely
 > delete the `cache` directory anytime, if you need to reclaim the disk space.
 {: .callout} 
 
