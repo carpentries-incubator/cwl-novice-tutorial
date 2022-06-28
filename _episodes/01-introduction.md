@@ -34,7 +34,7 @@ possible, are summarised below.
 
 **Handy Properties of Computational Workflows**[^2]
 
-| ![]({{page.root}}/fig/PropsCompute01.png) | **Composition & Abstraction**  <br><br>  Using the best code written by 3rd parties <br> Handle heterogeneity <br> Shield Complexity & incompatibility <br> Sharable reusable, re-mixable methods |
+| ![]({{page.root}}/fig/PropsCompute01.png) | **Composition & Abstraction**  <br><br>  Using the best code written by 3rd parties <br> Handle heterogeneity <br> Shield Complexity & incompatibility <br> Shareable reusable, re-mixable methods |
 | ![]({{page.root}}/fig/PropsCompute02.png){: height="5px"; max-width: 2vw} | **Sharing & Adaptability** <br><br> Shared method, publishable know-how <br> BYOD / parameters <br> Different implementations <br> Changes in execution infrastructure |
 | ![]({{page.root}}/fig/PropsCompute03.png){: height="5px"; max-width: 2vw} | **Automation** <br><br>  Repetitive reproducible pipelines <br> Simulation sweeps <br> Manage data and control flow <br> Optimised monitoring & recovery <br> Automated deployment |
 | ![]({{page.root}}/fig/PropsCompute04.png){: height="5px"; max-width: 2vw} | **Reporting & Accreditation** <br><br>  Provenance logging & data lineage <br> Auto-documentation <br> Result comparison |

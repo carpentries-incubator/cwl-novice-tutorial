@@ -95,7 +95,7 @@ INFO Final process status is success
 ~~~
 {: .output}
 
-The output displayed above shows that the program has run succesfully and its output, `Hello world!`.
+The output displayed above shows that the program has run successfully and its output, `Hello world!`.
 
 Let's take a look at the `echo.cwl` script in more detail.
 

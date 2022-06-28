@@ -7,7 +7,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 ### For Contributors
 
 Use the _Episodes_ menu above to browse through the pages for
-indivual blocks of learning objectives.
+individual blocks of learning objectives.
 These pages can be used for designing challenges/exercises
 for the tutorial,
 as described in detail on [this Issue](https://github.com/carpentires-incubator/cwl-novice-tutorial/issues/7).
@@ -38,7 +38,7 @@ for the tutorial material
 > CWL is based upon YAML. At any time, if you find yourself being confused by the YAML syntax, considering reviewing this guide on the [subset of YAML][yaml-for-cwl] used in CWL.
 >
 > If you have previously written a workflow description,
-> in CWL or another langauge,
+> in CWL or another language,
 > you may want to look instead at the [User Guide][cwl-user-guide].
 {: .prereq}
 
