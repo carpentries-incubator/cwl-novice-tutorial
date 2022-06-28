@@ -39,6 +39,7 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 
 
 > ## Exercise
+> Please copy the `rna_seq_workflow_2.cwl` file to create `rna_seq_workflow_3.cwl`.
 > Add the `featureCounts` tool to the workflow.
 > Similar to the `STAR` tool, this tool also needs more RAM than the default.
 > To run the tool a minimum of 500 MiB of RAM is needed.
@@ -47,6 +48,7 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 >
 > > ## Solution
 > >
+> > __rna_seq_workflow_3.cwl__
 > > ~~~
 > > cwlVersion: v1.2
 > > class: Workflow
