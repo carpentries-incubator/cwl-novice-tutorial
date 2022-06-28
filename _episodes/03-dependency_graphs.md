@@ -21,10 +21,18 @@ keypoints:
 ---
 
 ## Multi-Step Workflow
-In the previous episode a single step workflow was shown. To make a multi-step workflow, you add more entries to the `steps` field.
-In this episode, the workflow is extended with the next two steps of the RNA-sequencing analysis.
-The next two steps are triming the reads and alignment of the trimmed reads.
+In the previous episode a single step workflow was shown, carrying out a simple RNA read
+of the fruitfly genome. In this episode, the workflow is extended with an equivalent reverse
+RNA read, and the next two steps of the RNA-sequencing analysis, trimming the reads and
+aligning the trimmed reads, are added.
 We will be using the [`cutadapt`](https://bio.tools/cutadapt)  and [`STAR`](https://bio.tools/star) tools for these tasks.
+
+To make a multi-step workflow that can carry all this analysis out, we add more entries
+to the `steps` field. Note that when the `quality_control` step is duplicated the two
+steps are named `quality_control_forward` and `quality_control_reverse`, to distinguish
+the separate forward and reverse RNA reads. Likewise, the `rna_reads_fruitfly` input becomes
+`rna_reads_fruitfly_forward`, and an `rna_reads_fruitfly_reverse` input is added.
+
 
 __rna_seq_workflow.cwl__
 ~~~
@@ -32,10 +40,10 @@ cwlVersion: v1.2
 class: Workflow
 
 inputs:
-  rna_reads_forward:
+  rna_reads_fruitfly_forward:
     type: File
     format: https://edamontology.org/format_1930  # FASTQ
-  rna_reads_reverse:
+  rna_reads_fruitfly_reverse:
     type: File
     format: https://edamontology.org/format_1930  # FASTQ
   ref_genome: Directory
@@ -45,20 +53,20 @@ steps:
   quality_control_forward:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
     in:
-      reads_file: rna_reads_forward
+      reads_file: rna_reads_fruitfly_forward
     out: [html_file]
 
   quality_control_reverse:
     run: bio-cwl-tools/fastqc/fastqc_2.cwl
     in:
-      reads_file: rna_reads_reverse
+      reads_file: rna_reads_fruitfly_reverse
     out: [html_file]
 
   trim_low_quality_bases:
     run: bio-cwl-tools/cutadapt/cutadapt-paired.cwl
     in:
-      reads_1: rna_reads_forward
-      reads_2: rna_reads_reverse
+      reads_1: rna_reads_fruitfly_forward
+      reads_2: rna_reads_fruitfly_reverse
       minimum_length: { default: 20 }
       quality_cutoff: { default: 20 }
     out: [ trimmed_reads_1, trimmed_reads_2, report ]
@@ -87,6 +95,12 @@ steps:
     out: [bam_sorted_indexed]
 
 outputs:
+  quality_report_forward:
+    type: File
+    outputSource: quality_control_forward/html_file
+  quality_report_reverse:
+    type: File
+    outputSource: quality_control_reverse/html_file
   bam_sorted_indexed:
     type: File
     outputSource: index_alignment/bam_sorted_indexed
@@ -117,11 +131,11 @@ This `ref_genome` is added in the `inputs` field of the workflow and in the YAML
 
 __workflow_input.yml__
 ~~~
-rna_reads_forward:
+rna_reads_fruitfly_forward:
   class: File
   location: rnaseq/GSM461177_1_subsampled.fastqsanger
   format: https://edamontology.org/format_1930  # FASTQ
-rna_reads_reverse:
+rna_reads_fruitfly_reverse:
   class: File
   location: rnaseq/GSM461177_2_subsampled.fastqsanger
   format: https://edamontology.org/format_1930  # FASTQ
