@@ -127,13 +127,14 @@ $ cwltool rna_seq_workflow_fieldname_fail.cwl workflow_input_debug.yml
 
 ~~~
 ERROR Tool definition failed validation:
-rna_seq_workflow_fieldname_fail.cwl:1:1:   Object `rna_seq_workflow_fieldname_fail.cwl` is not valid because
-                             tried `Workflow` but
-rna_seq_workflow_fieldname_fail.cwl:46:1:     the `outputs` field is not valid because
-rna_seq_workflow_fieldname_fail.cwl:47:3:       item is invalid because
-rna_seq_workflow_fieldname_fail.cwl:49:5:         invalid field `outputsource`, expected one of: 'label',
-                                   'secondaryFiles', 'streamable', 'doc', 'id', 'format', 'outputSource',
-                                   'linkMerge', 'pickValue', 'type'
+rna_seq_workflow_fieldname_fail.cwl:1:1:   Object `rna_seq_workflow_fieldname_fail.cwl` is not valid
+                                          because
+                                            tried `Workflow` but
+rna_seq_workflow_fieldname_fail.cwl:35:1:     the `outputs` field is not valid because
+rna_seq_workflow_fieldname_fail.cwl:36:3:       item is invalid because
+rna_seq_workflow_fieldname_fail.cwl:38:5:         invalid field `outputsource`, expected one of:
+                                                  'label', 'secondaryFiles', 'streamable', 'doc', 'id',
+                                                  'format', 'outputSource', 'linkMerge', 'pickValue', 'type'
 ~~~
 {: .error}
 
@@ -195,14 +196,15 @@ $ cwltool rna_seq_workflow_varname_fail.cwl workflow_input_debug.yml
 
 ~~~
 ERROR Tool definition failed validation:
-rna_seq_workflow_varname_fail.cwl:9:1:  checking field `steps`
-rna_seq_workflow_varname_fail.cwl:30:3:   checking object `rna_seq_workflow_varname_fail.cwl#index_alignment`
-rna_seq_workflow_varname_fail.cwl:32:5:     checking field `in`
-rna_seq_workflow_varname_fail.cwl:33:7:       checking object `rna_seq_workflow_varname_fail.cwl#index_alignment/bam_sorted`
-                                   Field `source` references unknown identifier
-                                   `mapping_reads/alignments`, tried
-                                   file:///.../rna_seq_workflow_varname_fail.cwl#mapping_reads/alignments
-
+rna_seq_workflow_varname_fail.cwl:8:1:  checking field `steps`
+rna_seq_workflow_varname_fail.cwl:29:3:   checking object
+                                          `rna_seq_workflow_varname_fail.cwl#index_alignment`
+rna_seq_workflow_varname_fail.cwl:31:5:     checking field `in`
+rna_seq_workflow_varname_fail.cwl:32:7:       checking object
+                                              `rna_seq_workflow_varname_fail.cwl#index_alignment/bam_sorted`
+                                                Field `source` references unknown identifier
+                                                `mapping_reads/alignments`, tried
+                                                file:///.../rna_seq_workflow_varname_fail.cwl#mapping_reads/alignments
 ~~~
 {: .error}
 
@@ -273,10 +275,10 @@ $ cwltool rna_seq_workflow_type_fail.cwl workflow_input_debug.yml
 ERROR Tool definition failed validation:
 
 rna_seq_workflow_type_fail.cwl:5:3:   Source 'rna_reads_fruitfly' of type "int" is incompatible
-rna_seq_workflow_type_fail.cwl:23:7:   with sink 'ForwardReads' of type ["File", {"type": "array", "items":
-                             "File"}]
+rna_seq_workflow_type_fail.cwl:12:7:   with sink 'reads_file' of type "File"
 rna_seq_workflow_type_fail.cwl:5:3:   Source 'rna_reads_fruitfly' of type "int" is incompatible
-rna_seq_workflow_type_fail.cwl:12:7:   with sink 'reads_file' of type ["File"]
+rna_seq_workflow_type_fail.cwl:23:7:   with sink 'ForwardReads' of type ["File", {"type":
+                                       "array", "items": "File"}]
 ~~~
 {: .error}
 
@@ -349,14 +351,14 @@ $ cwltool rna_seq_workflow_debug.cwl workflow_input_undefined.yml
 
 ~~~
 ERROR Exception on step 'mapping_reads'
-ERROR [step mapping_reads] Cannot make job: Expected value of 'ForwardReads' to have format http://edamontology.org/format_1930 but
+ERROR [step mapping_reads] Cannot make job: Expected value of 'ForwardReads' to have format https://edamontology.org/format_1930 but
   File has no 'format' defined: {
     "class": "File",
-    "location": "file:///home/mbexegc2/Documents/projects/bioexcel/follow-cwl-novice-tutorial/novice-tutorial-exercises/rnaseq/raw_fastq/Mov10_oe_1.subset.fq",
-    "size": 75706556,
-    "basename": "Mov10_oe_1.subset.fq",
-    "nameroot": "Mov10_oe_1.subset",
-    "nameext": ".fq"
+    "location": "file:///.../rnaseq/GSM461177_1_subsampled.fastqsanger",
+    "size": 142867948,
+    "basename": "GSM461177_1_subsampled.fastqsanger",
+    "nameroot": "GSM461177_1_subsampled",
+    "nameext": ".fastqsanger"
 }
 ~~~
 {: .error}
