@@ -22,8 +22,8 @@ keypoints:
 
 ## Multi-Step Workflow
 In the previous episode a single step workflow was shown, carrying out a simple RNA read
-of the fruitfly genome. In this episode, the workflow is extended with an equivalent reverse
-RNA read, and the next two steps of the RNA-sequencing analysis, trimming the reads and
+of the fruitfly genome. In this episode the workflow is extended with an equivalent reverse
+RNA read and the next two steps of the RNA-sequencing analysis, trimming the reads and
 aligning the trimmed reads, are added.
 We will be using the [`cutadapt`](https://bio.tools/cutadapt)  and [`STAR`](https://bio.tools/star) tools for these tasks.
 
