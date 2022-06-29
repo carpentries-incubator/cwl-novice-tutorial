@@ -115,7 +115,7 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > >     run: bio-cwl-tools/subread/featureCounts.cwl
 > >     in:
 > >       mapped_reads: index_alignment/bam_sorted_indexed
-> >       annotations: gene_model
+> >       annotations: fruitfly_gene_model
 > >     out: [featurecounts]
 > >
 > > outputs:
