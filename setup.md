@@ -33,7 +33,7 @@ data-toggle="tab">Linux</a></li>
    1. Confirm that you are running Windows 10, version 2004 or higher (Build 19041 and higher) or Windows 11.
 
       > ## Check your Windows version
-      > To check your Windows version and build number, press the Windows logo key + <kbd>R</kbd>, type winver, select OK.
+      > To check your Windows version and build number, press the Windows logo key + <kbd>R</kbd>, type `winver`, select OK.
         You can update to the latest Windows version by selecting "Start" > "Settings" > "Windows Update" > "Check for updates".
       {: .callout }
    2. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
@@ -62,7 +62,7 @@ data-toggle="tab">Linux</a></li>
    2. After installation, in VS Code choose _Open a Remote - WSL Window_ and then _New WSL Window_.
 
       If you don't see those option, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> and then type
-      <kbd>WSL</kbd> and they should appear at the top of the screen.
+      `WSL` and they should appear at the top of the screen.
    3. There should now be a second VS Code window that has `WSL: Ubuntu` in green at the lower left corner.
       You can close the original VS Code window.
    4. To enable the **Benten CWL** extension in this "WSL : Ubuntu" window:
