@@ -37,9 +37,13 @@ data-toggle="tab">Linux</a></li>
         You can update to the latest Windows version by selecting "Start" > "Settings" > "Windows Update" > "Check for updates".
       {: .callout }
    2. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
-      and paste the following command followed by <kbd>Enter</kbd> to install WSL 2:
-
-      `wsl --install`
+      and paste the following commands followed by <kbd>Enter</kbd> to install WSL 2:  
+      `wsl --update`  
+      `wsl --install --distribution Ubuntu`  
+      To ensure that `Ubuntu` is the default subsystem instead of `docker-desktop-*`, you may need to use:  
+      `wsl --set-default Ubuntu`  
+      If you had previously installed WSL1 in Windows 10, upgrade to WSL2 with:  
+      `wsl --set-version Ubuntu 2` 
    3. Reboot your computer. Ubuntu will set itself up after the reboot. Wait for Ubuntu to ask for a
       UNIX username and password. After you provide that information and the command prompt appears,
       then the Ubuntu window can be closed.
@@ -54,14 +58,14 @@ data-toggle="tab">Linux</a></li>
       8. Close the Docker Desktop window
 4. Configure VS Code
    1. Open [this link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl){:target="_blank"}{:rel="noopener noreferrer"}
-      to install the "Remote - WSL" extension for VS Code by clicking the `Install` button or by following the directions.
-   2. After installation, in VS Code choose "Open a Remote - WSL Window" and then "New WSL Window".
+      to install the **Remote - WSL** extension for VS Code by clicking the `Install` button or by following the directions.
+   2. After installation, in VS Code choose _Open a Remote - WSL Window_ and then _New WSL Window_.
 
       If you don't see those option, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> and then type
-      "WSL" and they should appear at the top of the screen.
-   3. There should now be a second VS Code window that has "WSL: Ubuntu" in green at the lower left corner.
+      <kbd>WSL</kbd> and they should appear at the top of the screen.
+   3. There should now be a second VS Code window that has `WSL: Ubuntu` in green at the lower left corner.
       You can close the original VS Code window.
-   4. To enable the Benten CWL extension in this "WSL : Ubuntu" window:
+   4. To enable the **Benten CWL** extension in this "WSL : Ubuntu" window:
       * Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> to open the "Extensions" pane.
       * Look for "CWL (Rabix/Benten)" and click the blue "Install in WSL: Ubuntu" button.
 5. Open a terminal and install tutorial prerequisites
