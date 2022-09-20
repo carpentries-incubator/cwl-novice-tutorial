@@ -2,12 +2,7 @@
 layout: lesson
 root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
-title: ""
 ---
-
-### For learners
-
-Use the _Episodes_ menu above to browse through the pages.
 
 > ## Prerequisites
 >
