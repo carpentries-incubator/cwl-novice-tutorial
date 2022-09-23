@@ -20,17 +20,33 @@ keypoints:
 
 # Computational Workflows
 
-Computational workflows are widely used for data analysis, enabling rapid innovation and decision making.
-_Workflow thinking_ is a form of "conceptualizing processes as recipes and protocols,
-structured as workflow or dataflow graphs with computational steps, and subsequently
-developing tools and approaches for formalizing, analyzing and communicating these process
-descriptions"[^1].
-Distinct from general business workflows, computational workflows have their primary focus
-on data and dataflows.
-The workflow managers which are designed for such computational workflows should aid their
-users with this focus.
-The helpful properties that an ideal computational workflow would possess, to make this
-possible, are summarised below.
+A computational workflow is a formalised chain of software tools, which explicitly defines how data is input, how it flows between tools and how it is output. Computational workflows are widely used for data analysis and enable rapid innovation and decision making.
+
+The most important benefit of computational workflows is that they require a user to write down, fully formalise and automate their dataflow and process. While this can be a challenge, it allows greater repeatability, shareability and robustness to be achieved.
+
+Below is an image showing a graphical representation of a dummy workflow. You can see inputs being made on the left, data flowing and being processed by tools and passed to the output.
+
+![]({{page.root}}/fig/dummy_workflow.png)
+
+While you can imagine creating shell scripts (Bash or Make) to meet this need, using a formal workflow language (such as CWL) brings several further benefits such as introducing abstraction and improved scalability and portability. We will discuss some of these benefits here.
+
+Computational workflows explicitly create a divide between a user’s dataflow and the computational details which underpin the chain of tools, placing these elements in separate files. The dataflow is described by the **workflow**, where tools are described at a high level. The tools implementation is specified by **tool descriptors** where the full complexity of a tools usage is handled. The image below shows how tool descriptors underpin workflow steps and hide complexity.
+
+![]({{page.root}}/fig/dummy_workflow_tooldescriptors.png)
+
+This abstraction allows the use of heterogeneous tools, potentially shared by third parties, and allows workflow users to connect and utilise a wide range of tools and techniques without the need for significant computational experience. An example of the strength of this approach is the ability for workflows to use (e.g. Docker) containers "under the hood" without the user needing to install, download or learn any further technologies.
+
+By adapting tool descriptors to multiple platforms, this abstraction allows the same workflow to be used on different platforms, transparently to the workflow user. This means users can move between local development and cloud and HPC solutions seamlessly.
+
+Computational workflow managers further extend this abstraction, providing high level tools for managing data and tools, aiming to help users to design and run computational workflows more easily. A computational workflow engine provides an interface for launching workflows, specifying and handling inputs and collecting and exporting outputs, they can also help users by storing completed steps of workflows, allowing workflows to be resumed part way, or rerun with minimal changes.
+
+Further, computational workflow managers aid users with the automation, monitoring and provenance tracking of the dataflow. They may also help users to produce and understand reports and outputs from their workflow.
+
+Another advantage of workflows is that by producing computational workflows in a standard format, and publishing them (alongside any data) with open access, allow dataflows to be shared in a more FAIR (Findable, Accessible, Interoperable, and Reusable) manner.
+
+However, the rise in popularity of workflows has been matched by a rise in the number of disparate workflow managers that are available, each with their own syntax or methods for describing the tools and workflows, reducing portability and interoperability of these workflows. The Common Workflow Language (CWL) standard has been developed to address these problems, and to serve the general computational workflow needs described above.
+
+In summary, computational workflows bring many benefits and an ideal computation workflow adopts and provides the properties below:
 
 **Handy Properties of Computational Workflows**[^2]
 
@@ -40,27 +56,6 @@ possible, are summarised below.
 | ![]({{page.root}}/fig/PropsCompute04.png){: height="5px"; max-width: 2vw} | **Reporting & Accreditation** <br><br>  Provenance logging & data lineage <br> Auto-documentation <br> Result comparison |
 | ![]({{page.root}}/fig/PropsCompute05.png){: height="5px"; max-width: 2vw} | **Scalability & Infrastructure Access** <br><br> Accessing infrastructures, datasets and tools <br> Optimised computation and data handling <br> Parallelisation <br> Secure sensitive data access & management <br> Interoperating datasets & permission handling |
 | ![]({{page.root}}/fig/PropsCompute06.png){: height="5px"; max-width: 2vw} | **Portability** <br><br> Dependency handling <br> Containerisation & packaging <br> Moving between on premise & cloud|
-
-
-
-Computational workflows, and their managers, should abstracting away complexities of the
-underlying computational environment.
-Doing so enables the use of heterogeneous tools provided by multiple third parties, as
-well as the scalability and portability of the workflows, so users can make use of the
-resources available to them.
-The workflow manager should make easy the automation, monitoring and provenance tracking
-of the dataflow.
-In addition the computational workflow should be in a shareable format, published with
-open access.
-These features all will contribute to any data produced using the computational workflow
-being FAIR (Findable, Accessible, Interoperable, and Reusable)[^3].
-
-However as the rise in popularity of workflows has been matched by a rise in the number of
-disparate workflow managers that are available,
-each with their own syntax or methods for describing the tools and workflows, reducing portability
-and interoperability of these workflows.
-The Common Workflow Language (CWL) standard has been developed to address these problems,
-and to serve the general computational workflow needs described above.
 
 # Common Workflow Language
 
