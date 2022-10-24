@@ -56,10 +56,10 @@ so the tool should be located at `bio-cwl-tools/subread/featureCounts.cwl`.
 > > inputs:
 > >   rna_reads_fruitfly_forward:
 > >     type: File
-> >     format: https://edamontology.org/format_1930  # FASTQ
+> >     format: http://edamontology.org/format_1930  # FASTQ
 > >   rna_reads_fruitfly_reverse:
 > >     type: File
-> >     format: https://edamontology.org/format_1930  # FASTQ
+> >     format: http://edamontology.org/format_1930  # FASTQ
 > >   ref_fruitfly_genome: Directory
 > >   fruitfly_gene_model: File
 > >
@@ -145,18 +145,18 @@ __workflow_input_3.yml__
 rna_reads_fruitfly_forward:
   class: File
   location: rnaseq/GSM461177_1_subsampled.fastqsanger
-  format: https://edamontology.org/format_1930  # FASTQ
+  format: http://edamontology.org/format_1930  # FASTQ
 rna_reads_fruitfly_reverse:
   class: File
   location: rnaseq/GSM461177_2_subsampled.fastqsanger
-  format: https://edamontology.org/format_1930  # FASTQ
+  format: http://edamontology.org/format_1930  # FASTQ
 ref_fruitfly_genome:
   class: Directory
   location: rnaseq/dm6-STAR-index
 fruitfly_gene_model:
   class: File
   location: rnaseq/Drosophila_melanogaster.BDGP6.87.gtf
-  format: https://edamontology.org/format_2306
+  format: http://edamontology.org/format_2306
 ~~~
 {: .language-yaml}
 

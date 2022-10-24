@@ -112,7 +112,7 @@ __workflow_input_debug.yml__
 rna_reads_fruitfly:
   class: File
   location: rnaseq/GSM461177_1_subsampled.fastqsanger
-  format: https://edamontology.org/format_1930  # FASTQ
+  format: http://edamontology.org/format_1930  # FASTQ
 ref_fruitfly_genome:
   class: Directory
   location: rnaseq/dm6-STAR-index
@@ -351,7 +351,7 @@ $ cwltool rna_seq_workflow_debug.cwl workflow_input_undefined.yml
 
 ~~~
 ERROR Exception on step 'mapping_reads'
-ERROR [step mapping_reads] Cannot make job: Expected value of 'ForwardReads' to have format https://edamontology.org/format_1930 but
+ERROR [step mapping_reads] Cannot make job: Expected value of 'ForwardReads' to have format http://edamontology.org/format_1930 but
   File has no 'format' defined: {
     "class": "File",
     "location": "file:///.../rnaseq/GSM461177_1_subsampled.fastqsanger",
