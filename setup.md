@@ -37,13 +37,13 @@ data-toggle="tab">Linux</a></li>
         You can update to the latest Windows version by selecting "Start" > "Settings" > "Windows Update" > "Check for updates".
       {: .callout }
    2. Open PowerShell as Administrator ("Start menu" > "PowerShell" > right-click > "Run as Administrator")
-      and paste the following commands followed by <kbd>Enter</kbd> to install WSL 2:  
-      `wsl --update`  
-      `wsl --install --distribution Ubuntu`  
-      To ensure that `Ubuntu` is the default subsystem instead of `docker-desktop-*`, you may need to use:  
-      `wsl --set-default Ubuntu`  
-      If you had previously installed WSL1 in Windows 10, upgrade to WSL2 with:  
-      `wsl --set-version Ubuntu 2` 
+      and paste the following commands followed by <kbd>Enter</kbd> to install WSL 2:
+      `wsl --update`
+      `wsl --install --distribution Ubuntu`
+      To ensure that `Ubuntu` is the default subsystem instead of `docker-desktop-*`, you may need to use:
+      `wsl --set-default Ubuntu`
+      If you had previously installed WSL1 in Windows 10, upgrade to WSL2 with:
+      `wsl --set-version Ubuntu 2`
    3. Reboot your computer. Ubuntu will set itself up after the reboot. Wait for Ubuntu to ask for a
       UNIX username and password. After you provide that information and the command prompt appears,
       then the Ubuntu window can be closed.
@@ -329,7 +329,7 @@ These two options are detailed below -- choose the one most appropriate to your 
    InputFiles:
      - class: File
        location: rnaseq/dm6.fa
-       format: https://edamontology.org/format_1929  # FASTA
+       format: http://edamontology.org/format_1929  # FASTA
    IndexName: 'dm6-STAR-index'
    Overhang: 36
    Gtf:
