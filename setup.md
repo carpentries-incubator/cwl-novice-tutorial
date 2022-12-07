@@ -30,7 +30,7 @@ data-toggle="tab">Linux</a></li>
 2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
 
 3. Install and configure Windows Subsystem for Linux 2 (WSL2), and Docker Desktop
-   1. Confirm that you are running Windows 10, version 2004 or higher (Build 19041 and higher) or Windows 11.
+   1. Confirm that you are running Windows 10, version 1903 or higher (Build 18362 and higher) or Windows 11.
 
       > ## Check your Windows version
       > To check your Windows version and build number, press the Windows logo key + <kbd>R</kbd>, type `winver`, select OK.
@@ -104,7 +104,7 @@ data-toggle="tab">Linux</a></li>
 
 1. Download and install [VSCode](https://code.visualstudio.com/){:target="_blank"}{:rel="noopener noreferrer"}.
 2. [Open Benten in the marketplace](https://marketplace.visualstudio.com/items?itemName=sbg-rabix.benten-cwl){:target="_blank"}{:rel="noopener noreferrer"} and click the `Install` button or follow the directions.
-3. [Install docker](https://docs.docker.com/engine/install/){:target="_blank"}{:rel="noopener noreferrer"}
+3. [Install docker server](https://docs.docker.com/engine/install/#server){:target="_blank"}{:rel="noopener noreferrer"}
 4. [Enable docker usage as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user){:target="_blank"}{:rel="noopener noreferrer"}
 5. Install the latest version of `cwltool`.
    1. First we will make a Python virtual environment by running the following commands in the terminal.
@@ -163,7 +163,7 @@ data-toggle="tab">Linux</a></li>
     {: .language-bash}
 6. Create a virtual environment using conda
     ~~~
-    conda create --name cwltutorial
+    conda create --name cwltutorial python==3.10 mamba
     ~~~
     {: .language-bash}
 7. Activate the virtual environment
@@ -173,7 +173,7 @@ data-toggle="tab">Linux</a></li>
     {: .language-bash}
 8. Install the CWL reference runner (`cwltool`), and some helper programs using conda
     ~~~
-    conda install cwltool graphviz wget git nodejs
+    mamba install cwltool graphviz wget git nodejs
     ~~~
     {: .language-bash}
 
