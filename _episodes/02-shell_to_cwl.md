@@ -22,6 +22,55 @@ keypoints:
 - "FIXME: How can we use a tool descriptor in a single step workflow?"
 ---
 
+The first step of the workflow that will be built during this tutorial is the analysis of
+the raw genome data that has been supplied for processing. This analysis is going to be
+carried out using the [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+tool, which is available as a docker image - reducing the effort needed to install it.
+
+To directly run FastQC on the `Mov10_oe_1.subset.fq` data file, the following commands can be used (within the tutorial working directory):
+~~~
+mkdir outdir
+docker run -v $(pwd)/outdir:/outdir -v $(pwd)/rnaseq/raw_fastq:/indir biowardrobe2/fastqc:v0.11.5 fastqc --extract --outdir /outdir /indir/Mov10_oe_1.subset.fq
+~~~
+{: .language-bash}
+This command will download (if needed) the `biowardrobe2/fastqc:v0.11.5` image,
+then run the `fastqc` command within this container, generating a set of report files
+which will be returned in the `outdir` directory.
+Both the input and output directories have to be explicitly mapped to
+directories within the docker container (using the `-v [local directory]:[docker
+directory]` notation), and the directories have to be create beforehand, because docker
+will not create them itself. Once the tool has finished running several output files will
+be returned, including a html report file, `Mov10_oe_1.subset_fastqc.html`, which you can
+open with a web browser to get the report that is needed.
+
+> ## Shell workflows
+>
+> The final workflow could be written as a shell script, directly using docker commands
+> such as the one above, however this would provide several challenges for anyone writing
+> the workflow, and trying to maintain it later. Can you suggest what some of these
+> problems might be.
+>
+> > ## Solution
+> >
+> > This is a (non-exhaustive) list of issues with writing such a workflow as a
+> > shell script.
+> > 1. Docker more convenient for loading tools than installing them directly. However it
+> >    leads to very long commands, which can quickly get difficult to follow.
+> > 1. The workflow will not be very portable. For example, the shell syntax may vary
+> >    between compute systems; or the directory structure might change. This is
+> >    especially true for running in the cloud.
+> > 1. The tool has returned more files than needed. Within a workflow this will could
+> >    cause file management issues, especially if a tool returns a lot of temporary
+> >    files.
+> >
+> {: .solution}
+{: .challenge}
+
+In this lesson you will be shown how this tool can be run within a single-step CWL workflow: demonstrating how many of the problems of shell scripts identified above can be solved using CWL instead.
+
+## CWL scripts
+
+
 CWL workflows are written in the YAML syntax. This [short tutorial](https://www.commonwl.org/user_guide/yaml/)
 explains the parts of YAML used in CWL. A CWL document contains the workflow and the
 requirements for running that workflow. All CWL documents should start with two lines of code:
