@@ -222,8 +222,8 @@ outputs:
 ~~~
 {: .language-yaml}
 
-Each output in the `outputs` field needs its own name. In this example the output is called `qc_html`.
-Inside `qc_html` the type of output is defined. The output of the `quality_control` step is a file, so the `qc_html` type is `File`.
+Each output in the `outputs` field needs its own name. In this example the output is called `quality_report`.
+Inside `quality_report` the type of output is defined. The output of the `quality_control` step is a file, so the `quality_report` type is `File`.
 The `outputSource` field refers to where the output is located, in this example it came from the step `quality_control` and it is called `html_file`.
 
 When you want to run this workflow, you need to provide a file with the inputs the workflow needs. This file is similar to the `hello_world.yml` file in the previous section.
